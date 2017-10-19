@@ -8,16 +8,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class WeatherViewController: UIViewController {
+    
+    let weatherURL = "http://api.openweathermap.org/data/2.5/weather"
+    let appID = "ac5c2be22a93a78414edcf3ebfd4885e"
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 
