@@ -14,6 +14,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     let weatherURL = "http://api.openweathermap.org/data/2.5/weather"
     let appID = "ac5c2be22a93a78414edcf3ebfd4885e"
     
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var temperatureLabel: UILabel!
+    
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -48,7 +51,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
-        // locationLabel.text = "Location Unavailable!"
+        locationLabel.text = "Location Unavailable!"
     }
 
 }
