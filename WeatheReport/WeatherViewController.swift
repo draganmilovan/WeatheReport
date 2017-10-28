@@ -19,12 +19,37 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set up the location manager
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.requestWhenInUseAuthorization()
+        // Start looking for coordinates
+        locationManager.startUpdatingLocation()
     
     }
+    
+    
+    // Location Manager Delegate methods
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        let location = locations[locations.count-1]
+        
+        if location.horizontalAccuracy > 0 {
+            locationManager.stopUpdatingLocation()
+            
+            let lat = location.coordinate.latitude
+            let lon = location.coordinate.longitude
+            
+            print("lat = \(lat), lon = \(lon)")
+            
+        }
+        
+    }
 
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+        // locationLabel.text = "Location Unavailable!"
+    }
 
 }
 
