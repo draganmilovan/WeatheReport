@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreLocation
+import Alamofire
+import SwiftyJSON
 
 class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -31,6 +33,14 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     }
     
+}
+
+extension WeatherViewController {
+    
+    // Networking method
+    func getWeatherData(url: String, parametars: [String : String]) {
+        
+    }
     
     // Location Manager Delegate methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -40,19 +50,47 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         if location.horizontalAccuracy > 0 {
             locationManager.stopUpdatingLocation()
             
-            let lat = location.coordinate.latitude
-            let lon = location.coordinate.longitude
-            
+            let lat = String(location.coordinate.latitude)
+            let lon = String(location.coordinate.longitude)
             print("lat = \(lat), lon = \(lon)")
             
+            let params : [String : String] = ["lat" : lat, "lon" : lon, "appid" : appID]
+            
+            getWeatherData(url: weatherURL, parametars: params)
         }
         
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
         locationLabel.text = "Location Unavailable!"
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
