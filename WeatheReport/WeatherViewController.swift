@@ -20,6 +20,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var temperatureLabel: UILabel!
     
     let locationManager = CLLocationManager()
+    let weatherData = WeatherData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +43,7 @@ extension WeatherViewController {
         Alamofire.request(url, method: .get, parameters: parametars).responseJSON {
             response in
             if response.result.isSuccess {
-                //print("Weather data ready!")
+   //             print("Weather data ready!")
                 
                 //Casting data in to JSON
                 let weatherJSON: JSON = JSON(response.result.value!)
@@ -51,16 +52,45 @@ extension WeatherViewController {
                 
             } else {
                 print("Error \(String(describing: response.result.error))")
-                self.locationLabel.text = "Connection Issues!"
+                self.locationLabel.text = "Connection Issues"
             }
         }
     }
     
-    //JSON parsing method
+    // JSON parsing method
     func updateWeatherData(json: JSON) {
         
-        let temp = json["main"]["temp"]
-        print(temp)
+        if let temp = json["main"]["temp"].double {
+            
+            weatherData.temperature = Int(temp - 273.15)
+            weatherData.locationName = json["name"].stringValue
+            weatherData.condition = json["weather"][0]["id"].intValue
+            weatherData.weatherIconName = weatherData.updateWeatherIcon(condition: weatherData.condition)
+//            weatherData.cityID = json["id"].intValue
+//            weatherData.tempMax = json["main"]["temp_max"].intValue
+//            weatherData.tempMin = json["main"]["temp_min"].intValue
+//            weatherData.sunRise = json["sys"]["sunrise"].intValue
+//            weatherData.sunSet = json["sys"]["sunset"].intValue
+            
+            updateUIWithWeatherData()
+            
+        } else { locationLabel.text = "Weather Unavalable" }
+        
+    }
+    
+    // Updating UI information
+    func updateUIWithWeatherData () {
+        
+        if weatherData.locationName == "" {
+            
+            locationLabel.text = "Unnamed Location"
+            
+        } else { locationLabel.text = weatherData.locationName }
+        
+        temperatureLabel.text = String(weatherData.temperature)
+        
+// Need to create storyboard for other data
+        
     }
     
     // Location Manager Delegate methods
@@ -86,7 +116,7 @@ extension WeatherViewController {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
-        locationLabel.text = "Location Unavailable!"
+        locationLabel.text = "Location Unavailable"
     }
 
 }
