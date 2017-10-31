@@ -18,6 +18,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
+    @IBOutlet weak var weatherIconName: UIImageView!
     
     let locationManager = CLLocationManager()
     let weatherData = WeatherData()
@@ -87,7 +88,9 @@ extension WeatherViewController {
             
         } else { locationLabel.text = weatherData.locationName }
         
-        temperatureLabel.text = String(weatherData.temperature)
+        temperatureLabel.text = String(weatherData.temperature) + "°"
+        
+        weatherIconName.image = UIImage(named: weatherData.weatherIconName)
         
 // Need to create storyboard for other data
         
