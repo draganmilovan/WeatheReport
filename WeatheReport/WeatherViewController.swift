@@ -39,7 +39,16 @@ extension WeatherViewController {
     
     // Networking method
     func getWeatherData(url: String, parametars: [String : String]) {
-        
+        Alamofire.request(url, method: .get, parameters: parametars).responseJSON {
+            response in
+            if response.result.isSuccess {
+                print("Weather data ready!")
+                
+            } else {
+                print("Error \(String(describing: response.result.error))")
+                self.locationLabel.text = "Connection Issues!"
+            }
+        }
     }
     
     // Location Manager Delegate methods
