@@ -42,13 +42,25 @@ extension WeatherViewController {
         Alamofire.request(url, method: .get, parameters: parametars).responseJSON {
             response in
             if response.result.isSuccess {
-                print("Weather data ready!")
+                //print("Weather data ready!")
+                
+                //Casting data in to JSON
+                let weatherJSON: JSON = JSON(response.result.value!)
+                print(weatherJSON)
+                self.updateWeatherData(json: weatherJSON)
                 
             } else {
                 print("Error \(String(describing: response.result.error))")
                 self.locationLabel.text = "Connection Issues!"
             }
         }
+    }
+    
+    //JSON parsing method
+    func updateWeatherData(json: JSON) {
+        
+        let temp = json["main"]["temp"]
+        print(temp)
     }
     
     // Location Manager Delegate methods
@@ -58,6 +70,8 @@ extension WeatherViewController {
         
         if location.horizontalAccuracy > 0 {
             locationManager.stopUpdatingLocation()
+            //Stop multiplying received data
+            locationManager.delegate = nil
             
             let lat = String(location.coordinate.latitude)
             let lon = String(location.coordinate.longitude)
