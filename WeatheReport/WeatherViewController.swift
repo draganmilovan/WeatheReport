@@ -64,18 +64,19 @@ extension WeatherViewController {
     func updateWeatherData(json: JSON) {
         
         if let temp = json["main"]["temp"].double {
-            
-            weatherData.temperature = Int(temp - 273.15)
-            weatherData.locationName = json["name"].stringValue
-            weatherData.condition = json["weather"][0]["id"].intValue
-            weatherData.weatherIconName = weatherData.updateWeatherIcon(condition: weatherData.condition)
-//            weatherData.cityID = json["id"].intValue
-//            weatherData.tempMax = json["main"]["temp_max"].intValue
-//            weatherData.tempMin = json["main"]["temp_min"].intValue
             weatherData.sunRise = json["sys"]["sunrise"].intValue
             weatherData.sunSet = json["sys"]["sunset"].intValue
             
             weatherData.dayTime = weatherData.updateTimeOfDay()
+            
+            weatherData.temperature = Int(temp - 273.15)
+            weatherData.locationName = json["name"].stringValue
+            weatherData.condition = json["weather"][0]["id"].intValue
+            weatherData.weatherIconName = weatherData.updateWeatherIcon(condition: weatherData.condition, dayTime: weatherData.dayTime)
+//            weatherData.cityID = json["id"].stringValue
+//            weatherData.tempMax = json["main"]["temp_max"].intValue
+//            weatherData.tempMin = json["main"]["temp_min"].intValue
+
             
             updateUIWithWeatherData()
             
@@ -100,6 +101,7 @@ extension WeatherViewController {
         
         temperatureLabel.text = String(weatherData.temperature) + "°"
         
+   //     if weatherData.weatherIconName
         weatherIconName.image = UIImage(named: weatherData.weatherIconName)
         
 // Need to create storyboard for other data

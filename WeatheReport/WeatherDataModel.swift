@@ -15,14 +15,14 @@ class WeatherData {
     var locationName: String = ""
     var weatherIconName: String = ""
     var dayTime: Bool = true
-    var cityID: Int?
+    var cityID: String?
     var tempMin: Int?
     var tempMax: Int?
     var sunRise: Int?
     var sunSet: Int?
     
     
-    // Method returns true if is day time at the time
+    // Method returns true if is daytime at the time
     func updateTimeOfDay() -> Bool {
         
         let sunRise = Date(timeIntervalSince1970: Double(self.sunRise!))
@@ -30,80 +30,92 @@ class WeatherData {
         let date = Date()
         
         if date >= sunRise && date <= sunSet {
+            
             return true
+            
         } else { return false }
         
     }
     
     
     // Method returns the name of the weather condition image from API condition code
-    func updateWeatherIcon(condition: Int) -> String {
+    func updateWeatherIcon(condition: Int, dayTime: Bool) -> String {
+        
+        var iconName = ""
+        let dayTime = self.dayTime
         
         switch (condition) {
             
         case 200...209, 771...780, 960, 961 :
-            return "showerAndThunder"
+            iconName = "showerAndThunder"
             
         case 210...229 :
-            return "cloudAndThunder"
+            iconName = "cloudAndThunder"
             
         case 230...299 :
-            return "rainAndThunder"
+            iconName = "rainAndThunder"
             
         case 300...399, 500, 501 :
-            return "rainCloud"
+            iconName = "rainCloud"
             
         case 502...510, 520...599 :
-            return "shower"
+            iconName = "shower"
             
         case 600...610, 620...699 :
-            return "snowCloud"
+            iconName = "snowCloud"
             
         case 611...619, 511 :
-            return "hailAndSnow"
+            iconName = "hailAndSnow"
             
         case 700...740, 750...770 :
-            return "sunAndFog"
+            if dayTime {
+                iconName = "sunAndFog"
+            } else { iconName = "moonAndFog"}
             
         case 741 :
-            return "fog"
+            iconName = "fog"
             
         case 781, 900 :
-            return "tornado"
+            iconName = "tornado"
             
         case 800, 904 :
-            return "sun"
+            if dayTime {
+                iconName = "sun"
+            } else { iconName = "moon"}
             
         case 801 :
-            return "sunAndSmallCloud"
+            if dayTime {
+                iconName = "sunAndSmallCloud"
+            } else { iconName = "moonAndSmallCloud"}
             
         case 802, 803 :
-            return "sunAndBigCloud"
+            if dayTime {
+                iconName = "sunAndBigCloud"
+            } else { iconName = "moonAndBigCloud"}
             
         case 804 :
-            return "cloud"
+            iconName = "cloud"
             
         case 901, 902, 962 :
-            return "thunder"
+            iconName = "thunder"
             
         case 903 :
-            return "snow"
+            iconName = "snow"
             
         case 905 :
-            return "wind"
+            iconName = "wind"
             
         case 906 :
-            return "hail"
+            iconName = "hail"
             
         default :
-            return "N/A"
+            iconName = "na"
         }
         
+        return iconName
     }
     
 }
-
-
 
 
 
