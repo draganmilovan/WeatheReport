@@ -19,6 +19,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var weatherIconName: UIImageView!
+    @IBOutlet weak var backgroundImage: UIImageView!
+    
     
     let locationManager = CLLocationManager()
     let weatherData = WeatherData()
@@ -70,8 +72,10 @@ extension WeatherViewController {
 //            weatherData.cityID = json["id"].intValue
 //            weatherData.tempMax = json["main"]["temp_max"].intValue
 //            weatherData.tempMin = json["main"]["temp_min"].intValue
-//            weatherData.sunRise = json["sys"]["sunrise"].intValue
-//            weatherData.sunSet = json["sys"]["sunset"].intValue
+            weatherData.sunRise = json["sys"]["sunrise"].intValue
+            weatherData.sunSet = json["sys"]["sunset"].intValue
+            
+            weatherData.dayTime = weatherData.updateTimeOfDay()
             
             updateUIWithWeatherData()
             
@@ -82,9 +86,15 @@ extension WeatherViewController {
     // Updating UI information
     func updateUIWithWeatherData () {
         
+        if weatherData.dayTime {
+            
+            backgroundImage.image = UIImage(named: "BackgroundDay")
+            
+        } else { backgroundImage.image = UIImage(named: "BackgroundNight") }
+        
         if weatherData.locationName == "" {
             
-            locationLabel.text = "Unnamed Location"
+            locationLabel.text = "Nameless Location"
             
         } else { locationLabel.text = weatherData.locationName }
         

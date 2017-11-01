@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -16,14 +16,14 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="WeatherViewController" customModule="WeatheReport" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="BackgroundDay" translatesAutoresizingMaskIntoConstraints="NO" id="UOr-Pa-KEK">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2O8-xq-a79">
-                                <rect key="frame" x="20" y="293.5" width="335" height="80"/>
+                                <rect key="frame" x="20" y="366" width="335" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="HC6-kw-Ltf"/>
                                 </constraints>
@@ -32,13 +32,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-29" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1AM-eg-r55">
-                                <rect key="frame" x="238.5" y="40" width="116.5" height="233.5"/>
+                                <rect key="frame" x="214.66666666666663" y="64" width="140.33333333333337" height="282"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="60"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunAndFog" translatesAutoresizingMaskIntoConstraints="NO" id="GHj-KE-fb1">
-                                <rect key="frame" x="20" y="40" width="198.5" height="233.5"/>
+                                <rect key="frame" x="20" y="64" width="174.66666666666666" height="282"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -62,6 +62,7 @@
                         <viewLayoutGuide key="safeArea" id="aYk-NV-8gS"/>
                     </view>
                     <connections>
+                        <outlet property="backgroundImage" destination="UOr-Pa-KEK" id="ybV-EI-bS1"/>
                         <outlet property="locationLabel" destination="2O8-xq-a79" id="8Sa-uo-aVD"/>
                         <outlet property="temperatureLabel" destination="1AM-eg-r55" id="gO1-Mz-ehm"/>
                         <outlet property="weatherIconName" destination="GHj-KE-fb1" id="QAN-ac-c4Z"/>

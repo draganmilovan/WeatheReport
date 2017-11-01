@@ -14,11 +14,27 @@ class WeatherData {
     var condition: Int = 0
     var locationName: String = ""
     var weatherIconName: String = ""
+    var dayTime: Bool = true
     var cityID: Int?
     var tempMin: Int?
     var tempMax: Int?
     var sunRise: Int?
     var sunSet: Int?
+    
+    
+    // Method returns true if is day time at the time
+    func updateTimeOfDay() -> Bool {
+        
+        let sunRise = Date(timeIntervalSince1970: Double(self.sunRise!))
+        let sunSet = Date(timeIntervalSince1970: Double(self.sunSet!))
+        let date = Date()
+        
+        if date >= sunRise && date <= sunSet {
+            return true
+        } else { return false }
+        
+    }
+    
     
     // Method returns the name of the weather condition image from API condition code
     func updateWeatherIcon(condition: Int) -> String {
