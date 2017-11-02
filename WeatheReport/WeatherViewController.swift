@@ -101,11 +101,12 @@ extension WeatherViewController {
         
         temperatureLabel.text = String(weatherData.temperature) + "°"
         
-   //     if weatherData.weatherIconName
         weatherIconName.image = UIImage(named: weatherData.weatherIconName)
         
 // Need to create storyboard for other data
-        
+        print(weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunRise!))
+        print(weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunSet!))
+
     }
     
     // Location Manager Delegate methods

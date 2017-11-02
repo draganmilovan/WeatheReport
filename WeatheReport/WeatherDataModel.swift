@@ -111,8 +111,22 @@ class WeatherData {
         default :
             iconName = "na"
         }
-        
+
         return iconName
+    }
+    
+    
+    // Method returns time in hours and minutes from Unix Timestamp
+    func convertUnixTimestampToTime(timeStamp: Int) -> String {
+        
+        let date = Date(timeIntervalSince1970: Double(timeStamp))
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        
+        let time = formatter.string(from: date)
+        
+        return time
     }
     
 }
