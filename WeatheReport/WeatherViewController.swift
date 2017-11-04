@@ -21,6 +21,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var weatherIconName: UIImageView!
     @IBOutlet weak var backgroundImage: UIImageView!
+    @IBOutlet weak var uvIndexLabel: UILabel!
+    @IBOutlet weak var uviTextLabel: UILabel!
     
     
     let locationManager = CLLocationManager()
@@ -143,10 +145,13 @@ extension WeatherViewController {
         
         if let uvi = json["value"].double {
             weatherData.uvIndex = String(uvi)
-            //uvIndexLabel.text = weatherData.uvIndex
+            uvIndexLabel.text = weatherData.uvIndex
             print(weatherData.uvIndex!)
             
-        } else { weatherData.uvIndex = "N/A" }
+        } else {
+            weatherData.uvIndex = "N/A"
+            uvIndexLabel.text = weatherData.uvIndex
+        }
     }
     
     
