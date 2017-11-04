@@ -20,7 +20,7 @@ class WeatherData {
     var tempMax: Int?
     var sunRise: Int?
     var sunSet: Int?
-    
+    var uvIndex: String?
     
     // Method returns true if is daytime at the time
     func updateTimeOfDay() -> Bool {

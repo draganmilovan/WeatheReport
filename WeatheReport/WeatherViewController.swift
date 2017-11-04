@@ -14,6 +14,7 @@ import SwiftyJSON
 class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     let weatherURL = "http://api.openweathermap.org/data/2.5/weather"
+    let uvIndexURL = "http://api.openweathermap.org/data/2.5/uvi"
     let appID = "ac5c2be22a93a78414edcf3ebfd4885e"
     
     @IBOutlet weak var locationLabel: UILabel!
@@ -53,13 +54,30 @@ extension WeatherViewController {
    //             print("Weather data ready!")
                 
                 //Casting data in to JSON
-                let weatherJSON: JSON = JSON(response.result.value!)
-                print(weatherJSON)
-                self.updateWeatherData(json: weatherJSON)
+                let json: JSON = JSON(response.result.value!)
+                print(json)
+                self.updateWeatherData(json: json)
                 
             } else {
                 print("Error \(String(describing: response.result.error))")
                 self.locationLabel.text = "Connection Issues"
+            }
+        }
+    }
+    
+    func getUvIndexData(url: String, parametars: [String : String]) {
+        Alamofire.request(url, method: .get, parameters: parametars).responseJSON {
+            response in
+            if response.result.isSuccess {
+                
+                //Casting data in to JSON
+                let json: JSON = JSON(response.result.value!)
+                print(json)
+                self.updateUvIndexData(json: json)
+                
+            } else {
+                print("Error \(String(describing: response.result.error))")
+               // self.uvIndexLabel.text = "-"
             }
         }
     }
@@ -88,6 +106,7 @@ extension WeatherViewController {
         
     }
     
+    
     // Updating UI information
     func updateUIWithWeatherData () {
         
@@ -113,6 +132,18 @@ extension WeatherViewController {
 
     }
     
+    // Method for processing UV Index data
+    func updateUvIndexData(json:JSON) {
+        
+        if let uvi = json["value"].double {
+            weatherData.uvIndex = String(uvi)
+            //uvIndexLabel.text = weatherData.uvIndex
+            print(weatherData.uvIndex!)
+            
+        } else { weatherData.uvIndex = "N/A" }
+    }
+    
+    
     // Location Manager Delegate methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
@@ -130,6 +161,7 @@ extension WeatherViewController {
             let params : [String : String] = ["lat" : lat, "lon" : lon, "appid" : appID]
             
             getWeatherData(url: weatherURL, parametars: params)
+            getUvIndexData(url: uvIndexURL, parametars: params)
         }
         
     }
