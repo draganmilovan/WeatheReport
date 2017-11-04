@@ -85,11 +85,17 @@ extension WeatherViewController {
     // JSON parsing method
     func updateWeatherData(json: JSON) {
         
-        if let temp = json["main"]["temp"].double {
-            weatherData.sunRise = json["sys"]["sunrise"].intValue
-            weatherData.sunSet = json["sys"]["sunset"].intValue
+        if let sunRise = json["sys"]["sunrise"].int,
+            let sunSet = json["sys"]["sunset"].int {
+            
+            weatherData.sunRise = sunRise
+            weatherData.sunSet = sunSet
             
             weatherData.dayTime = weatherData.updateTimeOfDay()
+            
+        } else { weatherData.dayTime = true }
+        
+        if let temp = json["main"]["temp"].double {
             
             weatherData.temperature = Int(temp - 273.15)
             weatherData.locationName = json["name"].stringValue
@@ -160,8 +166,8 @@ extension WeatherViewController {
             
             let params : [String : String] = ["lat" : lat, "lon" : lon, "appid" : appID]
             
-            getWeatherData(url: weatherURL, parametars: params)
             getUvIndexData(url: uvIndexURL, parametars: params)
+            getWeatherData(url: weatherURL, parametars: params)
         }
         
     }
