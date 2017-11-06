@@ -28,6 +28,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     let weatherData = WeatherData()
     
+    weak var timer: Timer?
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -41,12 +43,24 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         // Start looking for coordinates
         locationManager.startUpdatingLocation()
-    
+        
+        // Start timer for auto refreshing data every minute
+        startTimer()
+        
+//        let refreshControl = UIRefreshControl()
+//        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+//
     }
     
 }
 
 extension WeatherViewController {
+    
+//    @objc func refresh(refreshControl: UIRefreshControl) {
+//        print("Refreshing...")
+//        locationManager.startUpdatingLocation()
+//        refreshControl.endRefreshing()
+//    }
     
     // Networking method
     func getWeatherData(url: String, parametars: [String : String]) {
@@ -57,7 +71,7 @@ extension WeatherViewController {
                 
                 //Casting data in to JSON
                 let json: JSON = JSON(response.result.value!)
-                print(json)
+               // print(json)
                 self.updateWeatherData(json: json)
                 
             } else {
@@ -74,12 +88,12 @@ extension WeatherViewController {
                 
                 //Casting data in to JSON
                 let json: JSON = JSON(response.result.value!)
-                print(json)
+               // print(json)
                 self.updateUvIndexData(json: json)
                 
             } else {
                 print("Error \(String(describing: response.result.error))")
-               // self.uvIndexLabel.text = "-"
+                self.uvIndexLabel.text = "-"
             }
         }
     }
@@ -137,6 +151,8 @@ extension WeatherViewController {
 // Need to create storyboard for other data
         print(weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunRise!))
         print(weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunSet!))
+        
+        print("Updated UI!")
 
     }
     
@@ -154,6 +170,15 @@ extension WeatherViewController {
         }
     }
     
+    // Method for auto refreshing data every minute
+    func startTimer() {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { [weak self] _ in
+
+            self!.locationManager.startUpdatingLocation()
+            print("timer started")
+        }
+    }
     
     // Location Manager Delegate methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -163,7 +188,7 @@ extension WeatherViewController {
         if location.horizontalAccuracy > 0 {
             locationManager.stopUpdatingLocation()
             //Stop multiplying received data
-            locationManager.delegate = nil
+            //locationManager.delegate = nil
             
             let lat = String(location.coordinate.latitude)
             let lon = String(location.coordinate.longitude)
