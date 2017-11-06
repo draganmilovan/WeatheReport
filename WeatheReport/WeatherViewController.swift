@@ -16,6 +16,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     let weatherURL = "http://api.openweathermap.org/data/2.5/weather"
     let uvIndexURL = "http://api.openweathermap.org/data/2.5/uvi"
     let appID = "ac5c2be22a93a78414edcf3ebfd4885e"
+    var paramsUVI : [String : String] = [:]
     
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -112,6 +113,10 @@ extension WeatherViewController {
         } else { weatherData.dayTime = true }
         
         if let temp = json["main"]["temp"].double {
+            
+            // Calling UV Index data after validating weather data,
+            // and knowing time of day (API never return 0!
+            getUvIndexData(url: uvIndexURL, parametars: paramsUVI)
             
             weatherData.temperature = Int(temp - 273.15)
             weatherData.locationName = json["name"].stringValue
@@ -210,8 +215,8 @@ extension WeatherViewController {
             print("lat = \(lat), lon = \(lon)")
             
             let params : [String : String] = ["lat" : lat, "lon" : lon, "appid" : appID]
+            self.paramsUVI = params
             
-            getUvIndexData(url: uvIndexURL, parametars: params)
             getWeatherData(url: weatherURL, parametars: params)
         }
         
