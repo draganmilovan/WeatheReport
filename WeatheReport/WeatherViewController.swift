@@ -124,7 +124,13 @@ extension WeatherViewController {
             
             updateUIWithWeatherData()
             
-        } else { locationLabel.text = "Weather Unavalable" }
+        } else {
+            // Updating UI information i case of unvalidated weather data
+            locationLabel.text = "Weather Unavalable"
+            weatherIconName.image = nil
+            temperatureLabel.text = nil
+            uvIndexLabel.text = nil
+        }
         
     }
     
@@ -156,19 +162,27 @@ extension WeatherViewController {
 
     }
     
+    
     // Method for processing UV Index data
     func updateUvIndexData(json:JSON) {
         
         if let uvi = json["value"].double {
-            weatherData.uvIndex = String(uvi)
-            uvIndexLabel.text = weatherData.uvIndex
-            print(weatherData.uvIndex!)
+            if self.locationLabel.text != "Weather Unavalable" {
+                weatherData.uvIndex = String(uvi)
+                uvIndexLabel.text = weatherData.uvIndex
+                print(weatherData.uvIndex!)
+            }
+            
+            if weatherData.dayTime == false {
+                uvIndexLabel.text = "0"
+            }
             
         } else {
-            weatherData.uvIndex = "N/A"
-            uvIndexLabel.text = weatherData.uvIndex
+            self.weatherData.uvIndex = "N/A"
+            self.uvIndexLabel.text = self.weatherData.uvIndex
         }
     }
+    
     
     // Method for auto refreshing data every minute
     func startTimer() {
@@ -179,6 +193,7 @@ extension WeatherViewController {
             print("timer started")
         }
     }
+    
     
     // Location Manager Delegate methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
