@@ -107,7 +107,7 @@ extension WeatherViewController {
                 
                 //Casting data in to JSON
                 let json: JSON = JSON(response.result.value!)
-                print(json)
+                //print(json)
                 self.updateForecastData(json: json)
                 
             } else {
@@ -141,10 +141,15 @@ extension WeatherViewController {
             weatherData.locationName = json["name"].stringValue
             weatherData.condition = json["weather"][0]["id"].intValue
             weatherData.weatherIconName = weatherData.updateWeatherIcon(condition: weatherData.condition, dayTime: weatherData.dayTime)
-//            weatherData.cityID = json["id"].stringValue
-//            weatherData.tempMax = json["main"]["temp_max"].intValue
-//            weatherData.tempMin = json["main"]["temp_min"].intValue
-
+            weatherData.cityID = json["id"].stringValue
+            weatherData.tempMax = json["main"]["temp_max"].intValue
+            weatherData.tempMin = json["main"]["temp_min"].intValue
+            weatherData.humidity = json["main"]["humidity"].intValue
+            weatherData.pressure = json["main"]["pressure"].intValue
+            weatherData.description = json["weather"][0]["description"].stringValue.capitalized
+            weatherData.windSpeed = json["wind"]["speed"].stringValue
+            let windDirection = json["wind"]["deg"].intValue
+            weatherData.windDirection = weatherData.windDirectionCardinalPoint(degrees: windDirection)
             
             updateUIWithWeatherData()
             
@@ -181,6 +186,10 @@ extension WeatherViewController {
 // Need to create storyboard for other data
         print(weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunRise!))
         print(weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunSet!))
+        print(weatherData.windSpeed)
+        print(weatherData.windDirection)
+        print(weatherData.description)
+        
         
         print("Updated UI!")
 

@@ -21,6 +21,13 @@ class WeatherData {
     var sunRise: Int?
     var sunSet: Int?
     var uvIndex: String?
+    var windDirection: String?
+    var windSpeed: String?
+    var humidity: Int?
+    var description: String?
+    var pressure: Int?
+    
+    
     
     // Method returns true if is daytime at the time
     func updateTimeOfDay() -> Bool {
@@ -113,6 +120,41 @@ class WeatherData {
         }
 
         return iconName
+    }
+    
+    
+    // Method returns the cardinal point from the wind direction in degrees
+    func windDirectionCardinalPoint(degrees: Int) -> String {
+        
+        switch (degrees) {
+            
+        case 0...22, 337...360 :
+            return "N"
+            
+        case 23...67 :
+            return "NE"
+            
+        case 68...111 :
+            return "E"
+            
+        case 112...157 :
+            return "SE"
+            
+        case 158...202 :
+            return "S"
+            
+        case 203...247 :
+            return "SW"
+            
+        case 248...292 :
+            return "W"
+            
+        case 293...336 :
+            return "NW"
+            
+        default:
+            return "-"
+        }
     }
     
     
