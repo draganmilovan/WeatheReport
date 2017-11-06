@@ -15,6 +15,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     let weatherURL = "http://api.openweathermap.org/data/2.5/weather"
     let uvIndexURL = "http://api.openweathermap.org/data/2.5/uvi"
+    let forecastURL = "http://api.openweathermap.org/data/2.5/forecast"
     let appID = "ac5c2be22a93a78414edcf3ebfd4885e"
     var paramsUVI : [String : String] = [:]
     
@@ -99,6 +100,24 @@ extension WeatherViewController {
         }
     }
     
+    func getForecastData(url: String, parametars: [String : String]) {
+        Alamofire.request(url, method: .get, parameters: parametars).responseJSON {
+            response in
+            if response.result.isSuccess {
+                
+                //Casting data in to JSON
+                let json: JSON = JSON(response.result.value!)
+                print(json)
+                self.updateForecastData(json: json)
+                
+            } else {
+                print("Error \(String(describing: response.result.error))")
+                
+            }
+        }
+    }
+    
+    
     // JSON parsing method
     func updateWeatherData(json: JSON) {
         
@@ -169,7 +188,7 @@ extension WeatherViewController {
     
     
     // Method for processing UV Index data
-    func updateUvIndexData(json:JSON) {
+    func updateUvIndexData(json: JSON) {
         
         if let uvi = json["value"].double {
             if self.locationLabel.text != "Weather Unavalable" {
@@ -186,6 +205,11 @@ extension WeatherViewController {
             self.weatherData.uvIndex = "N/A"
             self.uvIndexLabel.text = self.weatherData.uvIndex
         }
+    }
+    
+    
+    func updateForecastData(json: JSON) {
+        
     }
     
     
@@ -218,6 +242,7 @@ extension WeatherViewController {
             self.paramsUVI = params
             
             getWeatherData(url: weatherURL, parametars: params)
+            getForecastData(url: forecastURL, parametars: params)
         }
         
     }
