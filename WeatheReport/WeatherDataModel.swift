@@ -27,6 +27,14 @@ class WeatherData {
     var description: String?
     var pressure: Int?
     
+    var times: [String] = []
+    var temperatures: [String] = []
+    var conditions: [Int] = []
+    var weatherIconsNames: [String] = []
+    var temperaturesMin: [Int] = []
+    var temperaturesMax: [Int] = []
+    var cityIDs: [Int] = []
+    
     
     
     // Method returns true if is daytime at the time
@@ -50,6 +58,7 @@ class WeatherData {
         
         var iconName = ""
         let dayTime = self.dayTime
+        
         
         switch (condition) {
             
@@ -165,6 +174,20 @@ class WeatherData {
         
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
+        
+        let time = formatter.string(from: date)
+        
+        return time
+    }
+    
+    
+    // Method returns time in hours from Unix Timestamp
+    func convertUnixTimestampToHours(timeStamp: Int) -> String {
+        
+        let date = Date(timeIntervalSince1970: Double(timeStamp))
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH"
         
         let time = formatter.string(from: date)
         
