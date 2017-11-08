@@ -217,7 +217,32 @@ extension WeatherViewController {
     }
     
     
+    // Method for parsing forecast data
     func updateForecastData(json: JSON) {
+        
+        if let _ = json["list"][0]["dt"].int {
+
+            // Populating array with times for forecast
+            weatherData.times = json["list"].map {
+                
+                weatherData.convertUnixTimestampToHours(timeStamp: ($0.1["dt"].intValue))
+                
+            }
+            
+            // Populating array with temperatures for forecast
+            weatherData.temperatures = json["list"].map {
+                
+                String( Int( $0.1["main"]["temp"].doubleValue - 273.15 ))  + "°"
+                
+            }
+            
+            let wIDs = json["list"].map { $0.1["weather"][0]["id"].intValue }
+
+            print(weatherData.times)
+            print(weatherData.temperatures)
+            print(wIDs)
+            
+        } else { locationManager.startUpdatingLocation() }
         
     }
     
