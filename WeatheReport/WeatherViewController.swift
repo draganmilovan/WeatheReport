@@ -140,7 +140,7 @@ extension WeatherViewController {
             weatherData.temperature = Int(temp - 273.15)
             weatherData.locationName = json["name"].stringValue
             weatherData.condition = json["weather"][0]["id"].intValue
-            weatherData.weatherIconName = weatherData.updateWeatherIcon(condition: weatherData.condition, dayTime: weatherData.dayTime)
+            weatherData.weatherIconName = weatherData.updateWeatherIcon(condition: weatherData.condition, at: weatherData.dayTime)
             weatherData.cityID = json["id"].stringValue
             weatherData.tempMax = json["main"]["temp_max"].intValue
             weatherData.tempMin = json["main"]["temp_min"].intValue
@@ -184,8 +184,8 @@ extension WeatherViewController {
         weatherIconName.image = UIImage(named: weatherData.weatherIconName)
         
 // Need to create storyboard for other data
-        print(weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunRise!))
-        print(weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunSet!))
+        print(weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunRise!, format: "HH:mm"))
+        print(weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunSet!, format: "HH:mm"))
         print(weatherData.windSpeed)
         print(weatherData.windDirection)
         print(weatherData.description)
@@ -225,7 +225,8 @@ extension WeatherViewController {
             // Populating array with times for forecast
             weatherData.times = json["list"].map {
                 
-                weatherData.convertUnixTimestampToHours(timeStamp: ($0.1["dt"].intValue))
+                weatherData.convertUnixTimestampToTime(timeStamp: ($0.1["dt"].intValue),
+                                                       format: "HH")
                 
             }
             
