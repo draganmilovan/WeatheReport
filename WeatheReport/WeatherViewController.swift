@@ -236,11 +236,18 @@ extension WeatherViewController {
                 
             }
             
-            let wIDs = json["list"].map { $0.1["weather"][0]["id"].intValue }
-
+            // Populating array with names of weather icons
+            weatherData.weatherIconsNames = json["list"].map {
+                
+                weatherData.updateWeatherIcon(condition: ($0.1["weather"][0]["id"].intValue),
+                                              at: weatherData.timeOfDay(for: ($0.1["dt"].intValue),
+                                                                        inFormat: "HH"))
+                
+            }
+            
             print(weatherData.times)
             print(weatherData.temperatures)
-            print(wIDs)
+            print(weatherData.weatherIconsNames)
             
         } else { locationManager.startUpdatingLocation() }
         
