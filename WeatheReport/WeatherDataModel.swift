@@ -53,6 +53,22 @@ class WeatherData {
     }
     
     
+    // Method returns true if is daytime for certain time
+    func timeOfDay(for time: Int, inFormat: String) -> Bool {
+        
+        let t = Int(self.convertUnixTimestampToTime(timeStamp: time, format: inFormat))
+        let sunRise = Int(self.convertUnixTimestampToTime(timeStamp: self.sunRise!, format: inFormat))
+        let sunSet = Int(self.convertUnixTimestampToTime(timeStamp: self.sunSet!, format: inFormat))
+        
+        if t! >= sunRise! && t! <= sunSet! {
+            
+            return true
+            
+        } else { return false }
+        
+    }
+    
+    
     // Method returns the name of the weather condition image from API condition code
     func updateWeatherIcon(condition: Int, dayTime: Bool) -> String {
         
