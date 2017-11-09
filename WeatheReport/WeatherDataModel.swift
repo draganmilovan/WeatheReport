@@ -29,7 +29,6 @@ class WeatherData {
     
     var times: [String] = []
     var temperatures: [String] = []
-    var conditions: [Int] = []
     var weatherIconsNames: [String] = []
     var temperaturesMin: [Int] = []
     var temperaturesMax: [Int] = []
@@ -70,81 +69,76 @@ class WeatherData {
     
     
     // Method returns the name of the weather condition image from API condition code
-    func updateWeatherIcon(condition: Int, dayTime: Bool) -> String {
-        
-        var iconName = ""
-        let dayTime = self.dayTime
-        
+    func updateWeatherIcon(condition: Int, at dayTime: Bool) -> String {
         
         switch (condition) {
             
         case 200...209, 771...780, 960, 961 :
-            iconName = "showerAndThunder"
+            return "showerAndThunder"
             
         case 210...229 :
-            iconName = "cloudAndThunder"
+            return "cloudAndThunder"
             
         case 230...299 :
-            iconName = "rainAndThunder"
+            return "rainAndThunder"
             
         case 300...399, 500, 501 :
-            iconName = "rainCloud"
+            return "rainCloud"
             
         case 502...510, 520...599 :
-            iconName = "shower"
+            return "shower"
             
         case 600...610, 620...699 :
-            iconName = "snowCloud"
+            return "snowCloud"
             
         case 611...619, 511 :
-            iconName = "hailAndSnow"
+            return "hailAndSnow"
             
         case 700...740, 750...770 :
             if dayTime {
-                iconName = "sunAndFog"
-            } else { iconName = "moonAndFog"}
+                return "sunAndFog"
+            } else { return "moonAndFog"}
             
         case 741 :
-            iconName = "fog"
+            return "fog"
             
         case 781, 900 :
-            iconName = "tornado"
+            return "tornado"
             
         case 800, 904 :
             if dayTime {
-                iconName = "sun"
-            } else { iconName = "moon"}
+                return "sun"
+            } else { return "moon"}
             
         case 801 :
             if dayTime {
-                iconName = "sunAndSmallCloud"
-            } else { iconName = "moonAndSmallCloud"}
+                return "sunAndSmallCloud"
+            } else { return "moonAndSmallCloud"}
             
         case 802, 803 :
             if dayTime {
-                iconName = "sunAndBigCloud"
-            } else { iconName = "moonAndBigCloud"}
+                return "sunAndBigCloud"
+            } else { return "moonAndBigCloud"}
             
         case 804 :
-            iconName = "cloud"
+            return "cloud"
             
         case 901, 902, 962 :
-            iconName = "thunder"
+            return "thunder"
             
         case 903 :
-            iconName = "snow"
+            return "snow"
             
         case 905 :
-            iconName = "wind"
+            return "wind"
             
         case 906 :
-            iconName = "hail"
+            return "hail"
             
         default :
-            iconName = "na"
+            return "na"
         }
 
-        return iconName
     }
     
     
@@ -183,31 +177,16 @@ class WeatherData {
     }
     
     
-    // Method returns time in hours and minutes from Unix Timestamp
-    func convertUnixTimestampToTime(timeStamp: Int) -> String {
+    // Method returns time from Unix Timestamp
+    func convertUnixTimestampToTime(timeStamp: Int, format: String) -> String {
         
         let date = Date(timeIntervalSince1970: Double(timeStamp))
         
         let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
+        formatter.dateFormat = format
         
-        let time = formatter.string(from: date)
+        return (formatter.string(from: date))
         
-        return time
-    }
-    
-    
-    // Method returns time in hours from Unix Timestamp
-    func convertUnixTimestampToHours(timeStamp: Int) -> String {
-        
-        let date = Date(timeIntervalSince1970: Double(timeStamp))
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH"
-        
-        let time = formatter.string(from: date)
-        
-        return time
     }
     
 }
