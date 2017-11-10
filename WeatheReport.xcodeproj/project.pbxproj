@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		083E1A501FB5E52500CF5B67 /* WeatheReport.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083E1A4E1FB5E52500CF5B67 /* WeatheReport.xcdatamodeld */; };
 		08EF6EBB1F98FF6F00EB0E27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF6EBA1F98FF6F00EB0E27 /* AppDelegate.swift */; };
 		08EF6EBD1F98FF6F00EB0E27 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF6EBC1F98FF6F00EB0E27 /* WeatherViewController.swift */; };
 		08EF6EC01F98FF6F00EB0E27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08EF6EBE1F98FF6F00EB0E27 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		083E1A4F1FB5E52500CF5B67 /* WeatheReport.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeatheReport.xcdatamodel; sourceTree = "<group>"; };
 		08EF6EB71F98FF6F00EB0E27 /* WeatheReport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatheReport.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08EF6EBA1F98FF6F00EB0E27 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08EF6EBC1F98FF6F00EB0E27 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
@@ -42,9 +44,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		083E1A4D1FB5E40A00CF5B67 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				083E1A4E1FB5E52500CF5B67 /* WeatheReport.xcdatamodeld */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
 		08EF6EAE1F98FF6F00EB0E27 = {
 			isa = PBXGroup;
 			children = (
+				083E1A4D1FB5E40A00CF5B67 /* DataModel */,
 				08EF6EB91F98FF6F00EB0E27 /* WeatheReport */,
 				08EF6EB81F98FF6F00EB0E27 /* Products */,
 				C6B797D026D1B80B78FDADDF /* Pods */,
@@ -217,6 +228,7 @@
 				08EF6EBD1F98FF6F00EB0E27 /* WeatherViewController.swift in Sources */,
 				08EF6EBB1F98FF6F00EB0E27 /* AppDelegate.swift in Sources */,
 				08EF6ECD1F9901E000EB0E27 /* WeatherDataModel.swift in Sources */,
+				083E1A501FB5E52500CF5B67 /* WeatheReport.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +417,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		083E1A4E1FB5E52500CF5B67 /* WeatheReport.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				083E1A4F1FB5E52500CF5B67 /* WeatheReport.xcdatamodel */,
+			);
+			currentVersion = 083E1A4F1FB5E52500CF5B67 /* WeatheReport.xcdatamodel */;
+			path = WeatheReport.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 08EF6EAF1F98FF6F00EB0E27 /* Project object */;
 }
