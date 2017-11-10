@@ -200,7 +200,7 @@ extension WeatherViewController {
     func updateUvIndexData(json: JSON) {
         
         if let uvi = json["value"].double {
-            if self.locationLabel.text != "Weather Unavalable" {
+            if locationLabel.text != "Weather Unavalable" {
                 weatherData.uvIndex = String(uvi)
                 uvIndexLabel.text = weatherData.uvIndex
                 print(weatherData.uvIndex!)
@@ -211,8 +211,8 @@ extension WeatherViewController {
             }
             
         } else {
-            self.weatherData.uvIndex = "N/A"
-            self.uvIndexLabel.text = self.weatherData.uvIndex
+            weatherData.uvIndex = "N/A"
+            uvIndexLabel.text = weatherData.uvIndex
         }
     }
     
@@ -281,7 +281,7 @@ extension WeatherViewController {
             print("lat = \(lat), lon = \(lon)")
             
             let params : [String : String] = ["lat" : lat, "lon" : lon, "appid" : appID]
-            self.paramsUVI = params
+            paramsUVI = params
             
             getWeatherData(url: weatherURL, parametars: params)
             getForecastData(url: forecastURL, parametars: params)
