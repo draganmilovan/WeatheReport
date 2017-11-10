@@ -6,6 +6,20 @@
 	objectVersion = 48;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		083E1A511FB6057200CF5B67 /* mogenerator */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 083E1A541FB6057200CF5B67 /* Build configuration list for PBXAggregateTarget "mogenerator" */;
+			buildPhases = (
+				083E1A551FB6059A00CF5B67 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = mogenerator;
+			productName = mogenerator;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		083E1A501FB5E52500CF5B67 /* WeatheReport.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083E1A4E1FB5E52500CF5B67 /* WeatheReport.xcdatamodeld */; };
 		08EF6EBB1F98FF6F00EB0E27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF6EBA1F98FF6F00EB0E27 /* AppDelegate.swift */; };
@@ -135,6 +149,10 @@
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Dragan Milovanovic";
 				TargetAttributes = {
+					083E1A511FB6057200CF5B67 = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
 					08EF6EB61F98FF6F00EB0E27 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
@@ -155,6 +173,7 @@
 			projectRoot = "";
 			targets = (
 				08EF6EB61F98FF6F00EB0E27 /* WeatheReport */,
+				083E1A511FB6057200CF5B67 /* mogenerator */,
 			);
 		};
 /* End PBXProject section */
@@ -202,6 +221,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WeatheReport/Pods-WeatheReport-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		083E1A551FB6059A00CF5B67 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd DataModel\n\"${SRCROOT}/DataModel/tmpl/mogenerator\" --swift --model WeatheReport.xcdatamodeld --template-path tmpl --human-dir mogen-classes --machine-dir mogen-properties";
 		};
 		125EC533F0EB09351D3C8932 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -254,6 +286,22 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		083E1A521FB6057200CF5B67 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		083E1A531FB6057200CF5B67 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		08EF6EC71F98FF6F00EB0E27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -398,6 +446,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		083E1A541FB6057200CF5B67 /* Build configuration list for PBXAggregateTarget "mogenerator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				083E1A521FB6057200CF5B67 /* Debug */,
+				083E1A531FB6057200CF5B67 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		08EF6EB21F98FF6F00EB0E27 /* Build configuration list for PBXProject "WeatheReport" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
