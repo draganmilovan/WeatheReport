@@ -26,6 +26,7 @@ class WeatherDataManager {
 }
 
 
+
 extension WeatherDataManager {
     
     enum TypeOfData: String {
@@ -33,6 +34,24 @@ extension WeatherDataManager {
         case forecast
         case uvIndex = "uvi"
     }
+    
+    
+    //
+    // Method for calling all weather data
+    //
+    func createWeatherData(parametars: [String : String]) {
+        
+        getData(for: .currentWeather, parametars: parametars)
+        getData(for: .forecast, parametars: parametars)
+        getData(for: .uvIndex, parametars: parametars)
+        
+    }
+    
+}
+
+
+
+private extension WeatherDataManager {
     
     //
     // Networking method
@@ -69,7 +88,6 @@ extension WeatherDataManager {
         }
     }
 
-    
 }
 
 
@@ -96,9 +114,8 @@ private extension WeatherDataManager {
         
         if let temp = json["main"]["temp"].double {
             
-            // Calling UV Index data after validating weather data,
-            // and knowing time of day (API never return 0!
-            self.getData(for: .uvIndex, parametars: params)
+// Calling UV Index data after validating weather data
+// and knowing time of day (API never return 0!
             
             weatherData.temperature = Int(temp - 273.15)
             weatherData.locationName = json["name"].stringValue
