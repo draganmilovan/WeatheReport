@@ -67,6 +67,7 @@
 		083E1A4D1FB5E40A00CF5B67 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				08DF345C1FBC835500D074BB /* WeatherDataManager.swift */,
 				083E1A561FB6081200CF5B67 /* mogen-classes */,
 				083E1A581FB6081200CF5B67 /* mogen-properties */,
 				083E1A4E1FB5E52500CF5B67 /* WeatheReport.xcdatamodeld */,
@@ -93,6 +94,7 @@
 		08EF6EAE1F98FF6F00EB0E27 = {
 			isa = PBXGroup;
 			children = (
+				08EF6EBA1F98FF6F00EB0E27 /* AppDelegate.swift */,
 				083E1A4D1FB5E40A00CF5B67 /* DataModel */,
 				08EF6EB91F98FF6F00EB0E27 /* WeatheReport */,
 				08EF6EB81F98FF6F00EB0E27 /* Products */,
@@ -112,9 +114,7 @@
 		08EF6EB91F98FF6F00EB0E27 /* WeatheReport */ = {
 			isa = PBXGroup;
 			children = (
-				08EF6EBA1F98FF6F00EB0E27 /* AppDelegate.swift */,
 				08EF6ECC1F9901E000EB0E27 /* WeatherDataModel.swift */,
-				08DF345C1FBC835500D074BB /* WeatherDataManager.swift */,
 				08EF6EBC1F98FF6F00EB0E27 /* WeatherViewController.swift */,
 				08EF6EBE1F98FF6F00EB0E27 /* Main.storyboard */,
 				08EF6EC11F98FF6F00EB0E27 /* Assets.xcassets */,

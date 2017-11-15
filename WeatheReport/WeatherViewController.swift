@@ -13,11 +13,13 @@ import SwiftyJSON
 
 class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
-    let weatherURL = "http://api.openweathermap.org/data/2.5/weather"
-    let uvIndexURL = "http://api.openweathermap.org/data/2.5/uvi"
-    let forecastURL = "http://api.openweathermap.org/data/2.5/forecast"
+//    let weatherURL = "http://api.openweathermap.org/data/2.5/weather"
+//    let uvIndexURL = "http://api.openweathermap.org/data/2.5/uvi"
+//    let forecastURL = "http://api.openweathermap.org/data/2.5/forecast"
     let appID = "ac5c2be22a93a78414edcf3ebfd4885e"
-    var paramsUVI : [String : String] = [:]
+    var params : [String : String] = [:]
+    
+    let url = "http://api.openweathermap.org/data/2.5/"
     
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -58,23 +60,44 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 
 extension WeatherViewController {
     
+    
+    
+    enum TypeOfData: String {
+        case currentWeather = "weather"
+        case forecast
+        case uvIndex = "uvi"
+    }
+    
 //    @objc func refresh(refreshControl: UIRefreshControl) {
 //        print("Refreshing...")
 //        locationManager.startUpdatingLocation()
 //        refreshControl.endRefreshing()
 //    }
     
-    // Networking method
-    func getWeatherData(url: String, parametars: [String : String]) {
-        Alamofire.request(url, method: .get, parameters: parametars).responseJSON {
+    func getData(for data: TypeOfData, parametars: [String : String]) {
+        
+        let urlString = url + data.rawValue
+        
+        Alamofire.request(urlString, method: .get, parameters: parametars).responseJSON {
             response in
             if response.result.isSuccess {
-   //             print("Weather data ready!")
                 
                 //Casting data in to JSON
                 let json: JSON = JSON(response.result.value!)
-               // print(json)
-                self.updateWeatherData(json: json)
+                // print(json)
+                
+                switch (data) {
+                    
+                case .currentWeather:
+                    self.updateWeatherData(json: json)
+                    
+                case .uvIndex:
+                    self.updateUvIndexData(json: json)
+                    
+                case .forecast:
+                    self.updateForecastData(json: json)
+                    
+                }
                 
             } else {
                 print("Error \(String(describing: response.result.error))")
@@ -82,41 +105,60 @@ extension WeatherViewController {
             }
         }
     }
-    
-    func getUvIndexData(url: String, parametars: [String : String]) {
-        Alamofire.request(url, method: .get, parameters: parametars).responseJSON {
-            response in
-            if response.result.isSuccess {
-                
-                //Casting data in to JSON
-                let json: JSON = JSON(response.result.value!)
-               // print(json)
-                self.updateUvIndexData(json: json)
-                
-            } else {
-                print("Error \(String(describing: response.result.error))")
-                self.uvIndexLabel.text = "-"
-            }
-        }
-    }
-    
-    func getForecastData(url: String, parametars: [String : String]) {
-        Alamofire.request(url, method: .get, parameters: parametars).responseJSON {
-            response in
-            if response.result.isSuccess {
-                
-                //Casting data in to JSON
-                let json: JSON = JSON(response.result.value!)
-                //print(json)
-                self.updateForecastData(json: json)
-                
-            } else {
-                print("Error \(String(describing: response.result.error))")
-                
-            }
-        }
-    }
-    
+//
+//    // Networking method
+//    func getWeatherData(url: String, parametars: [String : String]) {
+//        Alamofire.request(url, method: .get, parameters: parametars).responseJSON {
+//            response in
+//            if response.result.isSuccess {
+//   //             print("Weather data ready!")
+//
+//                //Casting data in to JSON
+//                let json: JSON = JSON(response.result.value!)
+//               // print(json)
+//                self.updateWeatherData(json: json)
+//
+//            } else {
+//                print("Error \(String(describing: response.result.error))")
+//                self.locationLabel.text = "Connection Issues"
+//            }
+//        }
+//    }
+//
+//    func getUvIndexData(url: String, parametars: [String : String]) {
+//        Alamofire.request(url, method: .get, parameters: parametars).responseJSON {
+//            response in
+//            if response.result.isSuccess {
+//
+//                //Casting data in to JSON
+//                let json: JSON = JSON(response.result.value!)
+//               // print(json)
+//                self.updateUvIndexData(json: json)
+//
+//            } else {
+//                print("Error \(String(describing: response.result.error))")
+//                self.uvIndexLabel.text = "-"
+//            }
+//        }
+//    }
+//
+//    func getForecastData(url: String, parametars: [String : String]) {
+//        Alamofire.request(url, method: .get, parameters: parametars).responseJSON {
+//            response in
+//            if response.result.isSuccess {
+//
+//                //Casting data in to JSON
+//                let json: JSON = JSON(response.result.value!)
+//                //print(json)
+//                self.updateForecastData(json: json)
+//
+//            } else {
+//                print("Error \(String(describing: response.result.error))")
+//
+//            }
+//        }
+//    }
+//
     
     // JSON parsing method
     func updateWeatherData(json: JSON) {
@@ -135,7 +177,8 @@ extension WeatherViewController {
             
             // Calling UV Index data after validating weather data,
             // and knowing time of day (API never return 0!
-            getUvIndexData(url: uvIndexURL, parametars: paramsUVI)
+//            getUvIndexData(url: uvIndexURL, parametars: params)
+            getData(for: .uvIndex, parametars: params)
             
             weatherData.temperature = Int(temp - 273.15)
             weatherData.locationName = json["name"].stringValue
@@ -280,11 +323,10 @@ extension WeatherViewController {
             let lon = String(location.coordinate.longitude)
             print("lat = \(lat), lon = \(lon)")
             
-            let params : [String : String] = ["lat" : lat, "lon" : lon, "appid" : appID]
-            paramsUVI = params
+            params = ["lat" : lat, "lon" : lon, "appid" : appID]
             
-            getWeatherData(url: weatherURL, parametars: params)
-            getForecastData(url: forecastURL, parametars: params)
+            getData(for: .currentWeather, parametars: params)
+            getData(for: .forecast, parametars: params)
         }
         
     }
