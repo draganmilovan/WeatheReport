@@ -14,14 +14,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var coreDataStack: RTCoreDataStack?
+    var dataManager: WeatherDataManager?
     
     
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         
         coreDataStack = RTCoreDataStack {
+            [unowned self] in
+            
             // Core Data Stack is ready
             print("Core Data is ready!")
+            
+            self.configureDataManager()
+            
         }
         
         return true
@@ -57,4 +63,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
+
+
+extension AppDelegate {
+    
+    func configureDataManager() {
+        
+        
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
