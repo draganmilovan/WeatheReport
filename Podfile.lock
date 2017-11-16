@@ -1,15 +1,27 @@
 PODS:
-  - Alamofire (4.4.0)
-  - SwiftyJSON (3.1.4)
+  - Alamofire (4.5.1)
+  - RTCoreDataStack (3.2)
+  - SwiftyJSON (4.0.0)
 
 DEPENDENCIES:
   - Alamofire
+  - RTCoreDataStack (from `https://github.com/radianttap/RTSwiftCoreDataStack.git`)
   - SwiftyJSON
 
-SPEC CHECKSUMS:
-  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
-  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+EXTERNAL SOURCES:
+  RTCoreDataStack:
+    :git: https://github.com/radianttap/RTSwiftCoreDataStack.git
 
-PODFILE CHECKSUM: c11ae87f3e73c88c227bb526cccb0afacd2fc8ed
+CHECKOUT OPTIONS:
+  RTCoreDataStack:
+    :commit: 920089e5f274abd62e60e8fa12a4f4a1ebee603d
+    :git: https://github.com/radianttap/RTSwiftCoreDataStack.git
+
+SPEC CHECKSUMS:
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  RTCoreDataStack: 9a0b16d869f5fba2e5092a564ad20a1a6df6a2dc
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+
+PODFILE CHECKSUM: cafdb7b85b3c68418140adb19c4eccb6b6b149f7
 
 COCOAPODS: 1.2.0

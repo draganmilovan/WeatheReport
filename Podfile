@@ -8,5 +8,6 @@ target 'WeatheReport' do
   # Pods for WeatheReport
 	pod 'Alamofire'
 	pod 'SwiftyJSON'
+    pod 'RTCoreDataStack', :git => 'https://github.com/radianttap/RTSwiftCoreDataStack.git'
 
 end
