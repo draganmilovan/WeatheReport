@@ -9,8 +9,11 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import RTCoreDataStack
 
 class WeatherDataManager {
+    
+    let coreDataStack: RTCoreDataStack
     
     private var locationsIDs: [Int] = []
     var locationsNames: [String] = []
@@ -22,6 +25,11 @@ class WeatherDataManager {
     var params : [String : String] = [:]
     
     private weak var timer: Timer?
+    
+    
+    init(coreDataStack: RTCoreDataStack) {
+        self.coreDataStack = coreDataStack
+    }
     
 }
 
