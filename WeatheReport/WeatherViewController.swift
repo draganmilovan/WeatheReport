@@ -179,6 +179,7 @@ extension WeatherViewController {
             // and knowing time of day (API never return 0!
 //            getUvIndexData(url: uvIndexURL, parametars: params)
             getData(for: .uvIndex, parametars: params)
+            getData(for: .forecast, parametars: params)
             
             wData.temperature = Int(temp - 273.15)
             wData.locationName = json["name"].stringValue
@@ -326,7 +327,7 @@ extension WeatherViewController {
             params = ["lat" : lat, "lon" : lon, "appid" : appID]
             
             getData(for: .currentWeather, parametars: params)
-            getData(for: .forecast, parametars: params)
+            
         }
         
     }
