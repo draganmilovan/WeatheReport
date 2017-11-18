@@ -8,7 +8,7 @@
 
 import Foundation
 
-class WeatherData {
+class WData {
     
     var temperature: Int = 0
     var condition: Int = 0

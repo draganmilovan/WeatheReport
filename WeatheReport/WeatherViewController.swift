@@ -30,7 +30,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     
     let locationManager = CLLocationManager()
-    let weatherData = WeatherData()
+    let wData = WData()
     
     weak var timer: Timer?
     
@@ -166,12 +166,12 @@ extension WeatherViewController {
         if let sunRise = json["sys"]["sunrise"].int,
             let sunSet = json["sys"]["sunset"].int {
             
-            weatherData.sunRise = sunRise
-            weatherData.sunSet = sunSet
+            wData.sunRise = sunRise
+            wData.sunSet = sunSet
             
-            weatherData.dayTime = weatherData.updateTimeOfDay()
+            wData.dayTime = wData.updateTimeOfDay()
             
-        } else { weatherData.dayTime = true }
+        } else { wData.dayTime = true }
         
         if let temp = json["main"]["temp"].double {
             
@@ -180,19 +180,19 @@ extension WeatherViewController {
 //            getUvIndexData(url: uvIndexURL, parametars: params)
             getData(for: .uvIndex, parametars: params)
             
-            weatherData.temperature = Int(temp - 273.15)
-            weatherData.locationName = json["name"].stringValue
-            weatherData.condition = json["weather"][0]["id"].intValue
-            weatherData.weatherIconName = weatherData.updateWeatherIcon(condition: weatherData.condition, at: weatherData.dayTime)
-            weatherData.cityID = json["id"].stringValue
-            weatherData.tempMax = json["main"]["temp_max"].intValue
-            weatherData.tempMin = json["main"]["temp_min"].intValue
-            weatherData.humidity = json["main"]["humidity"].intValue
-            weatherData.pressure = json["main"]["pressure"].intValue
-            weatherData.description = json["weather"][0]["description"].stringValue.capitalized
-            weatherData.windSpeed = json["wind"]["speed"].stringValue
+            wData.temperature = Int(temp - 273.15)
+            wData.locationName = json["name"].stringValue
+            wData.condition = json["weather"][0]["id"].intValue
+            wData.weatherIconName = wData.updateWeatherIcon(condition: wData.condition, at: wData.dayTime)
+            wData.cityID = json["id"].stringValue
+            wData.tempMax = json["main"]["temp_max"].intValue
+            wData.tempMin = json["main"]["temp_min"].intValue
+            wData.humidity = json["main"]["humidity"].intValue
+            wData.pressure = json["main"]["pressure"].intValue
+            wData.description = json["weather"][0]["description"].stringValue.capitalized
+            wData.windSpeed = json["wind"]["speed"].stringValue
             let windDirection = json["wind"]["deg"].intValue
-            weatherData.windDirection = weatherData.windDirectionCardinalPoint(degrees: windDirection)
+            wData.windDirection = wData.windDirectionCardinalPoint(degrees: windDirection)
             
             updateUIWithWeatherData()
             
@@ -210,28 +210,28 @@ extension WeatherViewController {
     // Updating UI information
     func updateUIWithWeatherData () {
         
-        if weatherData.dayTime {
+        if wData.dayTime {
             
             backgroundImage.image = UIImage(named: "BackgroundDay")
             
         } else { backgroundImage.image = UIImage(named: "BackgroundNight") }
         
-        if weatherData.locationName == "" {
+        if wData.locationName == "" {
             
             locationLabel.text = "Nameless Location"
             
-        } else { locationLabel.text = weatherData.locationName }
+        } else { locationLabel.text = wData.locationName }
         
-        temperatureLabel.text = String(weatherData.temperature) + "°"
+        temperatureLabel.text = String(wData.temperature) + "°"
         
-        weatherIconName.image = UIImage(named: weatherData.weatherIconName)
+        weatherIconName.image = UIImage(named: wData.weatherIconName)
         
 // Need to create storyboard for other data
-        print(weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunRise!, format: "HH:mm"))
-        print(weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunSet!, format: "HH:mm"))
-        print(weatherData.windSpeed)
-        print(weatherData.windDirection)
-        print(weatherData.description)
+        print(wData.convertUnixTimestampToTime(timeStamp: wData.sunRise!, format: "HH:mm"))
+        print(wData.convertUnixTimestampToTime(timeStamp: wData.sunSet!, format: "HH:mm"))
+        print(wData.windSpeed)
+        print(wData.windDirection)
+        print(wData.description)
         
         
         print("Updated UI!")
@@ -244,18 +244,18 @@ extension WeatherViewController {
         
         if let uvi = json["value"].double {
             if locationLabel.text != "Weather Unavalable" {
-                weatherData.uvIndex = String(uvi)
-                uvIndexLabel.text = weatherData.uvIndex
-                print(weatherData.uvIndex!)
+                wData.uvIndex = String(uvi)
+                uvIndexLabel.text = wData.uvIndex
+                print(wData.uvIndex!)
             }
             
-            if weatherData.dayTime == false {
+            if wData.dayTime == false {
                 uvIndexLabel.text = "0"
             }
             
         } else {
-            weatherData.uvIndex = "N/A"
-            uvIndexLabel.text = weatherData.uvIndex
+            wData.uvIndex = "N/A"
+            uvIndexLabel.text = wData.uvIndex
         }
     }
     
@@ -266,32 +266,32 @@ extension WeatherViewController {
         if let _ = json["list"][0]["dt"].int {
 
             // Populating array with times for forecast
-            weatherData.times = json["list"].map {
+            wData.times = json["list"].map {
                 
-                weatherData.convertUnixTimestampToTime(timeStamp: ($0.1["dt"].intValue),
+                wData.convertUnixTimestampToTime(timeStamp: ($0.1["dt"].intValue),
                                                        format: "HH")
                 
             }
             
             // Populating array with temperatures for forecast
-            weatherData.temperatures = json["list"].map {
+            wData.temperatures = json["list"].map {
                 
                 String( Int( $0.1["main"]["temp"].doubleValue - 273.15 ))  + "°"
                 
             }
             
             // Populating array with names of weather icons
-            weatherData.weatherIconsNames = json["list"].map {
+            wData.weatherIconsNames = json["list"].map {
                 
-                weatherData.updateWeatherIcon(condition: ($0.1["weather"][0]["id"].intValue),
-                                              at: weatherData.timeOfDay(for: ($0.1["dt"].intValue),
+                wData.updateWeatherIcon(condition: ($0.1["weather"][0]["id"].intValue),
+                                              at: wData.timeOfDay(for: ($0.1["dt"].intValue),
                                                                         inFormat: "HH"))
                 
             }
             
-            print(weatherData.times)
-            print(weatherData.temperatures)
-            print(weatherData.weatherIconsNames)
+            print(wData.times)
+            print(wData.temperatures)
+            print(wData.weatherIconsNames)
             
         } else { locationManager.startUpdatingLocation() }
         

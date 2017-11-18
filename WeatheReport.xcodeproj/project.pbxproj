@@ -30,7 +30,7 @@
 		08EF6EC01F98FF6F00EB0E27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08EF6EBE1F98FF6F00EB0E27 /* Main.storyboard */; };
 		08EF6EC21F98FF6F00EB0E27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08EF6EC11F98FF6F00EB0E27 /* Assets.xcassets */; };
 		08EF6EC51F98FF6F00EB0E27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08EF6EC31F98FF6F00EB0E27 /* LaunchScreen.storyboard */; };
-		08EF6ECD1F9901E000EB0E27 /* WeatherDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF6ECC1F9901E000EB0E27 /* WeatherDataModel.swift */; };
+		08EF6ECD1F9901E000EB0E27 /* WDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF6ECC1F9901E000EB0E27 /* WDataModel.swift */; };
 		8717845CF8A89DF473CF940A /* Pods_WeatheReport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D2DC0F86CD3C2E8765D626 /* Pods_WeatheReport.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +46,7 @@
 		08EF6EC11F98FF6F00EB0E27 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		08EF6EC41F98FF6F00EB0E27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		08EF6EC61F98FF6F00EB0E27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		08EF6ECC1F9901E000EB0E27 /* WeatherDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataModel.swift; sourceTree = "<group>"; };
+		08EF6ECC1F9901E000EB0E27 /* WDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDataModel.swift; sourceTree = "<group>"; };
 		457F7C8DFA5029E2E0ACD0C5 /* Pods-WeatheReport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatheReport.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatheReport/Pods-WeatheReport.debug.xcconfig"; sourceTree = "<group>"; };
 		46D2DC0F86CD3C2E8765D626 /* Pods_WeatheReport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatheReport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83F2FE275265C8CD0D465011 /* Pods-WeatheReport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatheReport.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeatheReport/Pods-WeatheReport.release.xcconfig"; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 		08EF6EB91F98FF6F00EB0E27 /* WeatheReport */ = {
 			isa = PBXGroup;
 			children = (
-				08EF6ECC1F9901E000EB0E27 /* WeatherDataModel.swift */,
+				08EF6ECC1F9901E000EB0E27 /* WDataModel.swift */,
 				08EF6EBC1F98FF6F00EB0E27 /* WeatherViewController.swift */,
 				08EF6EBE1F98FF6F00EB0E27 /* Main.storyboard */,
 				08EF6EC11F98FF6F00EB0E27 /* Assets.xcassets */,
@@ -287,7 +287,7 @@
 				08EF6EBB1F98FF6F00EB0E27 /* AppDelegate.swift in Sources */,
 				083E1A5B1FB6081200CF5B67 /* _Location.swift in Sources */,
 				083E1A5A1FB6081200CF5B67 /* Location.swift in Sources */,
-				08EF6ECD1F9901E000EB0E27 /* WeatherDataModel.swift in Sources */,
+				08EF6ECD1F9901E000EB0E27 /* WDataModel.swift in Sources */,
 				083E1A501FB5E52500CF5B67 /* WeatheReport.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
