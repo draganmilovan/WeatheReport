@@ -36,6 +36,13 @@ class WData {
     
     
     
+    enum TimeFormat: String {
+        case Hours = "HH"
+        case HoursAndMinutes = "HH:mm"
+    }
+    
+    
+    
     // Method returns true if is daytime at the time
     func updateTimeOfDay() -> Bool {
         
@@ -53,7 +60,7 @@ class WData {
     
     
     // Method returns true if is daytime for certain time
-    func timeOfDay(for time: Int, inFormat: String) -> Bool {
+    func timeOfDay(for time: Int, inFormat: TimeFormat) -> Bool {
         
         let t = Int(self.convertUnixTimestampToTime(timeStamp: time, format: inFormat))
         let sunRise = Int(self.convertUnixTimestampToTime(timeStamp: self.sunRise!, format: inFormat))
@@ -178,12 +185,12 @@ class WData {
     
     
     // Method returns time from Unix Timestamp
-    func convertUnixTimestampToTime(timeStamp: Int, format: String) -> String {
+    func convertUnixTimestampToTime(timeStamp: Int, format: TimeFormat) -> String {
         
         let date = Date(timeIntervalSince1970: Double(timeStamp))
         
         let formatter = DateFormatter()
-        formatter.dateFormat = format
+        formatter.dateFormat = format.rawValue
         
         return (formatter.string(from: date))
         

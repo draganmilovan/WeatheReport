@@ -227,8 +227,8 @@ extension WeatherViewController {
         weatherIconName.image = UIImage(named: wData.weatherIconName)
         
 // Need to create storyboard for other data
-        print(wData.convertUnixTimestampToTime(timeStamp: wData.sunRise!, format: "HH:mm"))
-        print(wData.convertUnixTimestampToTime(timeStamp: wData.sunSet!, format: "HH:mm"))
+        print(wData.convertUnixTimestampToTime(timeStamp: wData.sunRise!, format: .HoursAndMinutes))
+        print(wData.convertUnixTimestampToTime(timeStamp: wData.sunSet!, format: .HoursAndMinutes))
         print(wData.windSpeed)
         print(wData.windDirection)
         print(wData.description)
@@ -269,7 +269,7 @@ extension WeatherViewController {
             wData.times = json["list"].map {
                 
                 wData.convertUnixTimestampToTime(timeStamp: ($0.1["dt"].intValue),
-                                                       format: "HH")
+                                                       format: .Hours)
                 
             }
             
@@ -285,7 +285,7 @@ extension WeatherViewController {
                 
                 wData.updateWeatherIcon(condition: ($0.1["weather"][0]["id"].intValue),
                                               at: wData.timeOfDay(for: ($0.1["dt"].intValue),
-                                                                        inFormat: "HH"))
+                                                                        inFormat: .Hours))
                 
             }
             
