@@ -33,7 +33,8 @@ struct WeatherData {
     var times: [String] = []
     var temperatures: [String] = []
     var weatherIconsNames: [String] = []
-
+    
+    var selected: Bool = false
     
 }
 
