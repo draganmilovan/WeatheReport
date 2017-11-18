@@ -69,8 +69,8 @@ extension AppDelegate {
     
     func configureDataManager() {
         
-//        guard let cds = coreDataStack else { fatalError() }
-//        dataManager = WeatherDataManager(coreDataStack: cds)
+        guard let cds = coreDataStack else { fatalError() }
+        dataManager = WeatherDataManager(coreDataStack: cds)
 
     }
     
