@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 import RTCoreDataStack
 
-class WeatherDataManager {
+final class WeatherDataManager {
     
     let coreDataStack: RTCoreDataStack
 

@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct WeatherData {
+final class WeatherData {
     
     var cityID: Int?
     var locationName: String?
