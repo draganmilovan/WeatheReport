@@ -25,6 +25,7 @@ public extension Location {
 	public struct Attributes {
 		static let locationID = "locationID"
 		static let name = "name"
+		static let selected = "selected"
 	}
 
     // MARK: - Properties
@@ -32,6 +33,8 @@ public extension Location {
     @NSManaged public var locationID: Int64
 
     @NSManaged public var name: String!
+
+    @NSManaged public var selected: Bool
 
     // MARK: - Relationships
 
