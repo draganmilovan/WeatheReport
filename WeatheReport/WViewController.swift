@@ -284,7 +284,9 @@ extension WeatherViewController {
 //                                              at: wData.timeOfDay(for: ($0.1["dt"].intValue),
 //                                                                        inFormat: .Hours))
                 
-                wData.updateWeatherIcon(condition: ($0.1["weather"][0]["id"].intValue), at: wData.tod(for: .time, time: ($0.1["dt"].intValue), inFormat: .Hours))
+                wData.updateWeatherIcon(condition: ($0.1["weather"][0]["id"].intValue),
+                                        at: wData.tod(for: .time, time: ($0.1["dt"].intValue),
+                                                      inFormat: .Hours))
                 
             }
             

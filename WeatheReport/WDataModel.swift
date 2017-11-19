@@ -131,7 +131,7 @@ class WData {
             }
         }
         
-        if t > sunRise && t < sunSet {
+        if t >= sunRise && t <= sunSet {
             
             return true
             
