@@ -190,7 +190,7 @@ private extension WeatherDataManager {
         if let _ = json["list"][0]["dt"].int {
 
             // Populating array with times for forecast
-            weatherData.times = json["list"].map {
+            weatherData.forecastTimes = json["list"].map {
 
                 weatherData.convertUnixTimestampToTime(timeStamp: ($0.1["dt"].intValue),
                                                        format: .Hours)
@@ -198,14 +198,14 @@ private extension WeatherDataManager {
             }
 
             // Populating array with temperatures for forecast
-            weatherData.temperatures = json["list"].map {
+            weatherData.forecastTemperatures = json["list"].map {
 
                 String( Int( $0.1["main"]["temp"].doubleValue - 273.15 ))  + "°"
 
             }
 
             // Populating array with names of weather icons
-            weatherData.weatherIconsNames = json["list"].map {
+            weatherData.forecastIconsNames = json["list"].map {
 
                 weatherData.updateWeatherIcon(condition: ($0.1["weather"][0]["id"].intValue),
                                               at: weatherData.timeOfDay(for: ($0.1["dt"].intValue),

@@ -30,9 +30,9 @@ final class WeatherData {
     
     var uvIndex: String?
     
-    var times: [String] = []
-    var temperatures: [String] = []
-    var weatherIconsNames: [String] = []
+    var forecastTimes: [String] = []
+    var forecastTemperatures: [String] = []
+    var forecastIconsNames: [String] = []
     
     var selected: Bool = false
     
