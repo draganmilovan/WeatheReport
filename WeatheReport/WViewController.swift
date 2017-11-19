@@ -40,13 +40,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Set up the location manager
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        locationManager.requestWhenInUseAuthorization()
-        // Start looking for coordinates
-        locationManager.startUpdatingLocation()
+
+        configureLocationManager()
         
         // Start timer for auto refreshing data every minute
         startTimer()
@@ -307,10 +302,23 @@ extension WeatherViewController {
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { [weak self] _ in
 
-            self!.locationManager.startUpdatingLocation()
+            self?.configureLocationManager()
             print("timer started")
         }
     }
+    
+    
+    func configureLocationManager() {
+        
+        // Set up the location manager
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.requestWhenInUseAuthorization()
+        // Start looking for coordinates
+        locationManager.startUpdatingLocation()
+        
+    }
+    
     
     
     // Location Manager Delegate methods
@@ -321,7 +329,7 @@ extension WeatherViewController {
         if location.horizontalAccuracy > 0 {
             locationManager.stopUpdatingLocation()
             //Stop multiplying received data
-            //locationManager.delegate = nil
+            locationManager.delegate = nil
             
             let lat = String(location.coordinate.latitude)
             let lon = String(location.coordinate.longitude)
