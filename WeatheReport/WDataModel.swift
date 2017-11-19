@@ -39,6 +39,7 @@ class WData {
     enum TimeFormat: String {
         case Hours = "HH"
         case HoursAndMinutes = "HH:mm"
+        case Minutes = "mm"
     }
     
     
@@ -73,6 +74,71 @@ class WData {
         } else { return false }
         
     }
+    
+    enum Time {
+        case now
+        case time
+    }
+    
+    
+    func tod(for moment: Time, time: Int?, inFormat: TimeFormat) -> Bool {
+        
+        var t: Double
+        var sunRise: Double
+        var sunSet: Double
+        
+        switch moment {
+        case .now:
+            if inFormat == .HoursAndMinutes {
+                let sunRiseHour = Double(self.convertUnixTimestampToTime(timeStamp: self.sunRise!, format: .Hours))
+                let sunRiseMinutes = Double(self.convertUnixTimestampToTime(timeStamp: self.sunRise!, format: .Minutes))
+                sunRise = sunRiseHour! + (sunRiseMinutes! / 60.0)
+                
+                let sunSetHour = Double(self.convertUnixTimestampToTime(timeStamp: self.sunSet!, format: .Hours))
+                let sunSetMinutes = Double(self.convertUnixTimestampToTime(timeStamp: self.sunSet!, format: .Minutes))
+                sunSet = sunSetHour! + (sunSetMinutes! / 60.0)
+                
+                let tHour = Double(self.convertUnixTimestampToTime(timeStamp: Int(Date().timeIntervalSince1970), format: .Hours))
+                let tMinutes = Double(self.convertUnixTimestampToTime(timeStamp: Int(Date().timeIntervalSince1970), format: .Minutes))
+                t = tHour! + (tMinutes! / 60.0)
+                
+            } else {
+                sunRise = Double(self.convertUnixTimestampToTime(timeStamp: self.sunRise!, format: inFormat))!
+                sunSet = Double(self.convertUnixTimestampToTime(timeStamp: self.sunSet!, format: inFormat))!
+                t = Double(self.convertUnixTimestampToTime(timeStamp: Int(Date().timeIntervalSince1970), format: inFormat))!
+                
+            }
+            
+        case .time:
+            if inFormat == .HoursAndMinutes {
+                let sunRiseHour = Double(self.convertUnixTimestampToTime(timeStamp: self.sunRise!, format: .Hours))
+                let sunRiseMinutes = Double(self.convertUnixTimestampToTime(timeStamp: self.sunRise!, format: .Minutes))
+                sunRise = sunRiseHour! + (sunRiseMinutes! / 60.0)
+                
+                let sunSetHour = Double(self.convertUnixTimestampToTime(timeStamp: self.sunSet!, format: .Hours))
+                let sunSetMinutes = Double(self.convertUnixTimestampToTime(timeStamp: self.sunSet!, format: .Minutes))
+                sunSet = sunSetHour! + (sunSetMinutes! / 60.0)
+                
+                let tHour = Double(self.convertUnixTimestampToTime(timeStamp: time!, format: .Hours))
+                let tMinutes = Double(self.convertUnixTimestampToTime(timeStamp: time!, format: .Minutes))
+                t = tHour! + (tMinutes! / 60.0)
+                
+            } else {
+                sunRise = Double(self.convertUnixTimestampToTime(timeStamp: self.sunRise!, format: inFormat))!
+                sunSet = Double(self.convertUnixTimestampToTime(timeStamp: self.sunSet!, format: inFormat))!
+                t = Double(self.convertUnixTimestampToTime(timeStamp: time!, format: inFormat))!
+                
+            }
+        }
+        
+        if t > sunRise && t < sunSet {
+            
+            return true
+            
+        } else { return false }
+        
+    }
+    
     
     
     // Method returns the name of the weather condition image from API condition code

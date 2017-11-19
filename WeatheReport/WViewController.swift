@@ -169,7 +169,8 @@ extension WeatherViewController {
             wData.sunRise = sunRise
             wData.sunSet = sunSet
             
-            wData.dayTime = wData.updateTimeOfDay()
+//            wData.dayTime = wData.updateTimeOfDay()
+            wData.dayTime = wData.tod(for: .now, time: nil, inFormat: .HoursAndMinutes)
             
         } else { wData.dayTime = true }
         
@@ -284,9 +285,11 @@ extension WeatherViewController {
             // Populating array with names of weather icons
             wData.weatherIconsNames = json["list"].map {
                 
-                wData.updateWeatherIcon(condition: ($0.1["weather"][0]["id"].intValue),
-                                              at: wData.timeOfDay(for: ($0.1["dt"].intValue),
-                                                                        inFormat: .Hours))
+//                wData.updateWeatherIcon(condition: ($0.1["weather"][0]["id"].intValue),
+//                                              at: wData.timeOfDay(for: ($0.1["dt"].intValue),
+//                                                                        inFormat: .Hours))
+                
+                wData.updateWeatherIcon(condition: ($0.1["weather"][0]["id"].intValue), at: wData.tod(for: .time, time: ($0.1["dt"].intValue), inFormat: .Hours))
                 
             }
             
