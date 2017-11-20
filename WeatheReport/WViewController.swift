@@ -246,12 +246,13 @@ extension WeatherViewController {
                 print(wData.uvIndex!)
             }
             
-            if wData.dayTime == false {
-                uvIndexLabel.text = "0"
-            }
+            if wData.dayTime == false { uvIndexLabel.text = "0" }
             
         } else {
             wData.uvIndex = "N/A"
+            
+            if wData.dayTime == false { uvIndexLabel.text = "0" }
+            
             uvIndexLabel.text = wData.uvIndex
         }
     }
