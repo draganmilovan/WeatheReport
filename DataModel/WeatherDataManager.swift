@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import RTCoreDataStack
+import CoreData
 
 final class WeatherDataManager {
     
@@ -53,6 +54,24 @@ extension WeatherDataManager {
 //        getData(for: .forecast, parametars: parametars)
 //        getData(for: .uvIndex, parametars: parametars)
 
+    }
+    
+    
+    //
+    // Method for Data fetching
+    //
+    func fetchLocatios() -> [Location] {
+        
+        guard let moc = coreDataStack.mainContext else { fatalError("Missing Context") }
+        
+        let fr: NSFetchRequest<Location> = Location.fetchRequest()
+        let sort = NSSortDescriptor(key: Location.Attributes.viewID, ascending: true)
+        
+        fr.sortDescriptors = [sort]
+        
+        let locations = try? moc.fetch(fr)
+        
+        return locations ?? []
     }
 
 }

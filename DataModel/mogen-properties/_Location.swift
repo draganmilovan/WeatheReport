@@ -26,6 +26,7 @@ public extension Location {
 		static let locationID = "locationID"
 		static let name = "name"
 		static let selected = "selected"
+		static let viewID = "viewID"
 	}
 
     // MARK: - Properties
@@ -35,6 +36,8 @@ public extension Location {
     @NSManaged public var name: String!
 
     @NSManaged public var selected: Bool
+
+    @NSManaged public var viewID: Int64
 
     // MARK: - Relationships
 
