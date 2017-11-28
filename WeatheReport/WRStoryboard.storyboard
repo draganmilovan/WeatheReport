@@ -6,13 +6,14 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Item-->
         <scene sceneID="3l3-Et-0IT">
             <objects>
-                <viewController id="PMv-ol-JBh" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WRCollectionViewController" id="PMv-ol-JBh" customClass="WRCollectionViewController" customModule="WeatheReport" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TpW-al-kkK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -30,7 +31,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="3Bi-Ja-y7w">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WRCell" id="3Bi-Ja-y7w" customClass="WRCell" customModule="WeatheReport" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="322" height="568"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -51,6 +52,10 @@
                                         </constraints>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="PMv-ol-JBh" id="WwR-go-7PM"/>
+                                    <outlet property="delegate" destination="PMv-ol-JBh" id="fza-G1-ctz"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -64,12 +69,16 @@
                             <constraint firstAttribute="trailing" secondItem="Q5p-fn-tRb" secondAttribute="trailing" id="tsk-cg-iXo"/>
                             <constraint firstAttribute="bottom" secondItem="Q5p-fn-tRb" secondAttribute="bottom" id="wvw-or-2hA"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="6iC-OL-rtd"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="CP4-dB-WHV"/>
+                    <connections>
+                        <outlet property="wrCollectionView" destination="Q5p-fn-tRb" id="tGC-cY-rde"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PRH-q5-oHS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="361.875" y="143.66197183098592"/>
+            <point key="canvasLocation" x="379" y="144"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Pcz-KS-ngY">
@@ -77,6 +86,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="PUj-EU-J8h" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UP7-SY-opp">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
