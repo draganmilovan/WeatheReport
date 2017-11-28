@@ -24,6 +24,7 @@
 		081E9EC41FC0941B00517B16 /* WeatherDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081E9EC31FC0941B00517B16 /* WeatherDataModel.swift */; };
 		083E0B7D1FCDAA19007A3C85 /* WRCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E0B7C1FCDAA19007A3C85 /* WRCollectionViewController.swift */; };
 		083E0B801FCDC1F7007A3C85 /* WRCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E0B7F1FCDC1F7007A3C85 /* WRCell.swift */; };
+		083E0B821FCDD4B7007A3C85 /* WRCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083E0B811FCDD4B7007A3C85 /* WRCell.xib */; };
 		083E1A501FB5E52500CF5B67 /* WeatheReport.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083E1A4E1FB5E52500CF5B67 /* WeatheReport.xcdatamodeld */; };
 		083E1A5A1FB6081200CF5B67 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1A571FB6081200CF5B67 /* Location.swift */; };
 		083E1A5B1FB6081200CF5B67 /* _Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1A591FB6081200CF5B67 /* _Location.swift */; };
@@ -42,6 +43,7 @@
 		081E9EC31FC0941B00517B16 /* WeatherDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataModel.swift; sourceTree = "<group>"; };
 		083E0B7C1FCDAA19007A3C85 /* WRCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WRCollectionViewController.swift; sourceTree = "<group>"; };
 		083E0B7F1FCDC1F7007A3C85 /* WRCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WRCell.swift; sourceTree = "<group>"; };
+		083E0B811FCDD4B7007A3C85 /* WRCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WRCell.xib; sourceTree = "<group>"; };
 		083E1A4F1FB5E52500CF5B67 /* WeatheReport.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeatheReport.xcdatamodel; sourceTree = "<group>"; };
 		083E1A571FB6081200CF5B67 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		083E1A591FB6081200CF5B67 /* _Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Location.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				083E0B7C1FCDAA19007A3C85 /* WRCollectionViewController.swift */,
 				083E0B7F1FCDC1F7007A3C85 /* WRCell.swift */,
 				08CF592E1FC86EF3003E9304 /* WRStoryboard.storyboard */,
+				083E0B811FCDD4B7007A3C85 /* WRCell.xib */,
 				08EF6EC11F98FF6F00EB0E27 /* Assets.xcassets */,
 				08EF6EC31F98FF6F00EB0E27 /* LaunchScreen.storyboard */,
 				08EF6EC61F98FF6F00EB0E27 /* Info.plist */,
@@ -220,6 +223,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				083E0B821FCDD4B7007A3C85 /* WRCell.xib in Resources */,
 				08CF592F1FC86EF3003E9304 /* WRStoryboard.storyboard in Resources */,
 				08EF6EC51F98FF6F00EB0E27 /* LaunchScreen.storyboard in Resources */,
 				08EF6EC21F98FF6F00EB0E27 /* Assets.xcassets in Resources */,

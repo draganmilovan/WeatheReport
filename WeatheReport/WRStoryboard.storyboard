@@ -30,28 +30,7 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WRCell" id="3Bi-Ja-y7w" customClass="WRCell" customModule="WeatheReport" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="322" height="568"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="322" height="568"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HVr-AC-SPc">
-                                                    <rect key="frame" x="0.0" y="0.0" width="322" height="568"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </view>
-                                            </subviews>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="HVr-AC-SPc" secondAttribute="trailing" id="4Kn-Bm-yHe"/>
-                                            <constraint firstAttribute="bottom" secondItem="HVr-AC-SPc" secondAttribute="bottom" id="Cdb-De-e9E"/>
-                                            <constraint firstItem="HVr-AC-SPc" firstAttribute="top" secondItem="3Bi-Ja-y7w" secondAttribute="top" id="qOJ-9d-Zfa"/>
-                                            <constraint firstItem="HVr-AC-SPc" firstAttribute="leading" secondItem="3Bi-Ja-y7w" secondAttribute="leading" id="t5P-N0-elU"/>
-                                        </constraints>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                                 <connections>
                                     <outlet property="dataSource" destination="PMv-ol-JBh" id="WwR-go-7PM"/>
                                     <outlet property="delegate" destination="PMv-ol-JBh" id="fza-G1-ctz"/>

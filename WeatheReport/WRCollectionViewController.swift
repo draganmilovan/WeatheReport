@@ -17,7 +17,10 @@ class WRCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Register Collection View Cell 
+        let wrNib = UINib(nibName: "WRCell", bundle: nil)
+        wrCollectionView.register(wrNib, forCellWithReuseIdentifier: "WRCell")
+        
     }
     
     
@@ -46,7 +49,7 @@ extension WRCollectionViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let wrCell: WRCell = wrCollectionView.dequeueReusableCell(withReuseIdentifier: "WRCell", for: indexPath) as! WRCell 
+        let wrCell: WRCell = wrCollectionView.dequeueReusableCell(withReuseIdentifier: "WRCell", for: indexPath) as! WRCell
         
         
         

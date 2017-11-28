@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WRCell" id="yrU-ZN-m8O" customClass="WRCell" customModule="WeatheReport" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="322" height="568"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="322" height="568"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7xc-TZ-AAu">
+                        <rect key="frame" x="0.0" y="0.0" width="322" height="568"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="7xc-TZ-AAu" secondAttribute="trailing" id="XI8-bU-Id2"/>
+                <constraint firstAttribute="bottom" secondItem="7xc-TZ-AAu" secondAttribute="bottom" id="bOp-f4-uwU"/>
+                <constraint firstItem="7xc-TZ-AAu" firstAttribute="top" secondItem="yrU-ZN-m8O" secondAttribute="top" id="vng-t7-tJQ"/>
+                <constraint firstItem="7xc-TZ-AAu" firstAttribute="leading" secondItem="yrU-ZN-m8O" secondAttribute="leading" id="x1u-43-Su8"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="tcO-GQ-ffW"/>
+        </collectionViewCell>
+    </objects>
+</document>
