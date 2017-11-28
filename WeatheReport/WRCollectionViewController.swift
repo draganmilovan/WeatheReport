@@ -51,7 +51,7 @@ extension WRCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let wrCell: WRCell = wrCollectionView.dequeueReusableCell(withReuseIdentifier: "WRCell", for: indexPath) as! WRCell
         
-        
+        // Configure cell!
         
         return wrCell
     }
@@ -59,9 +59,20 @@ extension WRCollectionViewController: UICollectionViewDataSource {
 }
 
 
-extension WRCollectionViewController: UICollectionViewDelegate {
+extension WRCollectionViewController: UICollectionViewDelegateFlowLayout {
     
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        // Setting cell size to fill screen
+        let bounds = collectionView.bounds
+        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+        var size = flowLayout.itemSize
+        
+        size.height = bounds.height
+        size.width = bounds.width
+        
+        return size
+    }
     
 }
 
