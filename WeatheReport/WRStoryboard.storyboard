@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PMv-ol-JBh">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--Collection View Controller-->
         <scene sceneID="3l3-Et-0IT">
             <objects>
                 <viewController storyboardIdentifier="WRCollectionViewController" id="PMv-ol-JBh" customClass="WRCollectionViewController" customModule="WeatheReport" customModuleProvider="target" sceneMemberID="viewController">
@@ -21,8 +21,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundDay" translatesAutoresizingMaskIntoConstraints="NO" id="O7W-oi-hku">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Q5p-fn-tRb">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Q5p-fn-tRb">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="1" id="2bz-3I-5VW">
                                     <size key="itemSize" width="322" height="568"/>
@@ -36,6 +36,20 @@
                                     <outlet property="delegate" destination="PMv-ol-JBh" id="fza-G1-ctz"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e5M-xP-3Dz">
+                                <rect key="frame" x="0.0" y="518" width="320" height="1"/>
+                                <color key="backgroundColor" white="1" alpha="0.60000002379999995" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="Nmt-Jx-vCI"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gYs-6d-zvy" userLabel="TabBarView">
+                                <rect key="frame" x="0.0" y="519" width="320" height="49"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="eGT-SK-a59"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -43,14 +57,22 @@
                             <constraint firstAttribute="bottom" secondItem="O7W-oi-hku" secondAttribute="bottom" id="EsP-Qx-0HN"/>
                             <constraint firstAttribute="trailing" secondItem="O7W-oi-hku" secondAttribute="trailing" id="FXr-L2-1MM"/>
                             <constraint firstItem="Q5p-fn-tRb" firstAttribute="leading" secondItem="TpW-al-kkK" secondAttribute="leading" id="Hfz-Qh-is4"/>
+                            <constraint firstItem="6iC-OL-rtd" firstAttribute="trailing" secondItem="gYs-6d-zvy" secondAttribute="trailing" id="Hja-DH-MPb"/>
+                            <constraint firstItem="e5M-xP-3Dz" firstAttribute="leading" secondItem="gYs-6d-zvy" secondAttribute="leading" id="RKe-q1-MUB"/>
+                            <constraint firstItem="gYs-6d-zvy" firstAttribute="top" secondItem="e5M-xP-3Dz" secondAttribute="bottom" id="Ygq-YY-IDS"/>
                             <constraint firstItem="O7W-oi-hku" firstAttribute="leading" secondItem="TpW-al-kkK" secondAttribute="leading" id="ZNW-QD-Kzk"/>
+                            <constraint firstItem="e5M-xP-3Dz" firstAttribute="trailing" secondItem="gYs-6d-zvy" secondAttribute="trailing" id="dz2-Ts-rq0"/>
+                            <constraint firstItem="6iC-OL-rtd" firstAttribute="bottom" secondItem="gYs-6d-zvy" secondAttribute="bottom" id="hF4-TY-DfY"/>
+                            <constraint firstItem="gYs-6d-zvy" firstAttribute="leading" secondItem="6iC-OL-rtd" secondAttribute="leading" id="rth-vq-3tB"/>
                             <constraint firstItem="Q5p-fn-tRb" firstAttribute="top" secondItem="TpW-al-kkK" secondAttribute="top" id="tLk-0s-TYN"/>
                             <constraint firstAttribute="trailing" secondItem="Q5p-fn-tRb" secondAttribute="trailing" id="tsk-cg-iXo"/>
-                            <constraint firstAttribute="bottom" secondItem="Q5p-fn-tRb" secondAttribute="bottom" id="wvw-or-2hA"/>
+                            <constraint firstItem="e5M-xP-3Dz" firstAttribute="top" secondItem="Q5p-fn-tRb" secondAttribute="bottom" id="y9H-8b-hCE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6iC-OL-rtd"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="CP4-dB-WHV"/>
+                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="CP4-dB-WHV">
+                        <color key="badgeColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="wrCollectionView" destination="Q5p-fn-tRb" id="tGC-cY-rde"/>
                     </connections>
@@ -58,24 +80,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PRH-q5-oHS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="379" y="144"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="Pcz-KS-ngY">
-            <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="PUj-EU-J8h" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UP7-SY-opp">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="PMv-ol-JBh" kind="relationship" relationship="viewControllers" id="pgC-lY-SRF"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rZo-1A-BZS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-386" y="144"/>
         </scene>
     </scenes>
     <resources>
