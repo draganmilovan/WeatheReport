@@ -12,6 +12,7 @@ class WRCollectionViewController: UIViewController {
 
     
     @IBOutlet fileprivate weak var wrCollectionView: UICollectionView!
+    @IBOutlet weak var pageControl: UIPageControl!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -53,7 +54,6 @@ extension WRCollectionViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let wrCell: WRCell = wrCollectionView.dequeueReusableCell(withReuseIdentifier: "WRCell", for: indexPath) as! WRCell
-        
         // Configure cell!
         
         return wrCell
@@ -75,6 +75,13 @@ extension WRCollectionViewController: UICollectionViewDelegateFlowLayout {
         size.width = bounds.width
         
         return size
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        if let indexPath = wrCollectionView.indexPathsForVisibleItems.first {
+            pageControl.currentPage = indexPath.row
+        }
     }
     
 }
