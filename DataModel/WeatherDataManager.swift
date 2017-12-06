@@ -110,7 +110,7 @@ extension WeatherDataManager {
     //
     // Method for Data fetching
     //
-    func fetchLocatios() -> [Location] {
+    func fetchLocatios() {
         
         guard let moc = coreDataStack.mainContext else { fatalError("Missing Context") }
         
@@ -121,7 +121,15 @@ extension WeatherDataManager {
         
         let locations = try? moc.fetch(fr)
         
-        return locations ?? []
+        for location in locations! {
+            locationsIDs.append(Int(location.locationID))
+            locationsNames.append(location.name)
+        }
+        
+        print(locationsNames)
+        print(locationsIDs)
+        
+//        return locations ?? []
     }
 
 }
@@ -260,6 +268,9 @@ private extension WeatherDataManager {
             weatherData.uvIndex = "N/A"
 //            uvIndexLabel.text = weatherData.uvIndex
         }
+        
+        print(weatherData.uvIndex)
+        print(locationsNames)
     }
 
 
