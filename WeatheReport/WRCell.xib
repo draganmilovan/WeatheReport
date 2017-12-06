@@ -238,7 +238,7 @@
                                                                 <color key="textColor" white="1" alpha="0.60000002379999995" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ORP-ae-hJi">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ORP-ae-hJi" userLabel="Uv Index Label">
                                                                 <rect key="frame" x="0.0" y="23" width="145" height="30"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -370,6 +370,38 @@
                 <constraint firstItem="7xc-TZ-AAu" firstAttribute="leading" secondItem="yrU-ZN-m8O" secondAttribute="leading" id="x1u-43-Su8"/>
             </constraints>
             <size key="customSize" width="322" height="793"/>
+            <connections>
+                <outlet property="forecastCollectionVew" destination="G4F-nf-wiI" id="tSf-kn-xAh"/>
+                <outlet property="humidityLabel" destination="RCz-50-Sqs" id="T8I-Ae-QsB"/>
+                <outlet property="latitudeLabel" destination="ecA-m4-C3t" id="gIJ-Zx-82c"/>
+                <outlet property="locationLabel" destination="1mp-Cl-nzd" id="yO4-JA-EOa"/>
+                <outlet property="longitudeLabel" destination="nfj-7r-iMv" id="8Vb-8K-rVg"/>
+                <outlet property="pressureLabel" destination="UAQ-ip-g59" id="DHI-7m-8b5"/>
+                <outlet property="sunriseLabel" destination="qwP-3K-eSL" id="kg0-6v-5KY"/>
+                <outlet property="sunsetLabel" destination="ft4-pD-qXy" id="e7U-ZQ-ipV"/>
+                <outlet property="temperatureLabel" destination="pwD-2G-7ob" id="mex-8X-Fq4"/>
+                <outlet property="uvIndexLabel" destination="ORP-ae-hJi" id="2gD-TG-T7b"/>
+                <outlet property="uvIndexlabel" destination="ORP-ae-hJi" id="gDW-RC-BIB"/>
+                <outlet property="weatherDescriptionLabel" destination="kLh-pA-7g8" id="kMC-at-MKl"/>
+                <outlet property="weatherIcon" destination="tEq-UA-Nm6" id="PWA-Nl-O3f"/>
+                <outlet property="windLabel" destination="7wn-K2-dBd" id="dYx-yQ-g1u"/>
+                <outletCollection property="labels" destination="cXh-Ee-DN2" collectionClass="NSMutableArray" id="7TA-w0-ghD"/>
+                <outletCollection property="labels" destination="MXd-7P-G9l" collectionClass="NSMutableArray" id="bkU-e6-bdQ"/>
+                <outletCollection property="labels" destination="PKU-An-mjZ" collectionClass="NSMutableArray" id="2bo-W7-nQW"/>
+                <outletCollection property="labels" destination="cv5-G4-lQJ" collectionClass="NSMutableArray" id="QUn-Vh-anA"/>
+                <outletCollection property="labels" destination="eBh-TE-KpK" collectionClass="NSMutableArray" id="Sve-mM-EfR"/>
+                <outletCollection property="labels" destination="VgL-y8-bW8" collectionClass="NSMutableArray" id="y4d-jf-EpP"/>
+                <outletCollection property="labels" destination="HNo-PQ-yTQ" collectionClass="NSMutableArray" id="1J6-CX-Jvr"/>
+                <outletCollection property="labels" destination="PSD-3Q-rPQ" collectionClass="NSMutableArray" id="zNi-PY-gyn"/>
+                <outletCollection property="textOnlyLabels" destination="cXh-Ee-DN2" collectionClass="NSMutableArray" id="jiv-JK-lBj"/>
+                <outletCollection property="textOnlyLabels" destination="MXd-7P-G9l" collectionClass="NSMutableArray" id="8b0-0A-1IL"/>
+                <outletCollection property="textOnlyLabels" destination="PKU-An-mjZ" collectionClass="NSMutableArray" id="Qv9-Ec-Ddc"/>
+                <outletCollection property="textOnlyLabels" destination="cv5-G4-lQJ" collectionClass="NSMutableArray" id="KyA-0p-7s0"/>
+                <outletCollection property="textOnlyLabels" destination="eBh-TE-KpK" collectionClass="NSMutableArray" id="ns2-GD-omR"/>
+                <outletCollection property="textOnlyLabels" destination="VgL-y8-bW8" collectionClass="NSMutableArray" id="AN5-4Z-ouQ"/>
+                <outletCollection property="textOnlyLabels" destination="HNo-PQ-yTQ" collectionClass="NSMutableArray" id="2dD-Rc-kB6"/>
+                <outletCollection property="textOnlyLabels" destination="PSD-3Q-rPQ" collectionClass="NSMutableArray" id="5iK-ip-DVA"/>
+            </connections>
             <point key="canvasLocation" x="34" y="124.5"/>
         </collectionViewCell>
     </objects>
