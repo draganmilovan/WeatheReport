@@ -62,6 +62,17 @@ extension WRCollectionViewController: UICollectionViewDataSource {
 }
 
 
+extension WRCollectionViewController {
+    
+    func updateUI() {
+        
+        
+        
+    }
+    
+}
+
+
 extension WRCollectionViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

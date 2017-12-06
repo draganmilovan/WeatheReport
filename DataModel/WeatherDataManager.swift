@@ -11,8 +11,9 @@ import Alamofire
 import SwiftyJSON
 import RTCoreDataStack
 import CoreData
+import CoreLocation
 
-final class WeatherDataManager {
+final class WeatherDataManager: NSObject, CLLocationManagerDelegate {
     
     let coreDataStack: RTCoreDataStack
 
@@ -24,12 +25,61 @@ final class WeatherDataManager {
     private let url = "http://api.openweathermap.org/data/2.5/"
     private let appID = "ac5c2be22a93a78414edcf3ebfd4885e"
     var params : [String : String] = [:]
+    
+    private let locationManager = CLLocationManager()
 
     private weak var timer: Timer?
 
 
     init(coreDataStack: RTCoreDataStack) {
         self.coreDataStack = coreDataStack
+    }
+
+}
+
+
+
+extension WeatherDataManager {
+    
+    func configureLocationManager() {
+        
+        // Set up the location manager
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.requestWhenInUseAuthorization()
+        // Start looking for coordinates
+        locationManager.startUpdatingLocation()
+        
+    }
+    
+    
+    //
+    // Two Location Manager Delegate methods
+    //
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        let location = locations[locations.count-1]
+        
+        if location.horizontalAccuracy > 0 {
+            locationManager.stopUpdatingLocation()
+            //Stop multiplying received data
+            locationManager.delegate = nil
+            
+            let lat = String(location.coordinate.latitude)
+            let lon = String(location.coordinate.longitude)
+            print("lat = \(lat), lon = \(lon)")
+            
+            params = ["lat" : lat, "lon" : lon, "appid" : appID]
+            
+            getData(for: .currentWeather, parametars: params)
+            
+        }
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+//        locationLabel.text = "Location Unavailable"///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
 }
@@ -166,7 +216,17 @@ private extension WeatherDataManager {
             weatherData.windDirection = weatherData.windDirectionCardinalPoint(degrees: windDirection)
 
 //            updateUIWithWeatherData()
-
+            print(weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunRise!, format: .HoursAndMinutes))
+            print(weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunSet!, format: .HoursAndMinutes))
+            print(weatherData.temperature)
+            print(weatherData.weatherIconName)
+            
+            
+            
+            locationsNames.insert(weatherData.locationName!, at: 0)
+            
+            
+            
         } else {
             // Updating UI information i case of unvalidated weather data
 //            locationLabel.text = "Weather Unavalable"
@@ -174,6 +234,8 @@ private extension WeatherDataManager {
 //            temperatureLabel.text = nil
 //            uvIndexLabel.text = nil
         }
+        
+        
 
     }
 
@@ -186,7 +248,7 @@ private extension WeatherDataManager {
 
         if let uvi = json["value"].double {
 //            if locationLabel.text != "Weather Unavalable" {
-                weatherData.uvIndex = String(uvi)
+                weatherData.uvIndex = String(Int(uvi))
 //                uvIndexLabel.text = weatherData.uvIndex
 //            }
 //
@@ -232,8 +294,11 @@ private extension WeatherDataManager {
 
             }
 
-        }// else { locationManager.startUpdatingLocation() }
+        } else { locationManager.startUpdatingLocation() }
 
+        print(weatherData.forecastTimes)
+        print(weatherData.forecastTemperatures)
+        print(weatherData.forecastIconsNames)
     }
 
 }
