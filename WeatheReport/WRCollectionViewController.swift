@@ -11,6 +11,7 @@ import UIKit
 class WRCollectionViewController: UIViewController {
 
     
+    @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet fileprivate weak var wrCollectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     

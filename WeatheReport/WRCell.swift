@@ -29,4 +29,37 @@ class WRCell: UICollectionViewCell {
     
   
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        cleanCell()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        cleanCell()
+    }
+    
+    
+    // Method for cleaning datas form UI
+    fileprivate func cleanCell() {
+        
+        locationLabel.text = nil
+        weatherIcon.image = nil
+        temperatureLabel.text = nil
+        weatherDescriptionLabel.text = nil
+        sunriseLabel.text = nil
+        sunsetLabel.text = nil
+        humidityLabel.text = nil
+        pressureLabel.text = nil
+        windLabel.text = nil
+        uvIndexLabel.text = nil
+        latitudeLabel.text = nil
+        longitudeLabel.text = nil
+        
+    }
+    
+    
+    
 }

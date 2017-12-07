@@ -95,6 +95,7 @@
                         <color key="badgeColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="backgroundImage" destination="O7W-oi-hku" id="NMt-aS-35P"/>
                         <outlet property="pageControl" destination="Bog-hn-nBV" id="LQ0-5v-lhb"/>
                         <outlet property="wrCollectionView" destination="Q5p-fn-tRb" id="tGC-cY-rde"/>
                     </connections>
