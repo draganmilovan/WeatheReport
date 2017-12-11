@@ -14,18 +14,13 @@ import CoreData
 import CoreLocation
 
 final class WeatherDataManager: NSObject, CLLocationManagerDelegate {
-    
-    let coreDataStack: RTCoreDataStack
 
-    private var locationsIDs: [Int] = []
-    var locationsNames: [String] = []
     var weatherDatas: [WeatherData] = []
-    private var weatherData = WeatherData()
 
     private let url = "http://api.openweathermap.org/data/2.5/"
     private let appID = "ac5c2be22a93a78414edcf3ebfd4885e"
-    var params : [String : String] = [:]
     
+    private let coreDataStack: RTCoreDataStack
     private let locationManager = CLLocationManager()
 
     private weak var timer: Timer?
@@ -93,18 +88,6 @@ extension WeatherDataManager {
         case currentWeather = "weather"
         case forecast
         case uvIndex = "uvi"
-    }
-
-
-    //
-    // Method for calling all weather data
-    //
-    func createWeatherData(parametars: [String : String]) {
-
-        getData(for: .currentWeather, parametars: parametars)
-//        getData(for: .forecast, parametars: parametars)
-//        getData(for: .uvIndex, parametars: parametars)
-
     }
     
     
