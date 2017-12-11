@@ -10,6 +10,7 @@ import UIKit
 
 class WRCollectionViewController: UIViewController {
 
+    var dataManager: WeatherDataManager?
     
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet fileprivate weak var wrCollectionView: UICollectionView!
@@ -26,6 +27,11 @@ class WRCollectionViewController: UIViewController {
         let wrNib = UINib(nibName: "WRCell", bundle: nil)
         wrCollectionView.register(wrNib, forCellWithReuseIdentifier: "WRCell")
         
+        dataManager?.updateAll()
+        
+        let dm = dataManager?.weatherDatas.count
+        print(dm)
+        print("CV ready")
     }
     
     
@@ -50,12 +56,15 @@ extension WRCollectionViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return dataManager?.weatherDatas.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let dataManager = dataManager else { fatalError("Missing Data Manager!") }
+        
         let wrCell: WRCell = wrCollectionView.dequeueReusableCell(withReuseIdentifier: "WRCell", for: indexPath) as! WRCell
-        // Configure cell!
+        
+        wrCell.weatherData = dataManager.weatherDatas[indexPath.item]
         
         return wrCell
     }

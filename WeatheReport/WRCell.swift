@@ -27,7 +27,20 @@ class WRCell: UICollectionViewCell {
     
     @IBOutlet weak var forecastCollectionVew: UICollectionView!
     
-  
+    //  Data source
+    
+    var weatherData: WeatherData? {
+        didSet {
+            guard let weatherData = weatherData else {
+                cleanCell()
+                return
+            }
+            
+            populate(with: weatherData)
+        }
+    }
+    
+    //
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,8 +54,9 @@ class WRCell: UICollectionViewCell {
         cleanCell()
     }
     
-    
+    //
     // Method for cleaning datas form UI
+    //
     fileprivate func cleanCell() {
         
         locationLabel.text = nil
@@ -60,6 +74,8 @@ class WRCell: UICollectionViewCell {
         
     }
     
-    
+    func populate(with weatherData: WeatherData) {
+        
+    }
     
 }

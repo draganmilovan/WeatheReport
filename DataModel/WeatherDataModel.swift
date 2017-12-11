@@ -7,11 +7,13 @@
 //
 
 import Foundation
-
+import CoreLocation
 
 final class WeatherData {
     
+    var coordinate: CLLocationCoordinate2D?
     var cityID: Int?
+    
     var locationName: String?
     var dayTime: Bool = true
     var sunRise: Int?

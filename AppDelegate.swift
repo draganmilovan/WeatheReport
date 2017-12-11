@@ -27,9 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Core Data is ready!")
             
             self.configureDataManager()
-            self.dataManager?.configureLocationManager()
-            self.dataManager?.fetchLocatios()
-            
         }
         
         return true

@@ -33,6 +33,10 @@ final class WeatherDataManager: NSObject, CLLocationManagerDelegate {
 
     init(coreDataStack: RTCoreDataStack) {
         self.coreDataStack = coreDataStack
+        super.init()
+        
+        fetchLocatios()
+        configureLocationManager()
     }
 
 }
@@ -65,13 +69,10 @@ extension WeatherDataManager {
             //Stop multiplying received data
             locationManager.delegate = nil
             
-            let lat = String(location.coordinate.latitude)
-            let lon = String(location.coordinate.longitude)
-            print("lat = \(lat), lon = \(lon)")
-            
-            params = ["lat" : lat, "lon" : lon, "appid" : appID]
-            
-            getData(for: .currentWeather, parametars: params)
+            if let wd = weatherDatas.first {
+                wd.coordinate = location.coordinate
+                update(weatherData: wd)
+            }
             
         }
         
@@ -120,33 +121,75 @@ extension WeatherDataManager {
         fr.sortDescriptors = [sort]
         
         let locations = try? moc.fetch(fr)
-        
+    
         for location in locations! {
-            locationsIDs.append(Int(location.locationID))
-            locationsNames.append(location.name)
+            let wd = WeatherData()
+            wd.cityID = Int(location.locationID)
+            
+            weatherDatas.append(wd)
+            
         }
         
-        print(locationsNames)
-        print(locationsIDs)
+        weatherDatas.insert(WeatherData(), at: 0)
         
-//        return locations ?? []
     }
 
 }
 
 
+extension WeatherDataManager {
+    
+    func updateAll() {
+        
+    }
+    
+    //
+    // Method for updating weather data
+    //
+    func update(weatherData: WeatherData, completion: @escaping () -> Void = {}) {
+        let params = createParams(weatherData: weatherData)
+        getData(weatherData: weatherData, for: .currentWeather, parametars: params)
+    }
+    
+}
+
 
 private extension WeatherDataManager {
+    
+    //
+    // Method for creating params for networking
+    //
+    func createParams(weatherData: WeatherData) -> [String : String] {
+        
+        var params: [String: String] = [:]
+        
+        if let coordinate = weatherData.coordinate {
+            let lat = String(coordinate.latitude)
+            let lon = String(coordinate.longitude)
+            print("lat = \(lat), lon = \(lon)")
+            
+            params = ["lat" : lat, "lon" : lon, "appid" : appID]
+            
+        } else if let cityID = weatherData.cityID {
+            params = ["id" : String(cityID), "appid" : appID]
+            
+        }
+        
+        return params
+    }
 
+    
     //
     // Networking method
     //
-    func getData(for data: TypeOfData, parametars: [String : String]) {
+    func getData(weatherData: WeatherData, for data: TypeOfData, parametars: [String : String]) {
 
         let urlString = url + data.rawValue
 
         Alamofire.request(urlString, method: .get, parameters: parametars).responseJSON {
-            response in
+            [weak weatherData] response in
+            guard let weatherData = weatherData else { return }
+            
             if response.result.isSuccess {
 
                 //Casting data in to JSON
@@ -156,13 +199,13 @@ private extension WeatherDataManager {
                 switch (data) {
 
                 case .currentWeather:
-                    self.updateWeatherData(json: json)
+                    self.updateWeatherData(weatherData: weatherData, json: json)
 
                 case .uvIndex:
-                    self.updateUvIndexData(json: json)
+                    self.updateUvIndexData(weatherData: weatherData, json: json)
 
                 case .forecast:
-                    self.updateForecastData(json: json)
+                    self.updateForecastData(weatherData: weatherData, json: json)
 
                 }
 
@@ -178,11 +221,11 @@ private extension WeatherDataManager {
 
 
 private extension WeatherDataManager {
-
+    
     //
     // JSON parsing method for current weather data
     //
-    func updateWeatherData(json: JSON) {
+    func updateWeatherData(weatherData: WeatherData, json: JSON) {
 
         if let sunRise = json["sys"]["sunrise"].int,
             let sunSet = json["sys"]["sunset"].int {
@@ -205,8 +248,10 @@ private extension WeatherDataManager {
             //
             // Plus Forecast data (forecast data can return before current weather data)
             //
-            getData(for: .forecast, parametars: params)
-            getData(for: .uvIndex, parametars: params)
+            let params = createParams(weatherData: weatherData)
+            
+            getData(weatherData: weatherData, for: .forecast, parametars: params)
+            getData(weatherData: weatherData, for: .uvIndex, parametars: params)
 
             weatherData.temperature = Int(temp - 273.15)
             weatherData.locationName = json["name"].stringValue
@@ -226,12 +271,8 @@ private extension WeatherDataManager {
 //            updateUIWithWeatherData()
             print(weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunRise!, format: .HoursAndMinutes))
             print(weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunSet!, format: .HoursAndMinutes))
-            print(weatherData.temperature)
-            print(weatherData.weatherIconName)
-            
-            
-            
-            locationsNames.insert(weatherData.locationName!, at: 0)
+            print(weatherData.temperature!)
+            print(weatherData.weatherIconName!)
             
             
             
@@ -252,32 +293,31 @@ private extension WeatherDataManager {
     //
     // Method for processing UV Index data
     //
-    func updateUvIndexData(json: JSON) {
+    func updateUvIndexData(weatherData: WeatherData, json: JSON) {
 
         if let uvi = json["value"].double {
 //            if locationLabel.text != "Weather Unavalable" {
                 weatherData.uvIndex = String(Int(uvi))
 //                uvIndexLabel.text = weatherData.uvIndex
 //            }
-//
-//            if weatherData.dayTime == false {
-//                uvIndexLabel.text = "0"
-//            }
+
+            if weatherData.dayTime == false {
+                weatherData.uvIndex = "0"
+            }
 
         } else {
             weatherData.uvIndex = "N/A"
 //            uvIndexLabel.text = weatherData.uvIndex
         }
         
-        print(weatherData.uvIndex)
-        print(locationsNames)
+        print("UVI = \(weatherData.uvIndex!)")
     }
 
 
     //
     // Method for parsing forecast data
     //
-    func updateForecastData(json: JSON) {
+    func updateForecastData(weatherData: WeatherData, json: JSON) {
 
         if let _ = json["list"][0]["dt"].int {
 
