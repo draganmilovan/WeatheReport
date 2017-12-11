@@ -76,6 +76,19 @@ class WRCell: UICollectionViewCell {
     
     func populate(with weatherData: WeatherData) {
         
+        locationLabel.text = weatherData.locationName
+        weatherIcon.image = UIImage(named: weatherData.weatherIconName!)
+        temperatureLabel.text = String(describing: weatherData.temperature)
+//        weatherDescriptionLabel.text =
+        sunriseLabel.text = weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunRise!, format: .HoursAndMinutes)
+        sunsetLabel.text = weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunSet!, format: .HoursAndMinutes)
+        humidityLabel.text = weatherData.humidity! + " %"
+        pressureLabel.text = weatherData.pressure
+        windLabel.text = weatherData.windDirection! + " " + String(describing: weatherData.windSpeed)
+        uvIndexLabel.text = weatherData.uvIndex
+//        latitudeLabel.text =
+//        longitudeLabel.text =
+        
     }
     
 }
