@@ -338,7 +338,21 @@ private extension WeatherDataManager {
 }
 
 
-
+private extension WeatherDataManager {
+    
+    //
+    // Method for auto refreshing data every minute
+    //
+    func startTimer() {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) {
+            [weak self] _ in
+            
+            self?.configureLocationManager()
+            print("timer started")
+        }
+    }
+}
 
 
 
