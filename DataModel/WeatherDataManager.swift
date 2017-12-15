@@ -114,7 +114,7 @@ extension WeatherDataManager {
         }
         
         weatherDatas.insert(WeatherData(), at: 0)
-        
+        print("Fetching")
     }
 
 }
@@ -123,13 +123,16 @@ extension WeatherDataManager {
 extension WeatherDataManager {
     
     func updateAll() {
-        
+        for wd in weatherDatas {
+            update(weatherData: wd)
+        }
+        print("Updating All!")
     }
     
     //
     // Method for updating weather data
     //
-    func update(weatherData: WeatherData, completion: @escaping () -> Void = {}) {
+    func update(weatherData: WeatherData) { // , completion: @escaping () -> Void = {}
         let params = createParams(weatherData: weatherData)
         getData(weatherData: weatherData, for: .currentWeather, parametars: params)
     }
@@ -144,7 +147,7 @@ private extension WeatherDataManager {
     //
     func createParams(weatherData: WeatherData) -> [String : String] {
         
-        var params: [String: String] = [:]
+        var params: [String : String] = [:]
         
         if let coordinate = weatherData.coordinate {
             let lat = String(coordinate.latitude)
@@ -257,7 +260,8 @@ private extension WeatherDataManager {
             print(weatherData.temperature!)
             print(weatherData.weatherIconName!)
             
-            
+            postNotification()
+
             
         } else {
             // Updating UI information i case of unvalidated weather data
@@ -266,7 +270,6 @@ private extension WeatherDataManager {
 //            temperatureLabel.text = nil
 //            uvIndexLabel.text = nil
         }
-        
         
 
     }
@@ -293,6 +296,7 @@ private extension WeatherDataManager {
 //            uvIndexLabel.text = weatherData.uvIndex
         }
         
+        postNotification()
         print("UVI = \(weatherData.uvIndex!)")
     }
 
@@ -327,8 +331,14 @@ private extension WeatherDataManager {
                                                                         inFormat: .Hours))
 
             }
+            
+            postNotification()
 
-        } else { locationManager.startUpdatingLocation() }
+        } else {
+            
+//            locationManager.startUpdatingLocation()
+            
+        }
 
         print(weatherData.forecastTimes)
         print(weatherData.forecastTemperatures)
@@ -339,6 +349,14 @@ private extension WeatherDataManager {
 
 
 private extension WeatherDataManager {
+    
+    func postNotification() {
+        
+        NotificationCenter.default.post(name: Notification.Name("NotificationIdentifier"),
+                                                object: nil)
+        print("Notification!")
+        
+    }
     
     //
     // Method for auto refreshing data every minute

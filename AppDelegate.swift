@@ -27,6 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Core Data is ready!")
             
             self.configureDataManager()
+            
+            if let vc = self.window?.rootViewController as? WRCollectionViewController {
+                vc.dataManager = self.dataManager
+            }
         }
         
         return true
