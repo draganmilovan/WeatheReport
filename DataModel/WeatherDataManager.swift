@@ -244,15 +244,15 @@ private extension WeatherDataManager {
             weatherData.weatherIconName = weatherData.updateWeatherIcon(condition: weatherData.condition!,
                                                                         at: weatherData.dayTime)
             weatherData.cityID = json["id"].intValue
-            weatherData.tempMax = json["main"]["temp_max"].intValue
-            weatherData.tempMin = json["main"]["temp_min"].intValue
             weatherData.humidity = json["main"]["humidity"].stringValue
             weatherData.pressure = json["main"]["pressure"].stringValue
             weatherData.description = json["weather"][0]["description"].stringValue.capitalized
             weatherData.windSpeed = json["wind"]["speed"].intValue
             let windDirection = json["wind"]["deg"].intValue
             weatherData.windDirection = weatherData.windDirectionCardinalPoint(degrees: windDirection)
- 
+            weatherData.latitude = json["coord"]["lat"].doubleValue
+            weatherData.longitude = json["coord"]["lon"].doubleValue
+            
             postNotification()
           
         } else {

@@ -91,9 +91,9 @@ class WRCell: UICollectionViewCell {
             pressureLabel.text = "\(weatherData.pressure!) hPa"
             windLabel.text = "\(weatherData.windDirection!) \(weatherData.windSpeed!) m/s"
             uvIndexLabel.text = weatherData.uvIndex
-            //        latitudeLabel.text =
-            //        longitudeLabel.text =
-            
+            latitudeLabel.text = "\(weatherData.latitude!)"
+            longitudeLabel.text = "\(weatherData.longitude!)"
+
         } else { return }
         
     }

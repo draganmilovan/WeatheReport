@@ -27,8 +27,8 @@ final class WeatherData {
     var humidity: String?
     var pressure: String?
     var description: String?
-    var tempMin: Int?
-    var tempMax: Int?
+    var latitude: Double?
+    var longitude: Double?
     
     var uvIndex: String?
     
