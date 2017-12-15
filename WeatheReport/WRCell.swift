@@ -27,8 +27,8 @@ class WRCell: UICollectionViewCell {
     
     @IBOutlet weak var forecastCollectionVew: UICollectionView!
     
-    //  Data source
     
+    //  Data source
     var weatherData: WeatherData? {
         didSet {
             guard let weatherData = weatherData else {
@@ -40,7 +40,6 @@ class WRCell: UICollectionViewCell {
         }
     }
     
-    //
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -53,6 +52,8 @@ class WRCell: UICollectionViewCell {
         
         cleanCell()
     }
+    
+    
     
     //
     // Method for cleaning datas form UI
@@ -74,19 +75,21 @@ class WRCell: UICollectionViewCell {
         
     }
     
+    
+    
     func populate(with weatherData: WeatherData) {
         
         if let weatherIconName = weatherData.weatherIconName {
             
             locationLabel.text = weatherData.locationName
             weatherIcon.image = UIImage(named: weatherIconName)
-            temperatureLabel.text = String(describing: weatherData.temperature)
-            //        weatherDescriptionLabel.text =
+            temperatureLabel.text = "\(weatherData.temperature!)°"
+            weatherDescriptionLabel.text = "Now: \(weatherData.description!) currently. It's \(weatherData.temperature!)°C."
             sunriseLabel.text = weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunRise!, format: .HoursAndMinutes)
             sunsetLabel.text = weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunSet!, format: .HoursAndMinutes)
-            humidityLabel.text = weatherData.humidity! + " %"
-            pressureLabel.text = weatherData.pressure
-            windLabel.text = weatherData.windDirection! + " " + String(describing: weatherData.windSpeed)
+            humidityLabel.text = "\(weatherData.humidity!)%"
+            pressureLabel.text = "\(weatherData.pressure!) hPa"
+            windLabel.text = "\(weatherData.windDirection!) \(weatherData.windSpeed!) m/s"
             uvIndexLabel.text = weatherData.uvIndex
             //        latitudeLabel.text =
             //        longitudeLabel.text =
