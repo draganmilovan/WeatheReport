@@ -114,7 +114,7 @@ extension WeatherDataManager {
         }
         
         weatherDatas.insert(WeatherData(), at: 0)
-        print("Fetching")
+        
     }
 
 }
@@ -126,7 +126,7 @@ extension WeatherDataManager {
         for wd in weatherDatas {
             update(weatherData: wd)
         }
-        print("Updating All!")
+        
     }
     
     //
@@ -152,7 +152,6 @@ private extension WeatherDataManager {
         if let coordinate = weatherData.coordinate {
             let lat = String(coordinate.latitude)
             let lon = String(coordinate.longitude)
-            print("lat = \(lat), lon = \(lon)")
             
             params = ["lat" : lat, "lon" : lon, "appid" : appID]
             
@@ -253,16 +252,9 @@ private extension WeatherDataManager {
             weatherData.windSpeed = json["wind"]["speed"].intValue
             let windDirection = json["wind"]["deg"].intValue
             weatherData.windDirection = weatherData.windDirectionCardinalPoint(degrees: windDirection)
-
-//            updateUIWithWeatherData()
-            print(weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunRise!, format: .HoursAndMinutes))
-            print(weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunSet!, format: .HoursAndMinutes))
-            print(weatherData.temperature!)
-            print(weatherData.weatherIconName!)
-            
+ 
             postNotification()
-
-            
+          
         } else {
             // Updating UI information i case of unvalidated weather data
 //            locationLabel.text = "Weather Unavalable"
@@ -351,11 +343,8 @@ private extension WeatherDataManager {
 private extension WeatherDataManager {
     
     func postNotification() {
-        
         NotificationCenter.default.post(name: Notification.Name("NotificationIdentifier"),
-                                                object: nil)
-        print("Notification!")
-        
+                                        object: nil)
     }
     
     //

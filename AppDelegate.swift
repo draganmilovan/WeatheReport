@@ -23,9 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         coreDataStack = RTCoreDataStack {
             [unowned self] in
             
-            // Core Data Stack is ready
-            print("Core Data is ready!")
-            
             self.configureDataManager()
             
             if let vc = self.window?.rootViewController as? WRCollectionViewController {

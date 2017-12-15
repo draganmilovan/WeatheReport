@@ -40,7 +40,6 @@ class WRCollectionViewController: UIViewController {
                                                object: nil)
         
         
-        print("CV ready")
     }
     
     
@@ -84,7 +83,7 @@ extension WRCollectionViewController: UICollectionViewDataSource {
 extension WRCollectionViewController {
     
     @objc func methodOfReceivedNotification(notification: NSNotification){
-        print("Notification Received")
+        
         updateUI()
     }
     
@@ -92,8 +91,6 @@ extension WRCollectionViewController {
         wrCollectionView.reloadData()
         pageControl.numberOfPages = dataManager?.weatherDatas.count ?? 0
 
-        print("Data Manager has \(String(describing: dataManager?.weatherDatas.count)) Locations.")
-        print("Update UI!")
     }
     
 }
