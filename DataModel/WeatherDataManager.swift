@@ -32,6 +32,7 @@ final class WeatherDataManager: NSObject, CLLocationManagerDelegate {
         
         fetchLocatios()
         configureLocationManager()
+        startTimer()
     }
 
 }
@@ -355,10 +356,19 @@ private extension WeatherDataManager {
         timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) {
             [weak self] _ in
             
-            self?.configureLocationManager()
+            for wd in (self?.weatherDatas)! {
+                if (wd.coordinate != nil) {
+                    self?.configureLocationManager()
+                    
+                } else {
+                    self?.update(weatherData: wd)
+                }
+            }
             print("timer started")
         }
     }
+    
+    
 }
 
 
