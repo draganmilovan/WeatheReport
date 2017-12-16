@@ -56,7 +56,7 @@ class WRCell: UICollectionViewCell {
     
     
     //
-    // Method for cleaning datas form UI
+    // Method for cleaning datas for UI
     //
     fileprivate func cleanCell() {
         
@@ -101,3 +101,50 @@ class WRCell: UICollectionViewCell {
     }
     
 }
+
+
+
+extension WRCell: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return weatherData?.forecastDatas.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let weatherData = weatherData else { fatalError("WRCell doesn't exist!") }
+        
+        let forecastCell: ForecastCell = forecastCollectionVew.dequeueReusableCell(withReuseIdentifier: "ForecastCell", for: indexPath) as! ForecastCell
+
+        forecastCell.forecastData = weatherData.forecastDatas[indexPath.item]
+        
+        return forecastCell
+    }
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

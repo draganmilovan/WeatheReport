@@ -307,30 +307,43 @@ private extension WeatherDataManager {
     func updateForecastData(weatherData: WeatherData, json: JSON) {
 
         if let _ = json["list"][0]["dt"].int {
-
-            // Populating array with times for forecast
-            weatherData.forecastTimes = json["list"].map {
-
-                weatherData.convertUnixTimestampToTime(timeStamp: ($0.1["dt"].intValue),
-                                                       format: .Hours)
-
+            
+            weatherData.forecastDatas = json["list"].map {
+                
+                // Populating forecastDatas array
+                ForecastData(time: weatherData.convertUnixTimestampToTime(timeStamp: ($0.1["dt"].intValue),
+                                                                          format: .Hours),
+                             
+                             iconName: weatherData.updateWeatherIcon(condition: ($0.1["weather"][0]["id"].intValue),
+                                                                     at: weatherData.timeOfDay(for: ($0.1["dt"].intValue),
+                                                                                               inFormat: .Hours)),
+                             
+                             temperature: (String( Int( $0.1["main"]["temp"].doubleValue - 273.15 ))  + "°"))
             }
 
-            // Populating array with temperatures for forecast
-            weatherData.forecastTemperatures = json["list"].map {
-
-                String( Int( $0.1["main"]["temp"].doubleValue - 273.15 ))  + "°"
-
-            }
-
-            // Populating array with names of weather icons
-            weatherData.forecastIconsNames = json["list"].map {
-
-                weatherData.updateWeatherIcon(condition: ($0.1["weather"][0]["id"].intValue),
-                                              at: weatherData.timeOfDay(for: ($0.1["dt"].intValue),
-                                                                        inFormat: .Hours))
-
-            }
+//            // Populating array with times for forecast
+//            weatherData.forecastTimes = json["list"].map {
+//
+//                weatherData.convertUnixTimestampToTime(timeStamp: ($0.1["dt"].intValue),
+//                                                       format: .Hours)
+//
+//            }
+//
+//            // Populating array with temperatures for forecast
+//            weatherData.forecastTemperatures = json["list"].map {
+//
+//                String( Int( $0.1["main"]["temp"].doubleValue - 273.15 ))  + "°"
+//
+//            }
+//
+//            // Populating array with names of weather icons
+//            weatherData.forecastIconsNames = json["list"].map {
+//
+//                weatherData.updateWeatherIcon(condition: ($0.1["weather"][0]["id"].intValue),
+//                                              at: weatherData.timeOfDay(for: ($0.1["dt"].intValue),
+//                                                                        inFormat: .Hours))
+//
+//            }
             
             postNotification()
 
@@ -340,9 +353,10 @@ private extension WeatherDataManager {
             
         }
 
-        print(weatherData.forecastTimes)
-        print(weatherData.forecastTemperatures)
-        print(weatherData.forecastIconsNames)
+        print(weatherData.forecastDatas.count)
+//        print(weatherData.forecastTimes)
+//        print(weatherData.forecastTemperatures)
+//        print(weatherData.forecastIconsNames)
     }
 
 }

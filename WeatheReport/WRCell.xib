@@ -93,6 +93,10 @@
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="yrU-ZN-m8O" id="hVE-78-21V"/>
+                                                    <outlet property="delegate" destination="yrU-ZN-m8O" id="ctw-Ps-xgs"/>
+                                                </connections>
                                             </collectionView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="THQ-nR-FhJ" userLabel="C2View">
                                                 <rect key="frame" x="0.0" y="260" width="322" height="1"/>
