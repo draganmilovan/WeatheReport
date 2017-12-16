@@ -41,6 +41,9 @@ final class WeatherDataManager: NSObject, CLLocationManagerDelegate {
 
 extension WeatherDataManager {
     
+    //
+    // Method for initiating GPS
+    //
     func configureLocationManager() {
         
         // Set up the location manager
@@ -123,12 +126,16 @@ extension WeatherDataManager {
 
 extension WeatherDataManager {
     
+    //
+    // Method for updating datas for all locations
+    //
     func updateAll() {
         for wd in weatherDatas {
             update(weatherData: wd)
         }
         
     }
+    
     
     //
     // Method for updating weather data
@@ -343,8 +350,11 @@ private extension WeatherDataManager {
 
 private extension WeatherDataManager {
     
+    //
+    // Method for posting Notification after updating datas
+    //
     func postNotification() {
-        NotificationCenter.default.post(name: Notification.Name("NotificationIdentifier"),
+        NotificationCenter.default.post(name: Notification.Name("DataUpdated"),
                                         object: nil)
     }
     

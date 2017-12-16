@@ -10,6 +10,7 @@ import UIKit
 
 class WRCollectionViewController: UIViewController {
 
+    // Data source
     var dataManager: WeatherDataManager? {
         didSet {
             if !self.isViewLoaded { return }
@@ -35,8 +36,8 @@ class WRCollectionViewController: UIViewController {
         
         dataManager?.updateAll()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)),
-                                               name: Notification.Name("NotificationIdentifier"),
+        NotificationCenter.default.addObserver(self, selector: #selector(self.notificationReceived(notification:)),
+                                               name: Notification.Name("DataUpdated"),
                                                object: nil)
         
         
@@ -82,19 +83,29 @@ extension WRCollectionViewController: UICollectionViewDataSource {
 
 extension WRCollectionViewController {
     
-    @objc func methodOfReceivedNotification(notification: NSNotification){
+    //
+    // Method for handling received Notification
+    //
+    @objc func notificationReceived(notification: NSNotification){
         
         updateUI()
     }
     
+    
+    //
+    // Method for updating UI
+    //
     func updateUI() {
-        
         updateBackgroundImage()
         wrCollectionView.reloadData()
         pageControl.numberOfPages = dataManager?.weatherDatas.count ?? 0
         
     }
     
+    
+    //
+    // Method for updating background image
+    //
     func updateBackgroundImage() {
         print(wrCollectionView.visibleCells.count)
         

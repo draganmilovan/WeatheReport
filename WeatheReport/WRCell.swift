@@ -76,7 +76,9 @@ class WRCell: UICollectionViewCell {
     }
     
     
-    
+    //
+    // Method for populating UI with datas
+    //
     func populate(with weatherData: WeatherData) {
         
         if let weatherIconName = weatherData.weatherIconName {
