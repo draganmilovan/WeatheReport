@@ -88,9 +88,25 @@ extension WRCollectionViewController {
     }
     
     func updateUI() {
+        
+        updateBackgroundImage()
         wrCollectionView.reloadData()
         pageControl.numberOfPages = dataManager?.weatherDatas.count ?? 0
-
+        
+    }
+    
+    func updateBackgroundImage() {
+        print(wrCollectionView.visibleCells.count)
+        
+        guard let cell = wrCollectionView.visibleCells.first as? WRCell else { return }
+        
+        if (cell.weatherData?.dayTime)! {
+            backgroundImage.image = UIImage(named: "BackgroundDay")
+            
+        } else {
+            backgroundImage.image = UIImage(named: "BackgroundNight")
+            
+        }
     }
     
 }
@@ -115,6 +131,7 @@ extension WRCollectionViewController: UICollectionViewDelegateFlowLayout {
         
         if let indexPath = wrCollectionView.indexPathsForVisibleItems.first {
             pageControl.currentPage = indexPath.row
+            updateBackgroundImage()
         }
     }
     
