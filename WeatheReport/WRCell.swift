@@ -8,24 +8,24 @@
 
 import UIKit
 
-class WRCell: UICollectionViewCell {
+final class WRCell: UICollectionViewCell {
     
-    @IBOutlet var textOnlyLabels: [UILabel]!
+    @IBOutlet fileprivate var textOnlyLabels: [UILabel]!
     
-    @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var weatherIcon: UIImageView!
-    @IBOutlet weak var temperatureLabel: UILabel!
-    @IBOutlet weak var weatherDescriptionLabel: UILabel!
-    @IBOutlet weak var sunriseLabel: UILabel!
-    @IBOutlet weak var sunsetLabel: UILabel!
-    @IBOutlet weak var humidityLabel: UILabel!
-    @IBOutlet weak var pressureLabel: UILabel!
-    @IBOutlet weak var windLabel: UILabel!
-    @IBOutlet weak var uvIndexLabel: UILabel!
-    @IBOutlet weak var latitudeLabel: UILabel!
-    @IBOutlet weak var longitudeLabel: UILabel!
+    @IBOutlet weak fileprivate var locationLabel: UILabel!
+    @IBOutlet weak fileprivate var weatherIcon: UIImageView!
+    @IBOutlet weak fileprivate var temperatureLabel: UILabel!
+    @IBOutlet weak fileprivate var weatherDescriptionLabel: UILabel!
+    @IBOutlet weak fileprivate var sunriseLabel: UILabel!
+    @IBOutlet weak fileprivate var sunsetLabel: UILabel!
+    @IBOutlet weak fileprivate var humidityLabel: UILabel!
+    @IBOutlet weak fileprivate var pressureLabel: UILabel!
+    @IBOutlet weak fileprivate var windLabel: UILabel!
+    @IBOutlet weak fileprivate var uvIndexLabel: UILabel!
+    @IBOutlet weak fileprivate var latitudeLabel: UILabel!
+    @IBOutlet weak fileprivate var longitudeLabel: UILabel!
     
-    @IBOutlet weak var forecastCollectionVew: UICollectionView!
+    @IBOutlet weak fileprivate var forecastCollectionVew: UICollectionView!
     
     
     //  Data source
@@ -83,24 +83,90 @@ class WRCell: UICollectionViewCell {
     //
     // Method for populating UI with datas
     //
-    func populate(with weatherData: WeatherData) {
+    fileprivate func populate(with weatherData: WeatherData) {
+        
+        if let location = weatherData.locationName {
+            if location == "" {
+                locationLabel.text = "Nameless Location"
+            }
+            locationLabel.text = location
+        } else {
+            cleanCell()
+            return
+        }
+        
         
         if let weatherIconName = weatherData.weatherIconName {
-            
-            locationLabel.text = weatherData.locationName
             weatherIcon.image = UIImage(named: weatherIconName)
-            temperatureLabel.text = "\(weatherData.temperature!)°"
-            weatherDescriptionLabel.text = "Now: \(weatherData.description!) currently. It's \(weatherData.temperature!)°C."
-            sunriseLabel.text = weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunRise!, format: .HoursAndMinutes)
-            sunsetLabel.text = weatherData.convertUnixTimestampToTime(timeStamp: weatherData.sunSet!, format: .HoursAndMinutes)
-            humidityLabel.text = "\(weatherData.humidity!)%"
-            pressureLabel.text = "\(weatherData.pressure!) hPa"
-            windLabel.text = "\(weatherData.windDirection!) \(weatherData.windSpeed!) m/s"
-            uvIndexLabel.text = weatherData.uvIndex
-            latitudeLabel.text = "\(weatherData.latitude!)"
-            longitudeLabel.text = "\(weatherData.longitude!)"
-
-        } else { return }
+        } else {
+            cleanCell()
+            return
+        }
+        
+        
+        if let temp = weatherData.temperature {
+            temperatureLabel.text = "\(temp)°"
+        } else {
+            cleanCell()
+            return
+        }
+        
+        
+        if let desc = weatherData.description {
+            weatherDescriptionLabel.text = "Now: \(desc) currently. It's \(weatherData.temperature!)°C."
+        }
+        
+        
+        if let sunRise = weatherData.sunRise {
+            sunriseLabel.text = weatherData.convertUnixTimestampToTime(timeStamp: sunRise, format: .HoursAndMinutes)
+        } else {
+            sunriseLabel.text = ""
+        }
+        
+        
+        if let sunSet = weatherData.sunRise {
+            sunsetLabel.text = weatherData.convertUnixTimestampToTime(timeStamp: sunSet, format: .HoursAndMinutes)
+        } else {
+            sunsetLabel.text = ""
+        }
+        
+        
+        if let hum = weatherData.humidity {
+            humidityLabel.text = "\(hum)%"
+        } else {
+            humidityLabel.text = ""
+        }
+        
+        
+        if let prs = weatherData.pressure {
+            pressureLabel.text = "\(prs) hPa"
+        } else {
+            pressureLabel.text = ""
+        }
+        
+        
+        if let windDir = weatherData.windDirection, let windSpd = weatherData.windSpeed {
+            windLabel.text = "\(windDir) \(windSpd) m/s"
+        } else {
+            windLabel.text = ""
+        }
+        
+        
+        uvIndexLabel.text = weatherData.uvIndex
+        
+        
+        if let lat = weatherData.latitude {
+            latitudeLabel.text = "\(lat)"
+        } else {
+            latitudeLabel.text = ""
+        }
+        
+        
+        if let lon = weatherData.longitude {
+            longitudeLabel.text = "\(lon)"
+        } else {
+            locationLabel.text = ""
+        }
         
     }
     
@@ -145,25 +211,3 @@ extension WRCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
