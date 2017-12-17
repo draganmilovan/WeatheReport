@@ -108,7 +108,7 @@ class WRCell: UICollectionViewCell {
 
 
 
-extension WRCell: UICollectionViewDataSource {
+extension WRCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -128,6 +128,21 @@ extension WRCell: UICollectionViewDataSource {
         return forecastCell
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let bounds = collectionView.bounds
+        let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
+        
+        var size = flowLayout.itemSize
+        let rows: CGFloat = 9
+        
+        let availableWidth = bounds.width - (rows - 9) * flowLayout.minimumInteritemSpacing - flowLayout.sectionInset.left - flowLayout.sectionInset.right
+        
+        size.height = bounds.height
+        size.width = availableWidth / rows
+        
+        return size
+    }
     
 }
 
