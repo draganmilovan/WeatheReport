@@ -8,7 +8,11 @@
 
 import UIKit
 
-class ForecastCell: UICollectionViewCell {
+final class ForecastCell: UICollectionViewCell {
+    
+    @IBOutlet weak fileprivate var forecastTimeLabel: UILabel!
+    @IBOutlet weak fileprivate var forecastWeatherIcon: UIImageView!
+    @IBOutlet weak fileprivate var forecastTemperatureLabel: UILabel!
     
     
     //  Data source
@@ -37,26 +41,38 @@ class ForecastCell: UICollectionViewCell {
     }
     
     
-    
-    func cleanCell() {
+    //
+    // Method for cleaning cell UI
+    //
+    fileprivate func cleanCell() {
+        
+        forecastTimeLabel.text = nil
+        forecastWeatherIcon.image = nil
+        forecastTemperatureLabel.text = nil
         
     }
     
     
-    func populate(with forecastData: ForecastData) {
+    //
+    // Method for populating cell with datas
+    //
+    fileprivate func populate(with forecastData: ForecastData) {
+        
+        if let time = forecastData.time {
+            forecastTimeLabel.text = time
+            
+        } else { forecastTimeLabel.text = "--" }
+        
+        if let iconName = forecastData.iconName {
+            forecastWeatherIcon.image = UIImage(named: iconName)
+            
+        } else { forecastWeatherIcon.image = UIImage(named: "na") }
+        
+        if let temp = forecastData.temperature {
+            forecastTemperatureLabel.text = temp
+            
+        } else { forecastTemperatureLabel.text = "--" }
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 }

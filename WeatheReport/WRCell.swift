@@ -35,6 +35,10 @@ class WRCell: UICollectionViewCell {
                 cleanCell()
                 return
             }
+            // Register Forecast Collection View Cell
+            let fcNib = UINib(nibName: "ForecastCell", bundle: nil)
+            forecastCollectionVew.register(fcNib, forCellWithReuseIdentifier: "ForecastCell")
+            forecastCollectionVew.reloadData()
             
             populate(with: weatherData)
         }
