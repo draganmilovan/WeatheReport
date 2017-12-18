@@ -25,8 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             self.configureDataManager()
             
-            if let vc = self.window?.rootViewController as? WRCollectionViewController {
-                vc.dataManager = self.dataManager
+            if let cvc = self.window?.rootViewController as? WRCollectionViewController {
+                cvc.dataManager = self.dataManager
+            }
+            
+            if let tvc = self.window?.rootViewController as? LocationsTableViewController {
+                tvc.dataManager = self.dataManager
             }
         }
         

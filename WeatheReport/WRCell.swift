@@ -124,7 +124,7 @@ final class WRCell: UICollectionViewCell {
         }
         
         
-        if let sunSet = weatherData.sunRise {
+        if let sunSet = weatherData.sunSet {
             sunsetLabel.text = weatherData.convertUnixTimestampToTime(timeStamp: sunSet, format: .HoursAndMinutes)
         } else {
             sunsetLabel.text = ""

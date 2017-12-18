@@ -149,7 +149,17 @@ extension WRCollectionViewController: UICollectionViewDelegateFlowLayout {
 }
 
 
-
+extension WRCollectionViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "locationsList" {
+            
+            let destinationVC = segue.destination as! LocationsTableViewController
+            destinationVC.dataManager = dataManager
+        }
+    }
+}
 
 
 
