@@ -1,6 +1,6 @@
 PODS:
-  - Alamofire (4.5.1)
-  - RTCoreDataStack (3.2)
+  - Alamofire (4.6.0)
+  - RTCoreDataStack (4.0)
   - SwiftyJSON (4.0.0)
 
 DEPENDENCIES:
@@ -14,12 +14,12 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   RTCoreDataStack:
-    :commit: 920089e5f274abd62e60e8fa12a4f4a1ebee603d
+    :commit: 24890fb0683777c3b708e2347239e2e72cd08539
     :git: https://github.com/radianttap/RTSwiftCoreDataStack.git
 
 SPEC CHECKSUMS:
-  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
-  RTCoreDataStack: 9a0b16d869f5fba2e5092a564ad20a1a6df6a2dc
+  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  RTCoreDataStack: b219556c86901c88ae6d9b6fa7c615db79bc53d3
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
 PODFILE CHECKSUM: cafdb7b85b3c68418140adb19c4eccb6b6b149f7
