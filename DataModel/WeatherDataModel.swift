@@ -18,6 +18,7 @@ final class WeatherData {
     var dayTime: Bool = true
     var sunRise: Int?
     var sunSet: Int?
+    var time: String?
 
     var temperature: Int?
     var condition: Int?

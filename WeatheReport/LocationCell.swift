@@ -39,7 +39,7 @@ class LocationCell: UITableViewCell {
         
         temperatureLabel.text = "\(weatherData.temperature!)°"
         locationLabel.text = weatherData.locationName!
-        timeLabel.text = "24:00"
+        timeLabel.text = weatherData.time!
     }
 
 }

@@ -80,7 +80,7 @@ extension WeatherDataManager {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
-//        locationLabel.text = "Location Unavailable"///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //configureLocationManager()
     }
 
 }
@@ -168,7 +168,14 @@ private extension WeatherDataManager {
             
             params = ["lat" : lat, "lon" : lon, "appid" : appID]
             
-        } else if let cityID = weatherData.cityID {
+        }
+        
+        if let lat = weatherData.latitude, let lon = weatherData.longitude {
+            params = ["lat" : "\(lat)", "lon" : "\(lon)", "appid" : appID]
+            
+        }
+        
+        if let cityID = weatherData.cityID {
             params = ["id" : String(cityID), "appid" : appID]
             
         }
@@ -192,12 +199,12 @@ private extension WeatherDataManager {
 
                 //Casting data in to JSON
                 let json: JSON = JSON(response.result.value!)
-                //print(json)
 
                 switch (data) {
 
                 case .currentWeather:
                     self.updateWeatherData(weatherData: weatherData, json: json)
+                    //print(json)
 
                 case .uvIndex:
                     self.updateUvIndexData(weatherData: weatherData, json: json)
@@ -313,6 +320,18 @@ private extension WeatherDataManager {
         
         if let lon = json["coord"]["lon"].double {
             weatherData.longitude = lon
+        }
+        
+        
+        if let t = json["dt"].int {
+            weatherData.time = weatherData.convertUnixTimestampToTime(timeStamp: t, format: .HoursAndMinutes)
+        }
+        
+        
+        // Erasing cityID for calling UV Index Data
+        // API handling only latitude and longitude as params
+        if let _ = weatherData.longitude, let _ = weatherData.latitude {
+            weatherData.cityID = nil
         }
         
         
