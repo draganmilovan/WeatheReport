@@ -80,6 +80,27 @@ final class WRCell: UICollectionViewCell {
     }
     
     
+    
+    //
+    // Method for informing user about error
+    //
+    fileprivate func displayMessage() {
+        
+        weatherIcon.image = nil
+        temperatureLabel.text = ""
+        weatherDescriptionLabel.text = ""
+        sunriseLabel.text = ""
+        sunsetLabel.text = ""
+        humidityLabel.text = ""
+        pressureLabel.text = ""
+        windLabel.text = ""
+        uvIndexLabel.text = ""
+        latitudeLabel.text = ""
+        longitudeLabel.text = ""
+        
+    }
+    
+    
     //
     // Method for populating UI with datas
     //
@@ -88,8 +109,14 @@ final class WRCell: UICollectionViewCell {
         if let location = weatherData.locationName {
             if location == "" {
                 locationLabel.text = "Nameless Location"
+                
+            } else if location == "Connection Issues" || location == "Weather Unavalable" {
+                locationLabel.text = location
+                displayMessage()
+                return
             }
             locationLabel.text = location
+            
         } else {
             cleanCell()
             return
@@ -120,52 +147,56 @@ final class WRCell: UICollectionViewCell {
         if let sunRise = weatherData.sunRise {
             sunriseLabel.text = weatherData.convertUnixTimestampToTime(timeStamp: sunRise, format: .HoursAndMinutes)
         } else {
-            sunriseLabel.text = ""
+            sunriseLabel.text = "N/A"
         }
         
         
         if let sunSet = weatherData.sunSet {
             sunsetLabel.text = weatherData.convertUnixTimestampToTime(timeStamp: sunSet, format: .HoursAndMinutes)
         } else {
-            sunsetLabel.text = ""
+            sunsetLabel.text = "N/A"
         }
         
         
         if let hum = weatherData.humidity {
             humidityLabel.text = "\(hum)%"
         } else {
-            humidityLabel.text = ""
+            humidityLabel.text = "N/A"
         }
         
         
         if let prs = weatherData.pressure {
             pressureLabel.text = "\(prs) hPa"
         } else {
-            pressureLabel.text = ""
+            pressureLabel.text = "N/A"
         }
         
         
         if let windDir = weatherData.windDirection, let windSpd = weatherData.windSpeed {
             windLabel.text = "\(windDir) \(windSpd) m/s"
         } else {
-            windLabel.text = ""
+            windLabel.text = "N/A"
         }
         
         
-        uvIndexLabel.text = weatherData.uvIndex
+        if let uvi = weatherData.uvIndex {
+            uvIndexLabel.text = uvi
+        } else {
+            uvIndexLabel.text = "N/A"
+        }
         
         
         if let lat = weatherData.latitude {
             latitudeLabel.text = "\(lat)"
         } else {
-            latitudeLabel.text = ""
+            latitudeLabel.text = "N/A"
         }
         
         
         if let lon = weatherData.longitude {
             longitudeLabel.text = "\(lon)"
         } else {
-            locationLabel.text = ""
+            locationLabel.text = "N/A"
         }
         
     }

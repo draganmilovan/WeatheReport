@@ -70,7 +70,8 @@ extension WeatherDataManager {
             
             if let wd = weatherDatas.first {
                 wd.coordinate = location.coordinate
-                update(weatherData: wd)
+                //update(weatherData: wd)
+                updateAll()
             }
             
         }
@@ -118,7 +119,11 @@ extension WeatherDataManager {
         }
         
         weatherDatas.insert(WeatherData(), at: 0)
-        
+///////////////////////////////////////////////////////////////////
+//                     FOR TESTING!                              //
+///////////////////////////////////////////////////////////////////
+        weatherDatas.insert(WeatherData(), at: 1)
+        weatherDatas.last?.cityID = 3467431
     }
 
 }
@@ -187,7 +192,7 @@ private extension WeatherDataManager {
 
                 //Casting data in to JSON
                 let json: JSON = JSON(response.result.value!)
-                // print(json)
+                //print(json)
 
                 switch (data) {
 
@@ -204,7 +209,22 @@ private extension WeatherDataManager {
 
             } else {
                 print("Error \(String(describing: response.result.error))")
-                //                self.locationLabel.text = "Connection Issues"
+                
+                switch (data) {
+                    
+                case .currentWeather:
+                    weatherData.locationName = "Connection Issues"
+                    //self.getData(weatherData: weatherData, for: .currentWeather, parametars: parametars)
+                    
+                case .uvIndex :
+                    weatherData.uvIndex = "N/A"
+                    
+                default :
+                    return
+                }
+                
+                self.postNotification()
+                
             }
         }
     }
@@ -234,44 +254,82 @@ private extension WeatherDataManager {
         } else { weatherData.dayTime = true }
 
         if let temp = json["main"]["temp"].double {
-
-            //
-            // Calling UV Index data after validating weather data
-            // and knowing time of day (API never return 0)
-            //
-            // Plus Forecast data (forecast data can return before current weather data)
-            //
-            let params = createParams(weatherData: weatherData)
-            
-            getData(weatherData: weatherData, for: .forecast, parametars: params)
-            getData(weatherData: weatherData, for: .uvIndex, parametars: params)
-
             weatherData.temperature = Int(temp - 273.15)
-            weatherData.locationName = json["name"].stringValue
-            weatherData.condition = json["weather"][0]["id"].intValue
-            weatherData.weatherIconName = weatherData.updateWeatherIcon(condition: weatherData.condition!,
-                                                                        at: weatherData.dayTime)
-            weatherData.cityID = json["id"].intValue
-            weatherData.humidity = json["main"]["humidity"].stringValue
-            weatherData.pressure = json["main"]["pressure"].stringValue
-            weatherData.description = json["weather"][0]["description"].stringValue.capitalized
-            weatherData.windSpeed = json["wind"]["speed"].intValue
-            let windDirection = json["wind"]["deg"].intValue
-            weatherData.windDirection = weatherData.windDirectionCardinalPoint(degrees: windDirection)
-            weatherData.latitude = json["coord"]["lat"].doubleValue
-            weatherData.longitude = json["coord"]["lon"].doubleValue
-            
-            postNotification()
-          
         } else {
-            // Updating UI information i case of unvalidated weather data
-//            locationLabel.text = "Weather Unavalable"
-//            weatherIconName.image = nil
-//            temperatureLabel.text = nil
-//            uvIndexLabel.text = nil
+            weatherData.locationName = "Weather Unavalable"
+            postNotification()
+            return
         }
         
-
+        
+        if let loc = json["name"].string {
+            weatherData.locationName = loc
+        } else {
+            weatherData.locationName = "Weather Unavalable"
+            postNotification()
+            return
+        }
+        
+        
+        if let con = json["weather"][0]["id"].int {
+            weatherData.weatherIconName = weatherData.updateWeatherIcon(condition: con,
+                                                                        at: weatherData.dayTime)
+        } else {
+            weatherData.locationName = "Weather Unavalable"
+            postNotification()
+            return
+        }
+        
+        
+        if let hum =  json["main"]["humidity"].int {
+            weatherData.humidity = "\(hum)"
+        }
+        
+        
+        if let pres = json["main"]["pressure"].int {
+            weatherData.pressure = "\(pres)"
+        }
+        
+        
+        if let desc = json["weather"][0]["description"].string?.capitalized {
+            weatherData.description = desc
+        }
+        
+        
+        if let wnd = json["wind"]["speed"].double {
+            weatherData.windSpeed = Int(wnd)
+        }
+        
+        
+        if let windDirection = json["wind"]["deg"].int {
+            weatherData.windDirection = weatherData.windDirectionCardinalPoint(degrees: windDirection)
+        }
+        
+        
+        if let lat = json["coord"]["lat"].double {
+            weatherData.latitude = lat
+        }
+        
+        
+        if let lon = json["coord"]["lon"].double {
+            weatherData.longitude = lon
+        }
+        
+        
+        postNotification()
+        
+        
+        //
+        // Calling UV Index data after validating weather data
+        // and knowing time of day (API never return 0)
+        //
+        // Plus Forecast data (forecast data can return before current weather data)
+        //
+        let params = createParams(weatherData: weatherData)
+        
+        getData(weatherData: weatherData, for: .forecast, parametars: params)
+        getData(weatherData: weatherData, for: .uvIndex, parametars: params)
+        
     }
 
 
