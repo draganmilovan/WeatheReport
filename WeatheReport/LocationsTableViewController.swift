@@ -21,12 +21,19 @@ class LocationsTableViewController: UIViewController {
 
     @IBOutlet weak fileprivate var locationTableView: UITableView!
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        locationsInnerSettings()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.notificationReceived(notification:)),
+                                               name: Notification.Name("DataUpdated"),
+                                               object: nil)
     }
 
 
@@ -64,13 +71,82 @@ extension LocationsTableViewController: UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
-    
 }
 
 
 
 
+extension LocationsTableViewController {
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
+        // Guarding first row from editing
+        if indexPath.row == 0 {
+            return false
+        } else {
+            return true
+        }
+        
+    }
+    
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            
+            if indexPath.row == 0 { return }
+            
+            dataManager?.weatherDatas.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+        }
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let dataManager = dataManager else { return }
+        
+        for wd in dataManager.weatherDatas {
+            if wd === dataManager.weatherDatas[indexPath.item] {
+                wd.selected = true
+            } else {
+                wd.selected = false
+            }
+        }
 
+        
+        
+    }
+    
+}
+
+
+
+extension LocationsTableViewController {
+    
+    //
+    // Method for handling received Notification
+    //
+    @objc func notificationReceived(notification: NSNotification){
+        
+        locationTableView.reloadData()
+    }
+    
+    
+    func locationsInnerSettings() {
+        
+        if let dm = dataManager {
+            for wd in dm.weatherDatas {
+                wd.selected = true
+            }
+        }
+        
+    }
+    
+    
+    
+}
 
 
 
