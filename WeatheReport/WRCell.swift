@@ -140,7 +140,7 @@ final class WRCell: UICollectionViewCell {
         
         
         if let desc = weatherData.description {
-            weatherDescriptionLabel.text = "Now: \(desc) currently. It's \(weatherData.temperature!)°C."
+            weatherDescriptionLabel.text = "Now: \(desc) Currently. It's \(weatherData.temperature!)°C."
         }
         
         
@@ -173,7 +173,12 @@ final class WRCell: UICollectionViewCell {
         
         
         if let windDir = weatherData.windDirection, let windSpd = weatherData.windSpeed {
-            windLabel.text = "\(windDir) \(windSpd) m/s"
+            if windSpd != 0 {
+                windLabel.text = "\(windDir) \(windSpd) m/s"
+            }
+            if windSpd == 0 {
+                windLabel.text = "\(windSpd) m/s"
+            }
         } else {
             windLabel.text = "N/A"
         }
