@@ -124,6 +124,12 @@ extension WeatherDataManager {
 ///////////////////////////////////////////////////////////////////
         weatherDatas.insert(WeatherData(), at: 1)
         weatherDatas.last?.cityID = 3467431
+        weatherDatas.insert(WeatherData(), at: 2)
+        weatherDatas.last?.cityID = 1283240
+        weatherDatas.insert(WeatherData(), at: 3)
+        weatherDatas.last?.cityID = 4161624
+        weatherDatas.insert(WeatherData(), at: 4)
+        weatherDatas.last?.cityID = 2160931
     }
 
 }
