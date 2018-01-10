@@ -159,6 +159,12 @@ extension WRCollectionViewController {
             destinationVC.dataManager = dataManager
         }
     }
+    
+    
+    @IBAction func unwindLocationsTableView(unwindSegue: UIStoryboardSegue) {
+       updateUI()
+    }
+    
 }
 
 

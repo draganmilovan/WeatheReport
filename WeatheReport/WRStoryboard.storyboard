@@ -60,7 +60,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="Ozl-DN-AlF" kind="showDetail" identifier="locationsList" id="AmP-bS-EEa"/>
+                                            <segue destination="Ozl-DN-AlF" kind="show" identifier="locationsList" id="9pb-MC-KYc"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -184,6 +184,7 @@
                                             <outlet property="locationLabel" destination="u8h-Kh-C7k" id="tdV-sr-TLD"/>
                                             <outlet property="temperatureLabel" destination="jDT-eP-vj4" id="KUC-a9-Rf5"/>
                                             <outlet property="timeLabel" destination="huR-R0-hza" id="kp2-az-3BN"/>
+                                            <segue destination="aEs-K2-Lmg" kind="unwind" unwindAction="unwindLocationsTableViewWithUnwindSegue:" id="lvP-r4-qcf"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -193,7 +194,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="4ZY-jr-B2r" firstAttribute="trailing" secondItem="fam-oJ-uEI" secondAttribute="trailing" id="0Nt-9e-Ant"/>
                             <constraint firstItem="fam-oJ-uEI" firstAttribute="leading" secondItem="4ZY-jr-B2r" secondAttribute="leading" id="LBz-Yv-zUU"/>
@@ -207,6 +208,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IPK-8e-I0h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="aEs-K2-Lmg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1101" y="144"/>
         </scene>
