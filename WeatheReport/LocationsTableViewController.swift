@@ -145,6 +145,16 @@ extension LocationsTableViewController {
     }
     
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "search" {
+            
+            let destinationVC = segue.destination as! SearchController
+            destinationVC.dataManager = dataManager
+        }
+    }
+    
+    
     @IBAction func unwindSearch(unwindSegue: UIStoryboardSegue) {
         locationTableView.reloadData()
     }

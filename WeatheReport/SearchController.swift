@@ -10,6 +10,18 @@ import UIKit
 
 class SearchController: UIViewController {
     
+    // Data source
+    var dataManager: WeatherDataManager? {
+        didSet {
+            if !self.isViewLoaded { return }
+        }
+    }
+    
+    
+    @IBOutlet weak fileprivate var addLocationTableView: UITableView!
+    @IBOutlet weak fileprivate var searchTextField: UITextField!
+    
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
