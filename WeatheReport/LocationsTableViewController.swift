@@ -145,6 +145,9 @@ extension LocationsTableViewController {
     }
     
     
+    @IBAction func unwindSearch(unwindSegue: UIStoryboardSegue) {
+        locationTableView.reloadData()
+    }
     
 }
 

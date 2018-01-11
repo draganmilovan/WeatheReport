@@ -28,6 +28,7 @@
 		083E1A501FB5E52500CF5B67 /* WeatheReport.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 083E1A4E1FB5E52500CF5B67 /* WeatheReport.xcdatamodeld */; };
 		083E1A5A1FB6081200CF5B67 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1A571FB6081200CF5B67 /* Location.swift */; };
 		083E1A5B1FB6081200CF5B67 /* _Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1A591FB6081200CF5B67 /* _Location.swift */; };
+		084946F42007EA9200208116 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084946F32007EA9200208116 /* SearchController.swift */; };
 		0876EB3D1FE6CC3B00632A05 /* ForecastCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0876EB3C1FE6CC3B00632A05 /* ForecastCell.xib */; };
 		08830F971FE8201E00744C83 /* LocationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08830F961FE8201E00744C83 /* LocationsTableViewController.swift */; };
 		08830F991FE8252B00744C83 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08830F981FE8252B00744C83 /* LocationCell.swift */; };
@@ -52,6 +53,7 @@
 		083E1A4F1FB5E52500CF5B67 /* WeatheReport.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeatheReport.xcdatamodel; sourceTree = "<group>"; };
 		083E1A571FB6081200CF5B67 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		083E1A591FB6081200CF5B67 /* _Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Location.swift; sourceTree = "<group>"; };
+		084946F32007EA9200208116 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		0876EB3C1FE6CC3B00632A05 /* ForecastCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForecastCell.xib; sourceTree = "<group>"; };
 		08830F961FE8201E00744C83 /* LocationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsTableViewController.swift; sourceTree = "<group>"; };
 		08830F981FE8252B00744C83 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				08FA72B41FE55DA6005D9BDE /* ForecastCell.swift */,
 				08830F961FE8201E00744C83 /* LocationsTableViewController.swift */,
 				08830F981FE8252B00744C83 /* LocationCell.swift */,
+				084946F32007EA9200208116 /* SearchController.swift */,
 				08CF592E1FC86EF3003E9304 /* WRStoryboard.storyboard */,
 				083E0B811FCDD4B7007A3C85 /* WRCell.xib */,
 				0876EB3C1FE6CC3B00632A05 /* ForecastCell.xib */,
@@ -316,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08FA72BB1FE5D2BE005D9BDE /* ForacastDataModel.swift in Sources */,
+				084946F42007EA9200208116 /* SearchController.swift in Sources */,
 				08830F971FE8201E00744C83 /* LocationsTableViewController.swift in Sources */,
 				08EF6EBD1F98FF6F00EB0E27 /* WViewController.swift in Sources */,
 				08DF345D1FBC835500D074BB /* WeatherDataManager.swift in Sources */,

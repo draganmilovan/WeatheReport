@@ -37,7 +37,7 @@ class LocationCell: UITableViewCell {
             backgroundImage.image = UIImage(named: "BackgroundNight")
         }
         
-        temperatureLabel.text = "\(weatherData.temperature!)°"
+        temperatureLabel.text = "\(weatherData.temperature!)°C"
         locationLabel.text = weatherData.locationName!
         timeLabel.text = weatherData.time!
     }
