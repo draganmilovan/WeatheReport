@@ -232,12 +232,12 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IPK-8e-I0h" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="aEs-K2-Lmg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1101" y="144"/>
+            <point key="canvasLocation" x="1103" y="143"/>
         </scene>
-        <!--Search Controller-->
+        <!--SearchController-->
         <scene sceneID="ba1-Kk-IX1">
             <objects>
-                <viewController id="O5T-Q8-xti" customClass="SearchController" customModule="WeatheReport" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchController" title="SearchController" id="O5T-Q8-xti" customClass="SearchController" customModule="WeatheReport" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YzI-wR-lSj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -286,33 +286,42 @@
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="reV-ft-GS0">
                                 <rect key="frame" x="16" y="144" width="343" height="634"/>
-                                <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="50" id="gzF-8q-EY5">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SearchTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchTableViewCell" rowHeight="50" id="gzF-8q-EY5" customClass="SearchTableViewCell" customModule="WeatheReport" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="343" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gzF-8q-EY5" id="lpb-Rt-qS5">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Kf9-Au-R7k">
-                                                    <rect key="frame" x="0.0" y="8" width="343" height="34"/>
-                                                    <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Kf9-Au-R7k">
+                                                    <rect key="frame" x="7" y="8" width="336" height="34"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="Kf9-Au-R7k" secondAttribute="bottom" constant="8" id="BP3-9m-Y2p"/>
-                                                <constraint firstItem="Kf9-Au-R7k" firstAttribute="leading" secondItem="lpb-Rt-qS5" secondAttribute="leading" id="Brb-K6-ik9"/>
+                                                <constraint firstItem="Kf9-Au-R7k" firstAttribute="leading" secondItem="lpb-Rt-qS5" secondAttribute="leading" constant="7" id="Brb-K6-ik9"/>
                                                 <constraint firstAttribute="trailing" secondItem="Kf9-Au-R7k" secondAttribute="trailing" id="cgX-gZ-wZl"/>
                                                 <constraint firstItem="Kf9-Au-R7k" firstAttribute="top" secondItem="lpb-Rt-qS5" secondAttribute="top" constant="8" id="dGV-Q0-p4B"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="searchLocationLabel" destination="Kf9-Au-R7k" id="MfC-hg-sa6"/>
+                                            <segue destination="eWG-5k-jwe" kind="unwind" unwindAction="unwindSearchWithUnwindSegue:" id="80r-Xx-gEq"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="O5T-Q8-xti" id="K0G-8C-1iY"/>
+                                    <outlet property="delegate" destination="O5T-Q8-xti" id="rnc-7E-lQb"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -339,7 +348,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iqM-Xc-RbI" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="eWG-5k-jwe" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1828" y="144"/>
+            <point key="canvasLocation" x="1831" y="143"/>
         </scene>
     </scenes>
     <resources>

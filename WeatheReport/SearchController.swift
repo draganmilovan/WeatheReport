@@ -17,6 +17,7 @@ class SearchController: UIViewController {
         }
     }
     
+    fileprivate var locations: [String] = ["Kraljevo", "Kragujevac", "Krusevac", "Kraljevcani", "Kranj", "Kranjska Gora", "Kravari", "Krestovac"]
     
     @IBOutlet weak fileprivate var addLocationTableView: UITableView!
     @IBOutlet weak fileprivate var searchTextField: UITextField!
@@ -50,3 +51,54 @@ class SearchController: UIViewController {
     */
 
 }
+
+
+extension SearchController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return locations.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = addLocationTableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as! SearchTableViewCell
+        
+        let loc = locations[indexPath.row]
+        cell.configure(with: loc)
+        
+        return cell
+    }
+    
+}
+
+
+
+extension SearchController {
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
