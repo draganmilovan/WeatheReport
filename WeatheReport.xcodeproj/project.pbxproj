@@ -29,6 +29,8 @@
 		083E1A5A1FB6081200CF5B67 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1A571FB6081200CF5B67 /* Location.swift */; };
 		083E1A5B1FB6081200CF5B67 /* _Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083E1A591FB6081200CF5B67 /* _Location.swift */; };
 		084946F42007EA9200208116 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084946F32007EA9200208116 /* SearchController.swift */; };
+		085A9551200CF5810056B22E /* cityList.json in Resources */ = {isa = PBXBuildFile; fileRef = 085A9550200CF5810056B22E /* cityList.json */; };
+		085A9553200D29310056B22E /* LocationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085A9552200D29310056B22E /* LocationsManager.swift */; };
 		0876EB3D1FE6CC3B00632A05 /* ForecastCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0876EB3C1FE6CC3B00632A05 /* ForecastCell.xib */; };
 		08830F971FE8201E00744C83 /* LocationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08830F961FE8201E00744C83 /* LocationsTableViewController.swift */; };
 		08830F991FE8252B00744C83 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08830F981FE8252B00744C83 /* LocationCell.swift */; };
@@ -55,6 +57,8 @@
 		083E1A571FB6081200CF5B67 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		083E1A591FB6081200CF5B67 /* _Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Location.swift; sourceTree = "<group>"; };
 		084946F32007EA9200208116 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
+		085A9550200CF5810056B22E /* cityList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cityList.json; sourceTree = "<group>"; };
+		085A9552200D29310056B22E /* LocationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsManager.swift; sourceTree = "<group>"; };
 		0876EB3C1FE6CC3B00632A05 /* ForecastCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForecastCell.xib; sourceTree = "<group>"; };
 		08830F961FE8201E00744C83 /* LocationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsTableViewController.swift; sourceTree = "<group>"; };
 		08830F981FE8252B00744C83 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
@@ -94,6 +98,7 @@
 				08DF345C1FBC835500D074BB /* WeatherDataManager.swift */,
 				081E9EC31FC0941B00517B16 /* WeatherDataModel.swift */,
 				08FA72BA1FE5D2BE005D9BDE /* ForacastDataModel.swift */,
+				085A9552200D29310056B22E /* LocationsManager.swift */,
 				083E1A561FB6081200CF5B67 /* mogen-classes */,
 				083E1A581FB6081200CF5B67 /* mogen-properties */,
 				083E1A4E1FB5E52500CF5B67 /* WeatheReport.xcdatamodeld */,
@@ -153,6 +158,7 @@
 				08CF592E1FC86EF3003E9304 /* WRStoryboard.storyboard */,
 				083E0B811FCDD4B7007A3C85 /* WRCell.xib */,
 				0876EB3C1FE6CC3B00632A05 /* ForecastCell.xib */,
+				085A9550200CF5810056B22E /* cityList.json */,
 				08EF6EC11F98FF6F00EB0E27 /* Assets.xcassets */,
 				08EF6EC31F98FF6F00EB0E27 /* LaunchScreen.storyboard */,
 				08EF6EC61F98FF6F00EB0E27 /* Info.plist */,
@@ -247,6 +253,7 @@
 				083E0B821FCDD4B7007A3C85 /* WRCell.xib in Resources */,
 				08CF592F1FC86EF3003E9304 /* WRStoryboard.storyboard in Resources */,
 				08EF6EC51F98FF6F00EB0E27 /* LaunchScreen.storyboard in Resources */,
+				085A9551200CF5810056B22E /* cityList.json in Resources */,
 				08EF6EC21F98FF6F00EB0E27 /* Assets.xcassets in Resources */,
 				0876EB3D1FE6CC3B00632A05 /* ForecastCell.xib in Resources */,
 				08EF6EC01F98FF6F00EB0E27 /* Main.storyboard in Resources */,
@@ -337,6 +344,7 @@
 				08C027ED200907ED00D2B1F3 /* SearchTableViewCell.swift in Sources */,
 				083E0B801FCDC1F7007A3C85 /* WRCell.swift in Sources */,
 				083E1A501FB5E52500CF5B67 /* WeatheReport.xcdatamodeld in Sources */,
+				085A9553200D29310056B22E /* LocationsManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

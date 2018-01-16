@@ -111,6 +111,7 @@ final class WRCell: UICollectionViewCell {
                 locationLabel.text = "Nameless Location"
                 
             } else if location == "Connection Issues" || location == "Weather Unavalable" {
+                forecastCollectionVew.reloadData()
                 locationLabel.text = location
                 displayMessage()
                 return
