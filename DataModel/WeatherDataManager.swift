@@ -16,6 +16,7 @@ import CoreLocation
 final class WeatherDataManager: NSObject, CLLocationManagerDelegate {
 
     var weatherDatas: [WeatherData] = []
+    var locationsManager = LocationsManager()
 
     private let url = "http://api.openweathermap.org/data/2.5/"
     private let appID = "ac5c2be22a93a78414edcf3ebfd4885e"
@@ -33,6 +34,7 @@ final class WeatherDataManager: NSObject, CLLocationManagerDelegate {
         fetchLocatios()
         configureLocationManager()
         startTimer()
+        configureLocationsManager()
     }
 
 }
@@ -132,6 +134,18 @@ extension WeatherDataManager {
         weatherDatas.last?.cityID = 2160931
     }
 
+}
+
+
+extension WeatherDataManager {
+    
+    //
+    // Method for creating list of available locations with weather datas
+    //
+    func configureLocationsManager() {
+        locationsManager.populateLocationlist()
+    }
+    
 }
 
 
