@@ -17,13 +17,13 @@ class SearchController: UIViewController {
         }
     }
     
-// "Kraljevo", "Kragujevac", "Krusevac", "Kraljevcani", "Kranj", "Kranjska Gora", "Kravari", "Krestovac"
-    fileprivate var locations: [String] = []
     fileprivate var searchTerm: String? {
         didSet {
             searchingLocation()
         }
     }
+    
+    fileprivate var locations: [String] = []
     
     @IBOutlet weak fileprivate var addLocationTableView: UITableView!
     @IBOutlet weak fileprivate var searchTextField: UITextField!
@@ -33,30 +33,8 @@ class SearchController: UIViewController {
         return .lightContent
     }
 
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
 
 
 extension SearchController: UITableViewDelegate, UITableViewDataSource {
@@ -85,10 +63,21 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource {
 
 extension SearchController {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+}
+
+
+
+extension SearchController {
+    
     //
     // Method for using Text Field
     //
     @IBAction func didChangeTextField(_ sender: UITextField) {
+        
         guard let st = sender.text else {
             searchTerm = nil
             return
@@ -110,13 +99,14 @@ extension SearchController {
         
         guard let dataManager = dataManager else { return }
         guard let st = searchTerm else { return }
-        let predicate = NSPredicate(format: "SELF contains %@", st)
+        
+        let predicate = NSPredicate(format: "SELF contains[cd] %@", st)
+        
         locations = dataManager.locationsManager.locationsList.filter {
             predicate.evaluate(with: $0)
         }
         
         addLocationTableView.reloadData()
-        
     }
     
 }
