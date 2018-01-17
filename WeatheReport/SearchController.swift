@@ -17,7 +17,13 @@ class SearchController: UIViewController {
         }
     }
     
-    fileprivate var locations: [String] = ["Kraljevo", "Kragujevac", "Krusevac", "Kraljevcani", "Kranj", "Kranjska Gora", "Kravari", "Krestovac"]
+// "Kraljevo", "Kragujevac", "Krusevac", "Kraljevcani", "Kranj", "Kranjska Gora", "Kravari", "Krestovac"
+    fileprivate var locations: [String] = []
+    fileprivate var searchTerm: String? {
+        didSet {
+            searchingLocation()
+        }
+    }
     
     @IBOutlet weak fileprivate var addLocationTableView: UITableView!
     @IBOutlet weak fileprivate var searchTextField: UITextField!
@@ -78,6 +84,40 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource {
 
 
 extension SearchController {
+    
+    //
+    // Method for using Text Field
+    //
+    @IBAction func didChangeTextField(_ sender: UITextField) {
+        guard let st = sender.text else {
+            searchTerm = nil
+            return
+        }
+        
+        if st.count == 0 {
+            searchTerm = nil
+            return
+        }
+        
+        searchTerm = st
+    }
+    
+    
+    //
+    // Method for finding location from searching term
+    //
+    func searchingLocation() {
+        
+        guard let dataManager = dataManager else { return }
+        guard let st = searchTerm else { return }
+        let predicate = NSPredicate(format: "SELF contains %@", st)
+        locations = dataManager.locationsManager.locationsList.filter {
+            predicate.evaluate(with: $0)
+        }
+        
+        addLocationTableView.reloadData()
+        
+    }
     
 }
 
