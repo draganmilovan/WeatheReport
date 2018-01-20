@@ -23,21 +23,27 @@ extension Location {
 public extension Location {
 
 	public struct Attributes {
+		static let displayOrderNumber = "displayOrderNumber"
+		static let latitude = "latitude"
 		static let locationID = "locationID"
+		static let longitude = "longitude"
 		static let name = "name"
 		static let selected = "selected"
-		static let viewID = "viewID"
 	}
 
     // MARK: - Properties
 
+    @NSManaged public var displayOrderNumber: Int64
+
+    @NSManaged public var latitude: NSNumber?
+
     @NSManaged public var locationID: Int64
+
+    @NSManaged public var longitude: NSNumber?
 
     @NSManaged public var name: String!
 
     @NSManaged public var selected: Bool
-
-    @NSManaged public var viewID: Int64
 
     // MARK: - Relationships
 

@@ -105,7 +105,7 @@ extension WeatherDataManager {
         guard let moc = coreDataStack.mainContext else { fatalError("Missing Context") }
         
         let fr: NSFetchRequest<Location> = Location.fetchRequest()
-        let sort = NSSortDescriptor(key: Location.Attributes.viewID, ascending: true)
+        let sort = NSSortDescriptor(key: Location.Attributes.displayOrderNumber, ascending: true)
         
         fr.sortDescriptors = [sort]
         
@@ -113,10 +113,16 @@ extension WeatherDataManager {
     
         for location in locations! {
             let wd = WeatherData()
+            
             wd.cityID = Int(location.locationID)
             
-            weatherDatas.append(wd)
+            guard let lat = location.latitude else { return }
+            guard let lon = location.longitude else { return }
+            wd.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(truncating: lat),
+                                                   longitude: CLLocationDegrees(truncating: lon))
             
+            weatherDatas.append(wd)
+            moc.delete(location)
         }
         
         weatherDatas.insert(WeatherData(), at: 0)
@@ -333,13 +339,21 @@ private extension WeatherDataManager {
         }
         
         
-        if let lat = json["coord"]["lat"].double {
+        if let lat = weatherData.coordinate?.latitude {
             weatherData.latitude = lat
+        } else {
+            if let lat = json["coord"]["lat"].double {
+                weatherData.latitude = lat
+            }
         }
         
         
-        if let lon = json["coord"]["lon"].double {
+        if let lon = weatherData.coordinate?.longitude {
             weatherData.longitude = lon
+        } else {
+            if let lon = json["coord"]["lon"].double {
+                weatherData.longitude = lon
+            }
         }
         
         

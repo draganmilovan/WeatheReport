@@ -193,14 +193,14 @@ final class WRCell: UICollectionViewCell {
         
         
         if let lat = weatherData.latitude {
-            latitudeLabel.text = "\(lat)"
+            latitudeLabel.text = String(format: "%.2f", lat)
         } else {
             latitudeLabel.text = "N/A"
         }
         
         
         if let lon = weatherData.longitude {
-            longitudeLabel.text = "\(lon)"
+            longitudeLabel.text = String(format: "%.2f", lon)
         } else {
             locationLabel.text = "N/A"
         }
