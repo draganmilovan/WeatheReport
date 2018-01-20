@@ -23,7 +23,7 @@ class SearchController: UIViewController {
         }
     }
     
-    fileprivate var locations: [String] = []
+    fileprivate var locations: [City] = []
     
     @IBOutlet weak fileprivate var addLocationTableView: UITableView!
     @IBOutlet weak fileprivate var searchTextField: UITextField!
@@ -52,7 +52,7 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource {
         let cell = addLocationTableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as! SearchTableViewCell
         
         let loc = locations[indexPath.row]
-        cell.configure(with: loc)
+        cell.configure(with: loc.name)
         
         return cell
     }
@@ -103,7 +103,7 @@ extension SearchController {
         let predicate = NSPredicate(format: "SELF contains[cd] %@", st)
         
         locations = dataManager.locationsManager.locationsList.filter {
-            predicate.evaluate(with: $0)
+            predicate.evaluate(with: $0.name)
         }
         
         addLocationTableView.reloadData()
