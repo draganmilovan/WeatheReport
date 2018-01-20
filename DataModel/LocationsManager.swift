@@ -18,10 +18,15 @@ struct LocationsManager {
     var locationsList: [City] = []
     
     
+    init() {
+        populateLocationlist()
+    }
+    
+    
     //
     // Parsing JSON for all available locations API accepts
     //
-    mutating func populateLocationlist() {
+    fileprivate mutating func populateLocationlist() {
         
         guard let path = Bundle.main.path(forResource: "cityList", ofType: "json") else { return }
         guard let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else { return }
@@ -38,23 +43,3 @@ struct LocationsManager {
         print(locationsList.count)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

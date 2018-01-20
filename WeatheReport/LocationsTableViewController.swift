@@ -8,15 +8,19 @@
 
 import UIKit
 
-class LocationsTableViewController: UIViewController {
+class LocationsTableViewController: UIViewController, NeedsDependency {
     
-    // Data source
-    var dataManager: WeatherDataManager? {
+    var dependency: Dependency? {
         didSet {
             if !self.isViewLoaded { return }
             print("locationsList!")
             locationTableView.reloadData()
         }
+    }
+    
+    // Data source
+    fileprivate var dataManager: WeatherDataManager? {
+        return dependency?.dataManager
     }
 
     @IBOutlet weak fileprivate var locationTableView: UITableView!
@@ -149,8 +153,8 @@ extension LocationsTableViewController {
         
         if segue.identifier == "search" {
             
-            let destinationVC = segue.destination as! SearchController
-            destinationVC.dataManager = dataManager
+            let destinationVC = segue.destination as! NeedsDependency
+            destinationVC.dependency = dependency
         }
     }
     

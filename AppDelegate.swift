@@ -23,14 +23,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         coreDataStack = RTCoreDataStack {
             [unowned self] in
             
-            self.configureDataManager()
+            self.configureDataManagers()
+            
+            let locationsManager = LocationsManager()
+            let dependency = Dependency(dataManager: self.dataManager, locationsManager: locationsManager)
             
             if let cvc = self.window?.rootViewController as? WRCollectionViewController {
-                cvc.dataManager = self.dataManager
+                cvc.dependency = dependency
             }
             
             if let tvc = self.window?.rootViewController as? LocationsTableViewController {
-                tvc.dataManager = self.dataManager
+                tvc.dependency = dependency
             }
         }
         
@@ -71,11 +74,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
     
-    func configureDataManager() {
+    func configureDataManagers() {
         
         guard let cds = coreDataStack else { fatalError() }
         dataManager = WeatherDataManager(coreDataStack: cds)
-
+        
     }
     
 }

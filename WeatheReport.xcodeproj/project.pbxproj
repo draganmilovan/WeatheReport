@@ -37,6 +37,7 @@
 		08C027ED200907ED00D2B1F3 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C027EC200907ED00D2B1F3 /* SearchTableViewCell.swift */; };
 		08CF592F1FC86EF3003E9304 /* WRStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CF592E1FC86EF3003E9304 /* WRStoryboard.storyboard */; };
 		08DF345D1FBC835500D074BB /* WeatherDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF345C1FBC835500D074BB /* WeatherDataManager.swift */; };
+		08EA8A2220139A9B003297C5 /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA8A2120139A9B003297C5 /* Dependency.swift */; };
 		08EF6EBB1F98FF6F00EB0E27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF6EBA1F98FF6F00EB0E27 /* AppDelegate.swift */; };
 		08EF6EBD1F98FF6F00EB0E27 /* WViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF6EBC1F98FF6F00EB0E27 /* WViewController.swift */; };
 		08EF6EC01F98FF6F00EB0E27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08EF6EBE1F98FF6F00EB0E27 /* Main.storyboard */; };
@@ -65,6 +66,7 @@
 		08C027EC200907ED00D2B1F3 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		08CF592E1FC86EF3003E9304 /* WRStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WRStoryboard.storyboard; sourceTree = "<group>"; };
 		08DF345C1FBC835500D074BB /* WeatherDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataManager.swift; sourceTree = "<group>"; };
+		08EA8A2120139A9B003297C5 /* Dependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
 		08EF6EB71F98FF6F00EB0E27 /* WeatheReport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatheReport.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08EF6EBA1F98FF6F00EB0E27 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08EF6EBC1F98FF6F00EB0E27 /* WViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				08CF592E1FC86EF3003E9304 /* WRStoryboard.storyboard */,
 				083E0B811FCDD4B7007A3C85 /* WRCell.xib */,
 				0876EB3C1FE6CC3B00632A05 /* ForecastCell.xib */,
+				08EA8A2120139A9B003297C5 /* Dependency.swift */,
 				085A9550200CF5810056B22E /* cityList.json */,
 				08EF6EC11F98FF6F00EB0E27 /* Assets.xcassets */,
 				08EF6EC31F98FF6F00EB0E27 /* LaunchScreen.storyboard */,
@@ -340,6 +343,7 @@
 				083E0B7D1FCDAA19007A3C85 /* WRCollectionViewController.swift in Sources */,
 				081E9EC41FC0941B00517B16 /* WeatherDataModel.swift in Sources */,
 				083E1A5A1FB6081200CF5B67 /* Location.swift in Sources */,
+				08EA8A2220139A9B003297C5 /* Dependency.swift in Sources */,
 				08EF6ECD1F9901E000EB0E27 /* WDataModel.swift in Sources */,
 				08C027ED200907ED00D2B1F3 /* SearchTableViewCell.swift in Sources */,
 				083E0B801FCDC1F7007A3C85 /* WRCell.swift in Sources */,

@@ -8,15 +8,19 @@
 
 import UIKit
 
-class WRCollectionViewController: UIViewController {
-
-    // Data source
-    var dataManager: WeatherDataManager? {
+class WRCollectionViewController: UIViewController, NeedsDependency {
+    
+    var dependency: Dependency? {
         didSet {
             if !self.isViewLoaded { return }
             
             wrCollectionView.reloadData()
         }
+    }
+    
+    // Data source
+    fileprivate var dataManager: WeatherDataManager? {
+        return dependency?.dataManager
     }
     
     @IBOutlet weak var backgroundImage: UIImageView!
@@ -107,7 +111,7 @@ extension WRCollectionViewController {
     // Method for updating background image
     //
     func updateBackgroundImage() {
-        print(wrCollectionView.visibleCells.count)
+        //print(wrCollectionView.visibleCells.count)
         
         guard let cell = wrCollectionView.visibleCells.first as? WRCell else { return }
         
@@ -155,8 +159,8 @@ extension WRCollectionViewController {
         
         if segue.identifier == "locationsList" {
             
-            let destinationVC = segue.destination as! LocationsTableViewController
-            destinationVC.dataManager = dataManager
+            let destinationVC = segue.destination as! NeedsDependency
+            destinationVC.dependency = dependency
         }
     }
     

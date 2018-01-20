@@ -8,13 +8,21 @@
 
 import UIKit
 
-class SearchController: UIViewController {
+class SearchController: UIViewController, NeedsDependency {
     
-    // Data source
-    var dataManager: WeatherDataManager? {
+    var dependency: Dependency? {
         didSet {
             if !self.isViewLoaded { return }
         }
+    }
+    
+    // Data source
+    var dataManager: WeatherDataManager? {
+        return dependency?.dataManager
+    }
+    
+    fileprivate var locationsManager: LocationsManager? {
+        return dependency?.locationsManager
     }
     
     fileprivate var searchTerm: String? {
@@ -97,12 +105,12 @@ extension SearchController {
     //
     func searchingLocation() {
         
-        guard let dataManager = dataManager else { return }
+        guard let locationsManager = locationsManager else { return }
         guard let st = searchTerm else { return }
         
         let predicate = NSPredicate(format: "SELF contains[cd] %@", st)
         
-        locations = dataManager.locationsManager.locationsList.filter {
+        locations = locationsManager.locationsList.filter {
             predicate.evaluate(with: $0.name)
         }
         
