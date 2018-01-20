@@ -17,7 +17,6 @@ import CoreLocation
 final class WeatherDataManager: NSObject, CLLocationManagerDelegate {
 
     var weatherDatas: [WeatherData] = []
-    //var locationsManager = LocationsManager()
 
     private let url = "http://api.openweathermap.org/data/2.5/"
     private let appID = "ac5c2be22a93a78414edcf3ebfd4885e"
@@ -35,7 +34,6 @@ final class WeatherDataManager: NSObject, CLLocationManagerDelegate {
         fetchLocatios()
         configureLocationManager()
         startTimer()
-        //configureLocationsManager()
     }
 
 }
@@ -73,7 +71,7 @@ extension WeatherDataManager {
             
             if let wd = weatherDatas.first {
                 wd.coordinate = location.coordinate
-                //update(weatherData: wd)
+                
                 updateAll()
             }
             
@@ -150,17 +148,6 @@ extension WeatherDataManager {
 }
 
 
-//extension WeatherDataManager {
-//
-//    //
-//    // Method for creating list of available locations with weather datas
-//    //
-//    func configureLocationsManager() {
-//        locationsManager.populateLocationlist()
-//    }
-//
-//}
-
 
 extension WeatherDataManager {
     
@@ -178,7 +165,7 @@ extension WeatherDataManager {
     //
     // Method for updating weather data
     //
-    func update(weatherData: WeatherData) { // , completion: @escaping () -> Void = {}
+    func update(weatherData: WeatherData) {
         let params = createParams(weatherData: weatherData)
         getData(weatherData: weatherData, for: .currentWeather, parametars: params)
     }
@@ -392,18 +379,14 @@ private extension WeatherDataManager {
     func updateUvIndexData(weatherData: WeatherData, json: JSON) {
 
         if let uvi = json["value"].double {
-//            if locationLabel.text != "Weather Unavalable" {
-                weatherData.uvIndex = String(Int(uvi))
-//                uvIndexLabel.text = weatherData.uvIndex
-//            }
-
+            weatherData.uvIndex = String(Int(uvi))
+            
             if weatherData.dayTime == false {
                 weatherData.uvIndex = "0"
             }
-
+            
         } else {
             weatherData.uvIndex = "N/A"
-//            uvIndexLabel.text = weatherData.uvIndex
         }
         
         postNotification()
@@ -430,30 +413,6 @@ private extension WeatherDataManager {
                              
                              temperature: (String( Int( $0.1["main"]["temp"].doubleValue - 273.15 ))  + "°"))
             }
-
-//            // Populating array with times for forecast
-//            weatherData.forecastTimes = json["list"].map {
-//
-//                weatherData.convertUnixTimestampToTime(timeStamp: ($0.1["dt"].intValue),
-//                                                       format: .Hours)
-//
-//            }
-//
-//            // Populating array with temperatures for forecast
-//            weatherData.forecastTemperatures = json["list"].map {
-//
-//                String( Int( $0.1["main"]["temp"].doubleValue - 273.15 ))  + "°"
-//
-//            }
-//
-//            // Populating array with names of weather icons
-//            weatherData.forecastIconsNames = json["list"].map {
-//
-//                weatherData.updateWeatherIcon(condition: ($0.1["weather"][0]["id"].intValue),
-//                                              at: weatherData.timeOfDay(for: ($0.1["dt"].intValue),
-//                                                                        inFormat: .Hours))
-//
-//            }
             
             postNotification()
 
@@ -462,11 +421,7 @@ private extension WeatherDataManager {
 //            locationManager.startUpdatingLocation()
             
         }
-
         print(weatherData.forecastDatas.count)
-//        print(weatherData.forecastTimes)
-//        print(weatherData.forecastTemperatures)
-//        print(weatherData.forecastIconsNames)
     }
 
 }
@@ -504,15 +459,3 @@ private extension WeatherDataManager {
     
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
