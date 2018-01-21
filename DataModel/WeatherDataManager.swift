@@ -324,7 +324,7 @@ private extension WeatherDataManager {
         }
         
         
-        if let desc = json["weather"][0]["description"].string?.capitalized {
+        if let desc = json["weather"][0]["description"].string {
             weatherData.description = desc
         }
         
