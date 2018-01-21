@@ -87,16 +87,16 @@ final class WRCell: UICollectionViewCell {
     fileprivate func displayMessage() {
         
         weatherIcon.image = nil
-        temperatureLabel.text = ""
-        weatherDescriptionLabel.text = ""
-        sunriseLabel.text = ""
-        sunsetLabel.text = ""
-        humidityLabel.text = ""
-        pressureLabel.text = ""
-        windLabel.text = ""
-        uvIndexLabel.text = ""
-        latitudeLabel.text = ""
-        longitudeLabel.text = ""
+        temperatureLabel.text = " "
+        weatherDescriptionLabel.text = " "
+        sunriseLabel.text = " "
+        sunsetLabel.text = " "
+        humidityLabel.text = " "
+        pressureLabel.text = " "
+        windLabel.text = " "
+        uvIndexLabel.text = " "
+        latitudeLabel.text = " "
+        longitudeLabel.text = " "
         
     }
     
@@ -111,6 +111,7 @@ final class WRCell: UICollectionViewCell {
                 locationLabel.text = "Nameless Location"
                 
             } else if location == "Connection Issues" || location == "Weather Unavalable" {
+                weatherData.forecastDatas = []
                 forecastCollectionVew.reloadData()
                 locationLabel.text = location
                 displayMessage()
@@ -141,13 +142,9 @@ final class WRCell: UICollectionViewCell {
         
         
         if let desc = weatherData.description {
-            var dd = desc
-            let d = String(dd.removeFirst()).capitalized
-            var cse = String(desc.reversed())
-            cse.removeLast()
-            let esc = String(cse.reversed())
+            let d = desc.prefix(1).uppercased() + desc.dropFirst()
             
-            weatherDescriptionLabel.text = "Now: \(d + esc) currently. It's \(weatherData.temperature!)°C."
+            weatherDescriptionLabel.text = "Now: \(d) currently. It's \(weatherData.temperature!)°C."
         }
         
         
