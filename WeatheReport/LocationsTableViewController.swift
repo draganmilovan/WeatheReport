@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LocationsTableViewController: UIViewController, NeedsDependency {
+class LocationsTableViewController: UIViewController, NeedsDependency, LocationInformation {
     
     var dependency: Dependency? {
         didSet {
@@ -153,14 +153,20 @@ extension LocationsTableViewController {
         
         if segue.identifier == "search" {
             
-            let destinationVC = segue.destination as! NeedsDependency
+            let destinationVC = segue.destination as! SearchController
             destinationVC.dependency = dependency
+            destinationVC.locationDelegate = self
         }
     }
     
     
     @IBAction func unwindSearch(unwindSegue: UIStoryboardSegue) {
         locationTableView.reloadData()
+    }
+    
+    
+    func newLocation(data: City) {
+        print(data.name)
     }
     
 }

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol LocationInformation {
+    func newLocation(data: City)
+}
+
 class SearchController: UIViewController, NeedsDependency {
     
     var dependency: Dependency? {
@@ -36,6 +40,8 @@ class SearchController: UIViewController, NeedsDependency {
     @IBOutlet weak fileprivate var addLocationTableView: UITableView!
     @IBOutlet weak fileprivate var searchTextField: UITextField!
     
+    
+    var locationDelegate: LocationInformation?
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -72,7 +78,7 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource {
 extension SearchController {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        locationDelegate?.newLocation(data: locations[indexPath.row])
     }
     
 }
