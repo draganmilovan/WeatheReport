@@ -17,6 +17,7 @@ import CoreLocation
 final class WeatherDataManager: NSObject, CLLocationManagerDelegate {
 
     var weatherDatas: [WeatherData] = []
+    private var locations: [Location] = []
 
     private let url = "http://api.openweathermap.org/data/2.5/"
     private let appID = "ac5c2be22a93a78414edcf3ebfd4885e"
@@ -100,7 +101,7 @@ extension WeatherDataManager {
     //
     // Method for Data fetching
     //
-    func fetchLocatios() {
+    private func fetchLocatios() {
         
         guard let moc = coreDataStack.mainContext else { fatalError("Missing Context") }
         
@@ -109,53 +110,108 @@ extension WeatherDataManager {
         
         fr.sortDescriptors = [sort]
         
-        let locations = try? moc.fetch(fr)
+        let locs = try? moc.fetch(fr)
     
-        for location in locations! {
+        for loc in locs! {
+            locations.append(loc)
+            
             let wd = WeatherData()
             
-            wd.cityID = Int(location.locationID)
+            wd.cityID = Int(loc.locationID)
             
-            guard let lat = location.latitude else { return }
-            guard let lon = location.longitude else { return }
+            guard let lat = loc.latitude else { return }
+            guard let lon = loc.longitude else { return }
             wd.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(truncating: lat),
                                                    longitude: CLLocationDegrees(truncating: lon))
             
             weatherDatas.append(wd)
-            moc.delete(location)
+            
         }
         
         weatherDatas.insert(WeatherData(), at: 0)
 ///////////////////////////////////////////////////////////////////
 //                     FOR TESTING!                              //
 ///////////////////////////////////////////////////////////////////
-        weatherDatas.insert(WeatherData(), at: 1)
-        weatherDatas.last?.cityID = 3467431
-        weatherDatas.insert(WeatherData(), at: 2)
-        weatherDatas.last?.cityID = 1283240
-        weatherDatas.insert(WeatherData(), at: 3)
-        weatherDatas.last?.cityID = 4161624
-        weatherDatas.insert(WeatherData(), at: 4)
-        weatherDatas.last?.cityID = 2160931
+//        weatherDatas.insert(WeatherData(), at: 1)
+//        weatherDatas.last?.cityID = 3467431
+//        weatherDatas.insert(WeatherData(), at: 2)
+//        weatherDatas.last?.cityID = 1283240
+//        weatherDatas.insert(WeatherData(), at: 3)
+//        weatherDatas.last?.cityID = 4161624
+//        weatherDatas.insert(WeatherData(), at: 4)
+//        weatherDatas.last?.cityID = 2160931
     }
-
-}
-
-
-extension WeatherDataManager {
+    
     
     //
-    // Method for creating list of available locations with weather datas
+    // Method for saving location in Core Data
     //
-    func configureLocationsManager() {
-        locationsManager.populateLocationlist()
+    private func saveLocation(location: City) {
+        
+        //let moc = coreDataStack.editorContext()
+        guard let moc = coreDataStack.mainContext else { fatalError("Missing Context") }
+        
+        guard let mo = Location(managedObjectContext: moc) else { return }
+        
+        
+        mo.selected = true
+        
+        mo.displayOrderNumber = Int64(self.weatherDatas.count)
+        
+        mo.name = location.name
+        
+        if let id = location.id {
+            mo.locationID = Int64(id)
+        }
+        
+        if let lat = location.coordinate?.latitude {
+            mo.latitude = lat as NSNumber
+        }
+        
+        if let lon = location.coordinate?.longitude {
+            mo.longitude = lon as NSNumber
+        }
+        
+        
+        do {
+            try moc.save()
+            locations.append(mo)
+            
+        } catch {
+            moc.delete(mo)
+            print("Error saving context \(error)")
+        }
+        
+    }
+    
+    
+    //
+    // Method for adding new location to list for weather datas
+    //
+    func addNewLocation(location: City) {
+        
+        let wd = WeatherData()
+        
+        wd.locationName = location.name
+        
+        if let id = location.id {
+            wd.cityID = id
+        }
+        
+        if let crd = location.coordinate {
+            wd.coordinate = crd
+        }
+        
+        weatherDatas.append(wd)
+        update(weatherData: wd)
+        saveLocation(location: location)
     }
 
 }
 
 
 
-extension WeatherDataManager {
+fileprivate extension WeatherDataManager {
     
     //
     // Method for updating datas for all locations

@@ -166,7 +166,7 @@ extension LocationsTableViewController {
     
     
     func newLocation(data: City) {
-        print(data.name)
+        dataManager?.addNewLocation(location: data)
     }
     
 }
