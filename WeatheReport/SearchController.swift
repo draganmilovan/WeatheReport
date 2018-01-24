@@ -21,10 +21,6 @@ class SearchController: UIViewController, NeedsDependency {
     }
     
     // Data source
-    var dataManager: WeatherDataManager? {
-        return dependency?.dataManager
-    }
-    
     fileprivate var locationsManager: LocationsManager? {
         return dependency?.locationsManager
     }
@@ -46,7 +42,7 @@ class SearchController: UIViewController, NeedsDependency {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-
+    
 }
 
 
@@ -71,11 +67,6 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-}
-
-
-
-extension SearchController {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         locationDelegate?.newLocation(data: locations[indexPath.row])
@@ -85,7 +76,7 @@ extension SearchController {
 
 
 
-extension SearchController {
+fileprivate extension SearchController {
     
     //
     // Method for using Text Field
@@ -99,6 +90,8 @@ extension SearchController {
         
         if st.count == 0 {
             searchTerm = nil
+            locations.removeAll()
+            addLocationTableView.reloadData()
             return
         }
         
@@ -124,25 +117,3 @@ extension SearchController {
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
