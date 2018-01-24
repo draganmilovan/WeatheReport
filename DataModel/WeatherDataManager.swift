@@ -26,7 +26,10 @@ final class WeatherDataManager: NSObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
 
     private weak var timer: Timer?
-
+    private var mocMain: NSManagedObjectContext? {
+        return coreDataStack.mainContext
+    }
+    
 
     init(coreDataStack: RTCoreDataStack) {
         self.coreDataStack = coreDataStack
@@ -103,7 +106,7 @@ extension WeatherDataManager {
     //
     private func fetchLocatios() {
         
-        guard let moc = coreDataStack.mainContext else { fatalError("Missing Context") }
+        guard let moc = mocMain else { fatalError("Missing Context") }
         
         let fr: NSFetchRequest<Location> = Location.fetchRequest()
         let sort = NSSortDescriptor(key: Location.Attributes.displayOrderNumber, ascending: true)
@@ -144,67 +147,88 @@ extension WeatherDataManager {
     
     
     //
-    // Method for saving location in Core Data
+    // Method for adding new location to list for weather datas and saving to Core Data
     //
-    private func saveLocation(location: City) {
-        
-        //let moc = coreDataStack.editorContext()
-        guard let moc = coreDataStack.mainContext else { fatalError("Missing Context") }
-        
+    func addNewLocation(location: City) {
+        guard let moc = mocMain else { fatalError("Missing Context") }
         guard let mo = Location(managedObjectContext: moc) else { return }
         
-        
-        mo.selected = true
-        
-        mo.displayOrderNumber = Int64(self.weatherDatas.count)
-        
-        mo.name = location.name
-        
-        if let id = location.id {
-            mo.locationID = Int64(id)
+        let n = location.name
+        let predicate = NSPredicate(format: "SELF matches %@", n)
+
+        let l = locations.filter {
+                predicate.evaluate(with: $0.name)
         }
-        
-        if let lat = location.coordinate?.latitude {
-            mo.latitude = lat as NSNumber
-        }
-        
-        if let lon = location.coordinate?.longitude {
-            mo.longitude = lon as NSNumber
-        }
-        
-        
-        do {
-            try moc.save()
-            locations.append(mo)
-            
-        } catch {
+
+        if l.count == 0 {
+            mo.selected = true
+
+            mo.displayOrderNumber = Int64(self.weatherDatas.count)
+
+            mo.name = location.name
+
+            if let id = location.id {
+                mo.locationID = Int64(id)
+            }
+
+            if let lat = location.coordinate?.latitude {
+                mo.latitude = lat as NSNumber
+            }
+
+            if let lon = location.coordinate?.longitude {
+                mo.longitude = lon as NSNumber
+            }
+
+            let wd = WeatherData()
+
+            wd.locationName = location.name
+
+            if let id = location.id {
+                wd.cityID = id
+            }
+
+            if let crd = location.coordinate {
+                wd.coordinate = crd
+            }
+
+
+            do {
+                try moc.save()
+                locations.append(mo)
+
+            } catch {
+                moc.delete(mo)
+                print("Error saving context \(error)")
+            }
+            weatherDatas.append(wd)
+            update(weatherData: wd)
+
+        } else {
             moc.delete(mo)
-            print("Error saving context \(error)")
+            return
         }
         
     }
     
     
     //
-    // Method for adding new location to list for weather datas
+    // Method for deleting location
     //
-    func addNewLocation(location: City) {
+    func deleteLocation(at indexPath: IndexPath) {
+        guard let moc = mocMain else { fatalError("Missing Context") }
+        let location = locations[indexPath.row - 1]
         
-        let wd = WeatherData()
+        moc.delete(location)
         
-        wd.locationName = location.name
-        
-        if let id = location.id {
-            wd.cityID = id
+        do {
+            try moc.save()
+            
+        } catch {
+            print("Error deleting context \(error)")
         }
         
-        if let crd = location.coordinate {
-            wd.coordinate = crd
-        }
-        
-        weatherDatas.append(wd)
-        update(weatherData: wd)
-        saveLocation(location: location)
+        locations.remove(at: indexPath.row - 1)
+        weatherDatas.remove(at: indexPath.row)
     }
 
 }

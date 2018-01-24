@@ -100,7 +100,7 @@ extension LocationsTableViewController {
             
             if indexPath.row == 0 { return }
             
-            dataManager?.weatherDatas.remove(at: indexPath.row)
+            dataManager?.deleteLocation(at: indexPath)
             tableView.deleteRows(at: [indexPath], with: .fade)
             
         }
