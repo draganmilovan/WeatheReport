@@ -85,7 +85,6 @@ extension WeatherDataManager {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
-        //configureLocationManager()
     }
 
 }
@@ -132,17 +131,7 @@ extension WeatherDataManager {
         }
         
         weatherDatas.insert(WeatherData(), at: 0)
-///////////////////////////////////////////////////////////////////
-//                     FOR TESTING!                              //
-///////////////////////////////////////////////////////////////////
-//        weatherDatas.insert(WeatherData(), at: 1)
-//        weatherDatas.last?.cityID = 3467431
-//        weatherDatas.insert(WeatherData(), at: 2)
-//        weatherDatas.last?.cityID = 1283240
-//        weatherDatas.insert(WeatherData(), at: 3)
-//        weatherDatas.last?.cityID = 4161624
-//        weatherDatas.insert(WeatherData(), at: 4)
-//        weatherDatas.last?.cityID = 2160931
+        
     }
     
     
@@ -310,7 +299,6 @@ private extension WeatherDataManager {
 
                 case .currentWeather:
                     self.updateWeatherData(weatherData: weatherData, json: json)
-                    //print(json)
 
                 case .uvIndex:
                     self.updateUvIndexData(weatherData: weatherData, json: json)
@@ -327,7 +315,6 @@ private extension WeatherDataManager {
                     
                 case .currentWeather:
                     weatherData.locationName = "Connection Issues"
-                    //self.getData(weatherData: weatherData, for: .currentWeather, parametars: parametars)
                     
                 case .uvIndex :
                     weatherData.uvIndex = "N/A"
@@ -358,10 +345,7 @@ private extension WeatherDataManager {
 
             weatherData.sunRise = sunRise
             weatherData.sunSet = sunSet
-
-            //            let date = Int(Date().timeIntervalSince1970)
-            //            weatherData.dayTime = weatherData.timeOfDay(for: date, inFormat: "HH:mm")
-
+            
             weatherData.dayTime = weatherData.updateTimeOfDay()
 
         } else { weatherData.dayTime = true }
@@ -510,12 +494,8 @@ private extension WeatherDataManager {
             
             postNotification()
 
-        } else {
-            
-//            locationManager.startUpdatingLocation()
-            
-        }
-        print(weatherData.forecastDatas.count)
+        } else { return }
+        
     }
 
 }
