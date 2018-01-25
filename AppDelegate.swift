@@ -15,18 +15,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var coreDataStack: RTCoreDataStack?
     var dataManager: WeatherDataManager?
-    
+    var locationsManager: LocationsManager?
     
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        
+        //print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
         coreDataStack = RTCoreDataStack {
             [unowned self] in
             
             self.configureDataManagers()
             
-            let locationsManager = LocationsManager()
-            let dependency = Dependency(dataManager: self.dataManager, locationsManager: locationsManager)
+            self.locationsManager = LocationsManager()
+            let dependency = Dependency(dataManager: self.dataManager, locationsManager: self.locationsManager)
             
             if let cvc = self.window?.rootViewController as? WRCollectionViewController {
                 cvc.dependency = dependency
@@ -78,31 +80,7 @@ extension AppDelegate {
         
         guard let cds = coreDataStack else { fatalError() }
         dataManager = WeatherDataManager(coreDataStack: cds)
-        
+        //locationsManager = LocationsManager()
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
