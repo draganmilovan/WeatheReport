@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             self.configureDataManagers()
             
-            self.locationsManager = LocationsManager()
+            //self.locationsManager = LocationsManager()
             let dependency = Dependency(dataManager: self.dataManager, locationsManager: self.locationsManager)
             
             if let cvc = self.window?.rootViewController as? WRCollectionViewController {
@@ -80,7 +80,7 @@ extension AppDelegate {
         
         guard let cds = coreDataStack else { fatalError() }
         dataManager = WeatherDataManager(coreDataStack: cds)
-        //locationsManager = LocationsManager()
+        locationsManager = LocationsManager()
     }
     
 }
