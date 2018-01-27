@@ -27,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             self.configureDataManagers()
             
-            //self.locationsManager = LocationsManager()
             let dependency = Dependency(dataManager: self.dataManager, locationsManager: self.locationsManager)
             
             if let cvc = self.window?.rootViewController as? WRCollectionViewController {
