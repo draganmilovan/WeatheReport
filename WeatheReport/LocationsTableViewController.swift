@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LocationsTableViewController: UIViewController, NeedsDependency, LocationInformation {
+class LocationsTableViewController: UIViewController, NeedsDependency, LocationDelegate {
     
     var dependency: Dependency? {
         didSet {
@@ -170,22 +170,3 @@ extension LocationsTableViewController {
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
