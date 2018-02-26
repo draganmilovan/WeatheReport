@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WRCollectionViewController: UIViewController, NeedsDependency, DisplayDelegate {
+class WRCollectionViewController: UIViewController, NeedsDependency {
     
     var dependency: Dependency? {
         didSet {
@@ -85,7 +85,7 @@ extension WRCollectionViewController: UICollectionViewDataSource {
 }
 
 
-extension WRCollectionViewController {
+extension WRCollectionViewController: DisplayDelegate {
     
     //
     // Method for handling received Notification
@@ -115,9 +115,9 @@ extension WRCollectionViewController {
         wrCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         
         updateBackgroundImage()
-        wrCollectionView.reloadData()
         pageControl.numberOfPages = dataManager.weatherDatas.count
         pageControl.currentPage = selectedItem
+        wrCollectionView.reloadData()
         
     }
     
