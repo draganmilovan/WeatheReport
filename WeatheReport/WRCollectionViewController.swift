@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WRCollectionViewController: UIViewController, NeedsDependency {
+class WRCollectionViewController: UIViewController, NeedsDependency, DisplayDelegate {
     
     var dependency: Dependency? {
         didSet {
@@ -38,7 +38,7 @@ class WRCollectionViewController: UIViewController, NeedsDependency {
         let wrNib = UINib(nibName: "WRCell", bundle: nil)
         wrCollectionView.register(wrNib, forCellWithReuseIdentifier: "WRCell")
         
-        dataManager?.updateAll()
+        //dataManager?.updateAll()
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.notificationReceived(notification:)),
                                                name: Notification.Name("DataUpdated"),
@@ -100,9 +100,24 @@ extension WRCollectionViewController {
     // Method for updating UI
     //
     func updateUI() {
+        guard let dataManager = dataManager else { return }
+        
+        var selectedItem = 0
+        
+        for (index, item) in dataManager.weatherDatas.enumerated() {
+            if item.selected == true {
+                selectedItem = index
+            }
+        }
+        
+        let indexPath = IndexPath(item: selectedItem, section: 0)
+        
+        wrCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        
         updateBackgroundImage()
         wrCollectionView.reloadData()
-        pageControl.numberOfPages = dataManager?.weatherDatas.count ?? 0
+        pageControl.numberOfPages = dataManager.weatherDatas.count
+        pageControl.currentPage = selectedItem
         
     }
     
@@ -122,6 +137,14 @@ extension WRCollectionViewController {
             backgroundImage.image = UIImage(named: "BackgroundNight")
             
         }
+    }
+    
+    
+    //
+    // Method for displaying selected item from locations table
+    //
+    func displayLocation() {
+        updateUI()
     }
     
 }
@@ -145,6 +168,15 @@ extension WRCollectionViewController: UICollectionViewDelegateFlowLayout {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
         if let indexPath = wrCollectionView.indexPathsForVisibleItems.first {
+            guard let dataManager = dataManager else { return }
+            
+            for (index, wd) in dataManager.weatherDatas.enumerated() {
+                if index == indexPath.row {
+                    wd.selected = true
+                } else {
+                    wd.selected = false
+                }
+            }
             pageControl.currentPage = indexPath.row
             updateBackgroundImage()
         }
@@ -159,37 +191,15 @@ extension WRCollectionViewController {
         
         if segue.identifier == "locationsList" {
             
-            let destinationVC = segue.destination as! NeedsDependency
+            let destinationVC = segue.destination as! LocationsTableViewController
             destinationVC.dependency = dependency
+            destinationVC.displayDelegate = self
         }
     }
     
     
     @IBAction func unwindLocationsTableView(unwindSegue: UIStoryboardSegue) {
-       updateUI()
+
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

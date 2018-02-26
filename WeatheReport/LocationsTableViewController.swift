@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol DisplayDelegate {
+    func displayLocation()
+}
+
 class LocationsTableViewController: UIViewController, NeedsDependency, LocationDelegate {
     
     var dependency: Dependency? {
@@ -24,6 +28,8 @@ class LocationsTableViewController: UIViewController, NeedsDependency, LocationD
     }
 
     @IBOutlet weak fileprivate var locationTableView: UITableView!
+    
+    var displayDelegate: DisplayDelegate?
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -119,7 +125,7 @@ extension LocationsTableViewController {
             }
         }
 
-        
+        displayDelegate?.displayLocation()
         
     }
     
