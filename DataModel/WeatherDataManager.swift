@@ -131,7 +131,6 @@ extension WeatherDataManager {
         }
         
         weatherDatas.insert(WeatherData(), at: 0)
-        
     }
     
     
@@ -248,7 +247,7 @@ fileprivate extension WeatherDataManager {
 }
 
 
-private extension WeatherDataManager {
+fileprivate extension WeatherDataManager {
     
     //
     // Method for creating params for networking
@@ -333,7 +332,7 @@ private extension WeatherDataManager {
 
 
 
-private extension WeatherDataManager {
+fileprivate extension WeatherDataManager {
     
     //
     // JSON parsing method for current weather data
@@ -501,7 +500,7 @@ private extension WeatherDataManager {
 }
 
 
-private extension WeatherDataManager {
+fileprivate extension WeatherDataManager {
     
     //
     // Method for posting Notification after updating datas
