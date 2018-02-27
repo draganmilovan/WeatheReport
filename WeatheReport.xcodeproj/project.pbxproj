@@ -39,11 +39,8 @@
 		08DF345D1FBC835500D074BB /* WeatherDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF345C1FBC835500D074BB /* WeatherDataManager.swift */; };
 		08EA8A2220139A9B003297C5 /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA8A2120139A9B003297C5 /* Dependency.swift */; };
 		08EF6EBB1F98FF6F00EB0E27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF6EBA1F98FF6F00EB0E27 /* AppDelegate.swift */; };
-		08EF6EBD1F98FF6F00EB0E27 /* WViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF6EBC1F98FF6F00EB0E27 /* WViewController.swift */; };
-		08EF6EC01F98FF6F00EB0E27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08EF6EBE1F98FF6F00EB0E27 /* Main.storyboard */; };
 		08EF6EC21F98FF6F00EB0E27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08EF6EC11F98FF6F00EB0E27 /* Assets.xcassets */; };
 		08EF6EC51F98FF6F00EB0E27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08EF6EC31F98FF6F00EB0E27 /* LaunchScreen.storyboard */; };
-		08EF6ECD1F9901E000EB0E27 /* WDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF6ECC1F9901E000EB0E27 /* WDataModel.swift */; };
 		08FA72B51FE55DA6005D9BDE /* ForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA72B41FE55DA6005D9BDE /* ForecastCell.swift */; };
 		08FA72BB1FE5D2BE005D9BDE /* ForacastDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA72BA1FE5D2BE005D9BDE /* ForacastDataModel.swift */; };
 		8717845CF8A89DF473CF940A /* Pods_WeatheReport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D2DC0F86CD3C2E8765D626 /* Pods_WeatheReport.framework */; };
@@ -69,12 +66,9 @@
 		08EA8A2120139A9B003297C5 /* Dependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
 		08EF6EB71F98FF6F00EB0E27 /* WeatheReport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatheReport.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08EF6EBA1F98FF6F00EB0E27 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		08EF6EBC1F98FF6F00EB0E27 /* WViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WViewController.swift; sourceTree = "<group>"; };
-		08EF6EBF1F98FF6F00EB0E27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		08EF6EC11F98FF6F00EB0E27 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		08EF6EC41F98FF6F00EB0E27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		08EF6EC61F98FF6F00EB0E27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		08EF6ECC1F9901E000EB0E27 /* WDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDataModel.swift; sourceTree = "<group>"; };
 		08FA72B41FE55DA6005D9BDE /* ForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCell.swift; sourceTree = "<group>"; };
 		08FA72BA1FE5D2BE005D9BDE /* ForacastDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForacastDataModel.swift; sourceTree = "<group>"; };
 		457F7C8DFA5029E2E0ACD0C5 /* Pods-WeatheReport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatheReport.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatheReport/Pods-WeatheReport.debug.xcconfig"; sourceTree = "<group>"; };
@@ -147,9 +141,6 @@
 		08EF6EB91F98FF6F00EB0E27 /* WeatheReport */ = {
 			isa = PBXGroup;
 			children = (
-				08EF6ECC1F9901E000EB0E27 /* WDataModel.swift */,
-				08EF6EBC1F98FF6F00EB0E27 /* WViewController.swift */,
-				08EF6EBE1F98FF6F00EB0E27 /* Main.storyboard */,
 				083E0B7C1FCDAA19007A3C85 /* WRCollectionViewController.swift */,
 				083E0B7F1FCDC1F7007A3C85 /* WRCell.swift */,
 				08FA72B41FE55DA6005D9BDE /* ForecastCell.swift */,
@@ -259,7 +250,6 @@
 				085A9551200CF5810056B22E /* cityList.json in Resources */,
 				08EF6EC21F98FF6F00EB0E27 /* Assets.xcassets in Resources */,
 				0876EB3D1FE6CC3B00632A05 /* ForecastCell.xib in Resources */,
-				08EF6EC01F98FF6F00EB0E27 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,7 +336,6 @@
 				08FA72BB1FE5D2BE005D9BDE /* ForacastDataModel.swift in Sources */,
 				084946F42007EA9200208116 /* SearchController.swift in Sources */,
 				08830F971FE8201E00744C83 /* LocationsTableViewController.swift in Sources */,
-				08EF6EBD1F98FF6F00EB0E27 /* WViewController.swift in Sources */,
 				08DF345D1FBC835500D074BB /* WeatherDataManager.swift in Sources */,
 				08830F991FE8252B00744C83 /* LocationCell.swift in Sources */,
 				08FA72B51FE55DA6005D9BDE /* ForecastCell.swift in Sources */,
@@ -356,7 +345,6 @@
 				081E9EC41FC0941B00517B16 /* WeatherDataModel.swift in Sources */,
 				083E1A5A1FB6081200CF5B67 /* Location.swift in Sources */,
 				08EA8A2220139A9B003297C5 /* Dependency.swift in Sources */,
-				08EF6ECD1F9901E000EB0E27 /* WDataModel.swift in Sources */,
 				08C027ED200907ED00D2B1F3 /* SearchTableViewCell.swift in Sources */,
 				083E0B801FCDC1F7007A3C85 /* WRCell.swift in Sources */,
 				083E1A501FB5E52500CF5B67 /* WeatheReport.xcdatamodeld in Sources */,
@@ -367,14 +355,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		08EF6EBE1F98FF6F00EB0E27 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				08EF6EBF1F98FF6F00EB0E27 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		08EF6EC31F98FF6F00EB0E27 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
