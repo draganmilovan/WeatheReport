@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import LatLongToTimezone
 
 final class WeatherData {
     
@@ -34,10 +35,6 @@ final class WeatherData {
     var uvIndex: String?
     
     var forecastDatas: [ForecastData] = []
-//
-//    var forecastTimes: [String] = []
-//    var forecastTemperatures: [String] = []
-//    var forecastIconsNames: [String] = []
     
     var selected: Bool = false
     
@@ -209,45 +206,14 @@ extension WeatherData {
     func convertUnixTimestampToTime(timeStamp: Int, format: TimeFormat) -> String {
         
         let date = Date(timeIntervalSince1970: Double(timeStamp))
-        
+        let timeZone = TimezoneMapper.latLngToTimezone(coordinate!)
+
         let formatter = DateFormatter()
         formatter.dateFormat = format.rawValue
+        formatter.timeZone = timeZone
         
         return (formatter.string(from: date))
         
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

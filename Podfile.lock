@@ -1,10 +1,12 @@
 PODS:
   - Alamofire (4.6.0)
+  - LatLongToTimezone (1.1.2)
   - RTCoreDataStack (4.1.1)
   - SwiftyJSON (4.0.0)
 
 DEPENDENCIES:
   - Alamofire
+  - LatLongToTimezone
   - RTCoreDataStack (from `https://github.com/radianttap/RTSwiftCoreDataStack.git`)
   - SwiftyJSON
 
@@ -19,9 +21,10 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  LatLongToTimezone: efd39e80e92c4cd3aefb597a2fd16f177a4742b5
   RTCoreDataStack: 1f6668166daf6ac2098417e1e6b36b4c8c1963af
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: cafdb7b85b3c68418140adb19c4eccb6b6b149f7
+PODFILE CHECKSUM: 5bb8f665167d7e301f939586af9dac1298bcbfa9
 
 COCOAPODS: 1.4.0

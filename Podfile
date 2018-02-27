@@ -9,5 +9,6 @@ target 'WeatheReport' do
 	pod 'Alamofire'
 	pod 'SwiftyJSON'
     pod 'RTCoreDataStack', :git => 'https://github.com/radianttap/RTSwiftCoreDataStack.git'
+	pod 'LatLongToTimezone'
 
 end
