@@ -420,9 +420,8 @@ fileprivate extension WeatherDataManager {
         }
         
         
-        if let t = json["dt"].int {
-            weatherData.time = weatherData.convertUnixTimestampToTime(timeStamp: t, format: .HoursAndMinutes)
-        }
+        let t = Int(Date().timeIntervalSince1970)
+        weatherData.time = weatherData.convertUnixTimestampToTime(timeStamp: t, format: .HoursAndMinutes)
         
         
         // Erasing cityID for calling UV Index Data
