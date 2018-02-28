@@ -14,31 +14,10 @@ class ForecastData {
     var iconName: String?
     var temperature: String?
     
-    init(time: String, iconName: String, temperature: String) {
+    init(time: String?, iconName: String?, temperature: String?) {
         self.time = time
         self.iconName = iconName
         self.temperature = temperature
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
