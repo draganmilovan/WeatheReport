@@ -17,8 +17,8 @@ final class WeatherData {
     
     var locationName: String?
     var dayTime: Bool = true
-    var sunRise: Int?
-    var sunSet: Int?
+    var sunRise: String?
+    var sunSet: String?
     var time: String?
 
     var temperature: Int?
@@ -49,41 +49,34 @@ extension WeatherData {
         case HoursAndMinutes = "HH:mm"
     }
     
-    
-    
-    //
-    // Method returns true if is daytime at the time
-    //
-    func updateTimeOfDay() -> Bool {
-        
-        let sunRise = Date(timeIntervalSince1970: Double(self.sunRise!))
-        let sunSet = Date(timeIntervalSince1970: Double(self.sunSet!))
-        let date = Date()
-        
-        if date >= sunRise && date <= sunSet {
-            
-            return true
-            
-        } else { return false }
-        
+    enum Time {
+        case now
+        case time
     }
     
     
     //
     // Method returns true if is daytime for certain time
     //
-    func timeOfDay(for time: Int, inFormat: TimeFormat) -> Bool {
-
-        let t = Int(self.convertUnixTimestampToTime(timeStamp: time, format: inFormat))
-        let sunRise = Int(self.convertUnixTimestampToTime(timeStamp: self.sunRise!, format: inFormat))
-        let sunSet = Int(self.convertUnixTimestampToTime(timeStamp: self.sunSet!, format: inFormat))
-
-        if t! >= sunRise! && t! <= sunSet! {
-
+    func timeOfDay(for moment: Time, time: Int?, inFormat: TimeFormat) -> Bool {
+        
+        var t: String!
+        
+        switch moment {
+        case .now:
+            let date = Int(Date().timeIntervalSince1970)
+            t = convertUnixTimestampToTime(timeStamp: date, format: inFormat)
+            
+        case .time:
+            t = convertUnixTimestampToTime(timeStamp: time!, format: inFormat)
+        }
+        
+        
+        if t >= sunRise! && t <= sunSet! {
             return true
-
+            
         } else { return false }
-
+        
     }
     
     

@@ -342,10 +342,10 @@ fileprivate extension WeatherDataManager {
         if let sunRise = json["sys"]["sunrise"].int,
             let sunSet = json["sys"]["sunset"].int {
 
-            weatherData.sunRise = sunRise
-            weatherData.sunSet = sunSet
+            weatherData.sunRise = weatherData.convertUnixTimestampToTime(timeStamp: sunRise, format: .HoursAndMinutes)
+            weatherData.sunSet = weatherData.convertUnixTimestampToTime(timeStamp: sunSet, format: .HoursAndMinutes)
             
-            weatherData.dayTime = weatherData.updateTimeOfDay()
+            weatherData.dayTime = weatherData.timeOfDay(for: .now, time: nil, inFormat: .HoursAndMinutes)
 
         } else { weatherData.dayTime = true }
 
@@ -484,8 +484,7 @@ fileprivate extension WeatherDataManager {
                                                                           format: .Hours),
                              
                              iconName: weatherData.updateWeatherIcon(condition: ($0.1["weather"][0]["id"].intValue),
-                                                                     at: weatherData.timeOfDay(for: ($0.1["dt"].intValue),
-                                                                                               inFormat: .Hours)),
+                                                                     at: weatherData.timeOfDay(for: .time, time: ($0.1["dt"].intValue), inFormat: .Hours)),
                              
                              temperature: (String( Int( $0.1["main"]["temp"].doubleValue - 273.15 ))  + "°"))
             }

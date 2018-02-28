@@ -149,14 +149,14 @@ final class WRCell: UICollectionViewCell {
         
         
         if let sunRise = weatherData.sunRise {
-            sunriseLabel.text = weatherData.convertUnixTimestampToTime(timeStamp: sunRise, format: .HoursAndMinutes)
+            sunriseLabel.text = sunRise
         } else {
             sunriseLabel.text = "N/A"
         }
         
         
         if let sunSet = weatherData.sunSet {
-            sunsetLabel.text = weatherData.convertUnixTimestampToTime(timeStamp: sunSet, format: .HoursAndMinutes)
+            sunsetLabel.text = sunSet
         } else {
             sunsetLabel.text = "N/A"
         }
