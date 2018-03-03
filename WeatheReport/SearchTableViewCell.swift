@@ -17,6 +17,12 @@ class SearchTableViewCell: UITableViewCell {
         
         searchLocationLabel.text = nil
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        searchLocationLabel.text = nil
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -24,8 +30,12 @@ class SearchTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func configure(with location: String) {
-        searchLocationLabel.text = location
+    func configure(with location: String?) {
+        
+        if let loc = location {
+            searchLocationLabel.text = loc
+        } else { return }
+        
     }
     
 }

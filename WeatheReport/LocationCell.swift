@@ -31,15 +31,36 @@ class LocationCell: UITableViewCell {
     }
     
     func configure(with weatherData: WeatherData) {
+        
         if weatherData.dayTime {
             backgroundImage.image = UIImage(named: "BackgroundDay")
         } else {
             backgroundImage.image = UIImage(named: "BackgroundNight")
         }
         
-        temperatureLabel.text = "\(weatherData.temperature!)°C"
-        locationLabel.text = weatherData.locationName!
-        timeLabel.text = weatherData.time!
+        
+        if let temp = weatherData.temperature {
+           temperatureLabel.text = "\(temp)°C"
+        } else {
+            temperatureLabel.text = " "
+            backgroundImage.image = UIImage(named: "BackgroundDay")
+        }
+        
+        
+        if let loc = weatherData.locationName {
+            locationLabel.text = loc
+        } else {
+            locationLabel.text = " "
+            backgroundImage.image = UIImage(named: "BackgroundDay")
+        }
+        
+        
+        if let t = weatherData.time {
+            timeLabel.text = t
+        } else {
+            timeLabel.text = " "
+            backgroundImage.image = UIImage(named: "BackgroundDay")
+        }
     }
 
 }
