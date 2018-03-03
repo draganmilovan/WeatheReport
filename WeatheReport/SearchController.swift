@@ -127,7 +127,11 @@ fileprivate extension SearchController {
         }
         
         addLocationTableView.reloadData()
-        scrollToFirstRow()
+        
+        if locations.count != 0 {
+            scrollToFirstRow()
+            
+        } else { return }
         
     }
     

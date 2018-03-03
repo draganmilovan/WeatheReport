@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ForecastData {
+final class ForecastData {
     
     var time: String?
     var iconName: String?
