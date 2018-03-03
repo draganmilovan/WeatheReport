@@ -37,30 +37,16 @@ class WRCollectionViewController: UIViewController, NeedsDependency {
         // Register Collection View Cell 
         let wrNib = UINib(nibName: "WRCell", bundle: nil)
         wrCollectionView.register(wrNib, forCellWithReuseIdentifier: "WRCell")
-        
-        //dataManager?.updateAll()
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.notificationReceived(notification:)),
                                                name: Notification.Name("DataUpdated"),
                                                object: nil)
         
-        
     }
-    
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
+
+
 
 extension WRCollectionViewController: UICollectionViewDataSource {
     
@@ -99,7 +85,7 @@ extension WRCollectionViewController: DisplayDelegate {
     //
     // Method for updating UI
     //
-    func updateUI() {
+    fileprivate func updateUI() {
         guard let dataManager = dataManager else { return }
         
         var selectedItem = 0
@@ -125,8 +111,7 @@ extension WRCollectionViewController: DisplayDelegate {
     //
     // Method for updating background image
     //
-    func updateBackgroundImage() {
-        //print(wrCollectionView.visibleCells.count)
+    fileprivate func updateBackgroundImage() {
         
         guard let cell = wrCollectionView.visibleCells.first as? WRCell else { return }
         

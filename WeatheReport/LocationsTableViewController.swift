@@ -46,17 +46,6 @@ class LocationsTableViewController: UIViewController, NeedsDependency, LocationD
                                                object: nil)
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 
@@ -144,7 +133,7 @@ extension LocationsTableViewController {
     }
     
     
-    func locationsInnerSettings() {
+    fileprivate func locationsInnerSettings() {
         
         if let dm = dataManager {
             for wd in dm.weatherDatas {
