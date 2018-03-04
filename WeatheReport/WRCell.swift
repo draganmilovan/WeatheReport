@@ -26,7 +26,7 @@ final class WRCell: UICollectionViewCell {
     @IBOutlet weak fileprivate var longitudeLabel: UILabel!
     
     @IBOutlet weak fileprivate var forecastCollectionVew: UICollectionView!
-    
+    @IBOutlet weak fileprivate var scrollView: UIScrollView!
     
     //  Data source
     var weatherData: WeatherData? {
@@ -76,7 +76,7 @@ final class WRCell: UICollectionViewCell {
         uvIndexLabel.text = nil
         latitudeLabel.text = nil
         longitudeLabel.text = nil
-        
+        scrollView.contentOffset = .zero
     }
     
     

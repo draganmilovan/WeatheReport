@@ -381,6 +381,7 @@
                 <outlet property="locationLabel" destination="1mp-Cl-nzd" id="yO4-JA-EOa"/>
                 <outlet property="longitudeLabel" destination="nfj-7r-iMv" id="8Vb-8K-rVg"/>
                 <outlet property="pressureLabel" destination="UAQ-ip-g59" id="DHI-7m-8b5"/>
+                <outlet property="scrollView" destination="oB2-uu-yb9" id="Sc7-yN-pmr"/>
                 <outlet property="sunriseLabel" destination="qwP-3K-eSL" id="kg0-6v-5KY"/>
                 <outlet property="sunsetLabel" destination="ft4-pD-qXy" id="e7U-ZQ-ipV"/>
                 <outlet property="temperatureLabel" destination="pwD-2G-7ob" id="mex-8X-Fq4"/>
