@@ -120,18 +120,24 @@ fileprivate extension SearchController {
         guard let locationsManager = locationsManager else { return }
         guard let st = searchTerm else { return }
         
-        let predicate = NSPredicate(format: "SELF contains[cd] %@", st)
-        
-        locations = locationsManager.locationsList.filter {
-            predicate.evaluate(with: $0.name)
-        }
-        
-        addLocationTableView.reloadData()
-        
-        if locations.count != 0 {
-            scrollToFirstRow()
+        DispatchQueue.global(qos: .background).async {
+            [unowned self] in
+            let predicate = NSPredicate(format: "SELF contains[cd] %@", st)
             
-        } else { return }
+            self.locations = locationsManager.locationsList.filter {
+                predicate.evaluate(with: $0.name)
+            }
+            
+            DispatchQueue.main.async {
+                self.addLocationTableView.reloadData()
+                
+                if self.locations.count != 0 {
+                    self.scrollToFirstRow()
+                    
+                } else { return }
+                
+            }
+        }
         
     }
     
