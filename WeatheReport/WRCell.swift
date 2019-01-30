@@ -209,6 +209,7 @@ final class WRCell: UICollectionViewCell {
         }
         
     }
+
     
 }
 
@@ -248,6 +249,51 @@ extension WRCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         size.width = availableWidth / rows
         
         return size
+    }
+    
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard let sv = self.scrollView else { return }
+        
+        let svCurrentOrigin = sv.bounds.origin
+        let viewsDistance = 10 - Int(svCurrentOrigin.y)
+        
+        switch viewsDistance {
+        case 0:
+            weatherIcon.alpha = 0.1
+            temperatureLabel.alpha = 0.1
+        case 1:
+            weatherIcon.alpha = 0.2
+            temperatureLabel.alpha = 0.2
+        case 2:
+            weatherIcon.alpha = 0.3
+            temperatureLabel.alpha = 0.3
+        case 3:
+            weatherIcon.alpha = 0.4
+            temperatureLabel.alpha = 0.4
+        case 4:
+            weatherIcon.alpha = 0.5
+            temperatureLabel.alpha = 0.5
+        case 5:
+            weatherIcon.alpha = 0.6
+            temperatureLabel.alpha = 0.6
+        case 6:
+            weatherIcon.alpha = 0.7
+            temperatureLabel.alpha = 0.7
+        case 7:
+            weatherIcon.alpha = 0.8
+            temperatureLabel.alpha = 0.8
+        case 8:
+            weatherIcon.alpha = 0.9
+            temperatureLabel.alpha = 0.9
+        case 9...1000:
+            weatherIcon.alpha = 1
+            temperatureLabel.alpha = 1
+        default:
+            weatherIcon.alpha = 0
+            temperatureLabel.alpha = 0
+        }
+        
     }
     
 }

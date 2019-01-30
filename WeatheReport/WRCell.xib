@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -348,6 +348,9 @@
                                     <constraint firstItem="XU4-ja-vxG" firstAttribute="leading" secondItem="oB2-uu-yb9" secondAttribute="leading" id="pfK-z0-aZO"/>
                                     <constraint firstAttribute="trailing" secondItem="XU4-ja-vxG" secondAttribute="trailing" id="qPo-ut-EfY"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="yrU-ZN-m8O" id="iee-d2-oEt"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -402,6 +405,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="sunAndFog" width="500" height="500"/>
+        <image name="sunAndFog" width="1000" height="1000"/>
     </resources>
 </document>
