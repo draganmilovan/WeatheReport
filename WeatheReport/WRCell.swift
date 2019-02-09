@@ -35,11 +35,7 @@ final class WRCell: UICollectionViewCell {
                 cleanCell()
                 return
             }
-            // Register Forecast Collection View Cell
-            let fcNib = UINib(nibName: "ForecastCell", bundle: nil)
-            forecastCollectionVew.register(fcNib, forCellWithReuseIdentifier: "ForecastCell")
-            forecastCollectionVew.reloadData()
-            
+            registerCells()
             populate(with: weatherData)
         }
     }
@@ -209,8 +205,21 @@ final class WRCell: UICollectionViewCell {
         }
         
     }
-
     
+    
+    //
+    // Register Forecast Collection View Cells
+    //
+    func registerCells() {
+        
+        let fcNib = UINib(nibName: "ForecastCell", bundle: nil)
+        let dayNib = UINib(nibName: "DayCell", bundle: nil)
+        forecastCollectionVew.register(fcNib, forCellWithReuseIdentifier: "ForecastCell")
+        forecastCollectionVew.register(dayNib, forCellWithReuseIdentifier: "DayCell")
+
+        forecastCollectionVew.reloadData()
+    }
+
 }
 
 
@@ -222,18 +231,33 @@ extension WRCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return weatherData?.forecastDatas.count ?? 0
+        guard let wd = weatherData else { fatalError("Missing Data source!") }
+        
+        return wd.forecastDatas.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let weatherData = weatherData else { fatalError("WRCell doesn't exist!") }
         
         let forecastCell: ForecastCell = forecastCollectionVew.dequeueReusableCell(withReuseIdentifier: "ForecastCell", for: indexPath) as! ForecastCell
-
-        forecastCell.forecastData = weatherData.forecastDatas[indexPath.item]
+        let dayCell: DayCell = forecastCollectionVew.dequeueReusableCell(withReuseIdentifier: "DayCell", for: indexPath) as! DayCell
         
-        return forecastCell
+        
+        if weatherData.forecastDatas[indexPath.item].time != nil {
+            
+            forecastCell.forecastData = weatherData.forecastDatas[indexPath.item]
+            
+            return forecastCell
+            
+        } else {
+            
+            dayCell.day = weatherData.forecastDatas[indexPath.item].day
+            
+            return dayCell
+        }
+        
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -243,7 +267,7 @@ extension WRCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         var size = flowLayout.itemSize
         let rows: CGFloat = 9
         
-        let availableWidth = bounds.width - (rows - 9) * flowLayout.minimumInteritemSpacing - flowLayout.sectionInset.left - flowLayout.sectionInset.right
+        let availableWidth = bounds.width - (rows - 8) * flowLayout.minimumInteritemSpacing - flowLayout.sectionInset.left - flowLayout.sectionInset.right
         
         size.height = bounds.height
         size.width = availableWidth / rows
@@ -251,7 +275,7 @@ extension WRCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
         return size
     }
     
-    
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         let svCurrentOrigin = self.scrollView.bounds.origin
