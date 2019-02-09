@@ -10,14 +10,30 @@ import Foundation
 
 final class ForecastData {
     
+    var day: String?
     var time: String?
     var iconName: String?
     var temperature: String?
     
-    init(time: String?, iconName: String?, temperature: String?) {
+    init(day: String?, time: String?, iconName: String?, temperature: String?) {
+        self.day = day?.uppercased()
         self.time = time
         self.iconName = iconName
         self.temperature = temperature
     }
+    
+}
+
+
+extension ForecastData: Hashable {
+    
+    var hashValue: Int {
+        return day.hashValue ^ time.hashValue ^ iconName.hashValue ^ temperature.hashValue
+    }
+    
+    static func ==(lhs: ForecastData, rhs: ForecastData) -> Bool {
+        return lhs.hashValue == rhs.hashValue
+    }
+    
     
 }
