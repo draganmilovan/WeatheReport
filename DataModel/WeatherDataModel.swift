@@ -47,11 +47,21 @@ extension WeatherData {
     enum TimeFormat: String {
         case Hours = "HH"
         case HoursAndMinutes = "HH:mm"
+        case Day = "EEE"
     }
     
     enum Time {
         case now
         case time
+    }
+    
+    
+    //
+    // Method returns day from timestamp
+    //
+    func whatDayIs(this timestamp: Int) -> String {
+        
+        return convertUnixTimestampToTime(timeStamp: timestamp, format: .Day)
     }
     
     

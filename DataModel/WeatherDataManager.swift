@@ -477,11 +477,13 @@ fileprivate extension WeatherDataManager {
 
         if let _ = json["list"][0]["dt"].int {
             
-            weatherData.forecastDatas = json["list"].map {
+            var forecastDatas: [ForecastData] = []
+            
+            forecastDatas = json["list"].map {
                 
                 // Populating forecastDatas array
-                ForecastData(time: weatherData.convertUnixTimestampToTime(timeStamp: ($0.1["dt"].intValue),
-                                                                          format: .Hours),
+                ForecastData(day: weatherData.whatDayIs(this: $0.1["dt"].intValue), time: weatherData.convertUnixTimestampToTime(timeStamp: ($0.1["dt"].intValue),
+                                                                                                                                 format: .Hours),
                              
                              iconName: weatherData.updateWeatherIcon(condition: ($0.1["weather"][0]["id"].intValue),
                                                                      at: weatherData.timeOfDay(for: .time, time: ($0.1["dt"].intValue), inFormat: .Hours)),
@@ -489,8 +491,21 @@ fileprivate extension WeatherDataManager {
                              temperature: (String( Int( $0.1["main"]["temp"].doubleValue - 273.15 ))  + "°"))
             }
             
+            let _ = forecastDatas.map {
+                if let day = $0.day {
+                    let dayData = ForecastData(day: day, time: nil, iconName: nil, temperature: nil)
+                    if !weatherData.forecastDatas.contains(dayData) {
+                        weatherData.forecastDatas.append(contentsOf: [dayData, $0])
+                    } else {
+                        weatherData.forecastDatas.append($0)
+                    }
+                }
+            }
+            
+            weatherData.forecastDatas.removeFirst()
+            
             postNotification()
-
+            
         } else { return }
         
     }
