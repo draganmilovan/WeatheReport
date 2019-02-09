@@ -491,6 +491,8 @@ fileprivate extension WeatherDataManager {
                              temperature: (String( Int( $0.1["main"]["temp"].doubleValue - 273.15 ))  + "°"))
             }
             
+            weatherData.forecastDatas = []
+            
             let _ = forecastDatas.map {
                 if let day = $0.day {
                     let dayData = ForecastData(day: day, time: nil, iconName: nil, temperature: nil)
