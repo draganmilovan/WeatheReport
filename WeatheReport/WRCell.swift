@@ -112,8 +112,10 @@ final class WRCell: UICollectionViewCell {
                 locationLabel.text = location
                 displayMessage()
                 return
+                
+            } else {
+                locationLabel.text = location
             }
-            locationLabel.text = location
             
         } else {
             cleanCell()

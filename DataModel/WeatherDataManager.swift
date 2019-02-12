@@ -359,7 +359,15 @@ fileprivate extension WeatherDataManager {
         
         
         if let loc = json["name"].string {
-            weatherData.locationName = loc
+            if loc.hasSuffix("(historical)"){
+                let index = loc.firstIndex(of: "(") ?? loc.endIndex
+                let name = loc[..<index]
+                weatherData.locationName = String(name)
+                
+            } else {
+                weatherData.locationName = loc
+            }
+            
         } else {
             weatherData.locationName = "Weather Unavalable"
             postNotification()
