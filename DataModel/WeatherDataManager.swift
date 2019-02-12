@@ -151,7 +151,7 @@ extension WeatherDataManager {
         if l.count == 0 {
             mo.selected = true
 
-            mo.displayOrderNumber = Int64(self.weatherDatas.count)
+            mo.displayOrderNumber = Int64(Date().timeIntervalSince1970)
 
             mo.name = location.name
 
