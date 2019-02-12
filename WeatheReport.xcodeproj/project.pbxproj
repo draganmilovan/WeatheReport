@@ -33,11 +33,11 @@
 		085A9553200D29310056B22E /* LocationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085A9552200D29310056B22E /* LocationsManager.swift */; };
 		0870CF9422048287008DDBD6 /* DayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0870CF9322048287008DDBD6 /* DayCell.xib */; };
 		0870CF96220484E7008DDBD6 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0870CF95220484E7008DDBD6 /* DayCell.swift */; };
+		087553EA22131C7000C0FECE /* WRStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 087553E922131C7000C0FECE /* WRStoryboard.storyboard */; };
 		0876EB3D1FE6CC3B00632A05 /* ForecastCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0876EB3C1FE6CC3B00632A05 /* ForecastCell.xib */; };
 		08830F971FE8201E00744C83 /* LocationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08830F961FE8201E00744C83 /* LocationsTableViewController.swift */; };
 		08830F991FE8252B00744C83 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08830F981FE8252B00744C83 /* LocationCell.swift */; };
 		08C027ED200907ED00D2B1F3 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C027EC200907ED00D2B1F3 /* SearchTableViewCell.swift */; };
-		08CF592F1FC86EF3003E9304 /* WRStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CF592E1FC86EF3003E9304 /* WRStoryboard.storyboard */; };
 		08DF345D1FBC835500D074BB /* WeatherDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF345C1FBC835500D074BB /* WeatherDataManager.swift */; };
 		08EA8A2220139A9B003297C5 /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA8A2120139A9B003297C5 /* Dependency.swift */; };
 		08EF6EBB1F98FF6F00EB0E27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF6EBA1F98FF6F00EB0E27 /* AppDelegate.swift */; };
@@ -61,11 +61,11 @@
 		085A9552200D29310056B22E /* LocationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsManager.swift; sourceTree = "<group>"; };
 		0870CF9322048287008DDBD6 /* DayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DayCell.xib; sourceTree = "<group>"; };
 		0870CF95220484E7008DDBD6 /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
+		087553E922131C7000C0FECE /* WRStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WRStoryboard.storyboard; sourceTree = "<group>"; };
 		0876EB3C1FE6CC3B00632A05 /* ForecastCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForecastCell.xib; sourceTree = "<group>"; };
 		08830F961FE8201E00744C83 /* LocationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsTableViewController.swift; sourceTree = "<group>"; };
 		08830F981FE8252B00744C83 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		08C027EC200907ED00D2B1F3 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
-		08CF592E1FC86EF3003E9304 /* WRStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WRStoryboard.storyboard; sourceTree = "<group>"; };
 		08DF345C1FBC835500D074BB /* WeatherDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataManager.swift; sourceTree = "<group>"; };
 		08EA8A2120139A9B003297C5 /* Dependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
 		08EF6EB71F98FF6F00EB0E27 /* WeatheReport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatheReport.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,7 +153,7 @@
 				08830F981FE8252B00744C83 /* LocationCell.swift */,
 				084946F32007EA9200208116 /* SearchController.swift */,
 				08C027EC200907ED00D2B1F3 /* SearchTableViewCell.swift */,
-				08CF592E1FC86EF3003E9304 /* WRStoryboard.storyboard */,
+				087553E922131C7000C0FECE /* WRStoryboard.storyboard */,
 				0870CF9322048287008DDBD6 /* DayCell.xib */,
 				083E0B811FCDD4B7007A3C85 /* WRCell.xib */,
 				0876EB3C1FE6CC3B00632A05 /* ForecastCell.xib */,
@@ -252,7 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				083E0B821FCDD4B7007A3C85 /* WRCell.xib in Resources */,
-				08CF592F1FC86EF3003E9304 /* WRStoryboard.storyboard in Resources */,
+				087553EA22131C7000C0FECE /* WRStoryboard.storyboard in Resources */,
 				0870CF9422048287008DDBD6 /* DayCell.xib in Resources */,
 				08EF6EC51F98FF6F00EB0E27 /* LaunchScreen.storyboard in Resources */,
 				085A9551200CF5810056B22E /* cityList.json in Resources */,
