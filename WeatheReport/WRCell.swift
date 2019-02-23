@@ -142,7 +142,7 @@ final class WRCell: UICollectionViewCell {
         if let desc = weatherData.description {
             let d = desc.prefix(1).uppercased() + desc.dropFirst()
             
-            weatherDescriptionLabel.text = "Now: \(d) currently. It's \(weatherData.temperature!)°C."
+            weatherDescriptionLabel.text = "Report: \(d) currently. It's \(weatherData.temperature!)°C."
         }
         
         
